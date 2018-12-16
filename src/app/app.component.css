@@ -1,5 +1,6 @@
 mat-toolbar {
 	height: auto;
+	margin-bottom: 40px;
 	justify-content: flex-end;
 }
 

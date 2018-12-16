@@ -5,9 +5,15 @@ const express = require('express'),
 	translate = require('./routes/translate'),
 	videosData = require('./routes/videosData');
 
+const cors = require('cors');//tmp
+
 const VideoModel = require('./models/VideoModel');
 
 var app = express();
+
+app.use(cors({
+	origin:['http://localhost:4200']
+}));//tmp
 
 var host = 'localhost',
 	port = '2500';

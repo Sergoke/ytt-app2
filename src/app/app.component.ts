@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './core/auth/login/login.component';
+import { SignupComponent } from './core/auth/signup/signup.component';
 
 @Component({
   selector: 'app-root',
