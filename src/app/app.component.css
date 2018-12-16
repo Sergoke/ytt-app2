@@ -1,0 +1,14 @@
+mat-toolbar {
+	height: auto;
+	justify-content: flex-end;
+}
+
+button {
+	margin: 5px 2px;
+	font-size: 14pt;
+	border: 1px solid #673ab7;
+}
+
+button:hover {
+	border: 1px solid white;
+}
