@@ -11,7 +11,7 @@ export class DbService {
     private http: HttpClient
   ) { }
 
-  getVideoIds(){
-    return this.http.get('http://localhost:2500/data/videoids');
+  getVideos(){
+    return this.http.get('http://localhost:2500/data/videos');
   }
 }

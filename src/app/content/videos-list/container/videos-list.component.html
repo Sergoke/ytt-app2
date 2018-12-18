@@ -1,5 +1,14 @@
 <h1>All the videos</h1>
 
-<p>
-  videos-list works!
-</p>
+<div class="videos-wrap">
+  <div class="mat-card-wrap" *ngFor="let video of videos | async" routerLink="/video/{{video.id}}">
+    <mat-card>
+      <img mat-card-image [src]="video.thumbnail" alt="thumbnail">
+      <mat-card-title>{{video.title}}</mat-card-title>
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

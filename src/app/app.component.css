@@ -1,3 +1,7 @@
+main {
+	padding: 0 50px;
+}
+
 mat-toolbar {
 	height: auto;
 	margin-bottom: 40px;

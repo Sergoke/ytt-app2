@@ -26,7 +26,10 @@ module.exports.getVideos = function(ids){
 
 				videosRaw.forEach( video => {
 					videos.push({
-						'channel': video.snippet.channelTitle
+						id: video.id,
+						title: video.snippet.title,
+						channel: video.snippet.channelTitle,
+						thumbnail: video.snippet.thumbnails.medium.url
 					});
 				});
 

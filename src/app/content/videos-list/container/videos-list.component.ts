@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DbService } from './../../../shared/services/db.service';
-import { _MatDatepickerContentMixinBase } from '@angular/material';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-videos-list',
@@ -10,12 +10,14 @@ import { _MatDatepickerContentMixinBase } from '@angular/material';
 })
 export class VideosListComponent implements OnInit {
 
+  videos;
+
   constructor(
     private db: DbService
   ) { }
 
   ngOnInit() {
-    this.db.getVideoIds().subscribe( ids => console.log(ids));
+    this.videos = this.db.getVideos();
   }
 
 }
