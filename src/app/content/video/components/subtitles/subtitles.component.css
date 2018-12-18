@@ -1,0 +1,34 @@
+.subts-wrap {
+    height: 50px;
+    background-color: #625a86;
+    overflow: hidden;
+    position: relative;
+}
+
+ul {
+    position: absolute;
+    margin: 0 20px;
+    padding: 0;
+    list-style: none;
+    font-family: 'Concert One',cursive;
+    transition: transform .5s ease-out;
+    transition: -webkit-transform .5s ease-out;
+}
+
+li {
+    height: 30px;
+    padding: 10px 0;
+    line-height: 30px;
+    font-size: 24px;
+    color: #c0ffee;
+}
+
+.string span {
+    padding: 3px 7px;
+    cursor: pointer;
+}
+
+.clickedWord {
+    background-color: #3e9e3c;
+    border-radius: 4px;
+}

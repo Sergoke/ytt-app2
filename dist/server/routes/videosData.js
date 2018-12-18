@@ -34,5 +34,5 @@ router.get('/subts/:id', function(req, res){
 	VideoModel.findOne({videoId: req.params.id})
 	.then(function(video){
 		res.send(video);
-	})
+	});
 });

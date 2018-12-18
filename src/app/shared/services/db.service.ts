@@ -14,4 +14,8 @@ export class DbService {
   getVideos(){
     return this.http.get('http://localhost:2500/data/videos');
   }
+
+  getSubtitles(videoId){
+    return this.http.get('http://localhost:2500/data/subts/' + videoId);
+  }
 }

@@ -1,7 +1,7 @@
 .videos-wrap {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .mat-card-wrap {
@@ -13,5 +13,6 @@
 }
 
 mat-card {
-
+    height: 100%;
+    box-sizing: border-box;
 }

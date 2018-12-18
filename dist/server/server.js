@@ -18,7 +18,7 @@ app.use(cors({
 var host = 'localhost',
 	port = '2500';
 
-app.use(express.static(__dirname + '/../ytt-app2'));
+app.use(express.static(__dirname + '/../yt-app'));
 
 app.use(express.urlencoded({extended: false}));
 
@@ -41,7 +41,7 @@ app.get('*', function(req, res){
 	res.sendFile(path.join(__dirname, '/../yt-app/index.html'));
 });
 
-mongoose.connect('mongodb://localhost:27017/videos');
+mongoose.connect('mongodb://localhost:27017/videos', {useNewUrlParser: true });
 
 mongoose.connection.on('open', function(){
 	app.locals.db = mongoose.connection;
