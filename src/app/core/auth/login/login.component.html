@@ -1,11 +1,11 @@
 <mat-toolbar color="primary">Login</mat-toolbar>
 
-<form method="POST" action="http://localhost:2500/login">
+<form (ngSubmit)=logins()>
   <mat-form-field class="full-width">
-    <input matInput required placeholder="Login" name="login">
+    <input matInput required placeholder="Login" name="login" [(ngModel)]="userLogin" autocomplete="off">
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput required placeholder="Password" name="password">
+    <input matInput required placeholder="Password" name="password" [(ngModel)]="userPassword" autocomplete="off">
   </mat-form-field>
-  <button mat-stroked-button class="full-width" color="primary">Login</button>
+  <button (click)="login($event)" mat-stroked-button class="full-width" color="primary">Login</button>
 </form>

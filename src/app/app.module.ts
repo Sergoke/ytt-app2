@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './material/material.module';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { VideosListModule } from './content/videos-list/videos-list.module';
@@ -23,6 +24,7 @@ import { SignupComponent } from './core/auth/signup/signup.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
     SharedModule,
     MaterialModule,
     VideosListModule,

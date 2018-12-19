@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
 
@@ -11,11 +12,11 @@ export class DbService {
     private http: HttpClient
   ) { }
 
-  getVideos(){
+  getVideos(): Observable<any>{
     return this.http.get('http://localhost:2500/data/videos');
   }
 
-  getSubtitles(videoId){
+  getSubtitles(videoId: string): Observable<any>{
     return this.http.get('http://localhost:2500/data/subts/' + videoId);
   }
 }

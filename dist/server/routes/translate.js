@@ -8,6 +8,6 @@ module.exports = router.use(function(req, res, next){
 router.get('/:word', function(req, res){
 	res.setHeader('Content-Type', 'application/json');
 	translate(req.params.word)
-		.then( tr => res.send(tr))
+		.then( tr => res.send(JSON.stringify(tr)))
 		.catch( err => res.send(err));
 });

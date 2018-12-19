@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { MatDialog } from '@angular/material';
 
+import { TranslService } from './../../../../shared/services/transl.service';
+
 import { TranslationComponent } from './../translation/translation.component';
 
 @Component({
@@ -19,7 +21,8 @@ export class SubtitlesComponent implements OnInit {
   private lastClickedWord;
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private tr: TranslService
   ) { }
 
   ngOnInit() {
@@ -35,23 +38,15 @@ export class SubtitlesComponent implements OnInit {
       this.lastClickedWord && this.lastClickedWord.classList.remove("clickedWord");
       this.lastClickedWord = e.target;
       e.target.classList.add("clickedWord");
-      var xhr = new XMLHttpRequest;
-      xhr.onreadystatechange = (function(ev) {
-          if (4 == ev.currentTarget.readyState && 200 == ev.currentTarget.status) {
-            console.log(xhr.responseText);
-            this.dialog.open(TranslationComponent, {
-              data: {
-                originWord: e.target.textContent,
-                translatedWord: xhr.responseText
-              }
-            });
 
-            this.wordClicked.emit(true);
+      this.tr.translate(e.target.textContent).subscribe( word => {
+        this.dialog.open(TranslationComponent, {
+          data: {
+            originWord: e.target.textContent,
+            translatedWord: word
           }
-      }
-      ).bind(this);
-      xhr.open("GET", "http://localhost:2500/tr/" + e.target.textContent);
-      xhr.send();
+        });        
+      });
     }
   }
 

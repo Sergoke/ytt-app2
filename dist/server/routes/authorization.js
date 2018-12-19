@@ -14,7 +14,8 @@ router.post('/login', function(req, res){
 	})
 	.then( user => {
 		if(user){
-			res.send('successfully logined');
+			console.log(req.session);
+			res.redirect('/');
 		}
 
 		else{
@@ -23,7 +24,7 @@ router.post('/login', function(req, res){
 	});
 });
 
-router.post('/signup', function(req, res){
+router.post('/sign-up', function(req, res){
 	console.log('name: ' + req.body.name + ', surname: ' + req.body.surname + ', email: ' + req.body.email + ', login:' + req.body.login + ', password: ' + req.body.password);
 
 	let user = new User({
