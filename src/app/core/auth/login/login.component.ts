@@ -21,18 +21,16 @@ export class LoginComponent implements OnInit {
   }
 
   login(e){
-    console.log('login');
     e.preventDefault();
 
-    console.log(this.userLogin, this.userPassword);
+    console.log('login: ' + this.userLogin, this.userPassword);
 
     this.auth.login({
       login: this.userLogin,
       password: this.userPassword
-    }).subscribe(res => console.log(res));
+    }).subscribe(res => {
+      console.log(res)
+    });
   }
-
-  logins(){
-    console.log('logins');
-  }
+  
 }

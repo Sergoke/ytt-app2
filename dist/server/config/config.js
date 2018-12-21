@@ -10,9 +10,10 @@ module.exports = {
     session: {
         secret: 'subaru forester',
         key: 'sid',
+        saveUninitialized: true,
         cookie: {
             httpOnly: true,
-            maxAge: null//ms
+            maxAge: 10 * 60 * 1000
         }
     }
 }

@@ -11,5 +11,8 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
+  h(){
+    console.log('hello form');
+  }
 }

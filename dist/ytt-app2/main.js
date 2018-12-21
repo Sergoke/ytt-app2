@@ -93,7 +93,7 @@ module.exports = "main {\r\n\tpadding: 0 50px;\r\n}\r\n\r\nmat-toolbar {\r\n\the
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color='primary'>\r\n  <button mat-button>Home</button>\r\n  <button mat-button routerLink=\"videos\">Videos</button>\r\n  <button mat-button (click)=\"loginDialog()\">Log in</button>\r\n  <button mat-button (click)=\"signupDialog()\">Sign up</button>\r\n</mat-toolbar>\r\n\r\n<main>\r\n  <router-outlet></router-outlet>\r\n</main>\r\n\r\n\r\n"
+module.exports = "<mat-toolbar color='primary'>\r\n  <button mat-button>Home</button>\r\n  <button mat-button routerLink=\"videos\">Videos</button>\r\n  <button *ngIf=\"roles.isGuest()\" mat-button (click)=\"loginDialog()\">Log in</button>\r\n  <button *ngIf=\"roles.isGuest()\" mat-button (click)=\"signupDialog()\">Sign up</button>\r\n  <button *ngIf=\"!roles.isGuest()\" mat-button>Log out</button>\r\n</mat-toolbar>\r\n\r\n<main>\r\n  <router-outlet></router-outlet>\r\n</main>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -109,8 +109,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _core_auth_login_login_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./core/auth/login/login.component */ "./src/app/core/auth/login/login.component.ts");
-/* harmony import */ var _core_auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./core/auth/signup/signup.component */ "./src/app/core/auth/signup/signup.component.ts");
+/* harmony import */ var _shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared/services/roles/roles.service */ "./src/app/shared/services/roles/roles.service.ts");
+/* harmony import */ var _core_auth_login_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./core/auth/login/login.component */ "./src/app/core/auth/login/login.component.ts");
+/* harmony import */ var _core_auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./core/auth/signup/signup.component */ "./src/app/core/auth/signup/signup.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -124,18 +125,23 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent(matDialog) {
+    function AppComponent(matDialog, roles) {
         this.matDialog = matDialog;
+        this.roles = roles;
         this.title = 'ytt-app2';
     }
+    AppComponent.prototype.ngOnInit = function () {
+        console.log(this.roles.getRole());
+    };
     AppComponent.prototype.loginDialog = function () {
-        this.matDialog.open(_core_auth_login_login_component__WEBPACK_IMPORTED_MODULE_2__["LoginComponent"], {
+        this.matDialog.open(_core_auth_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"], {
             width: '400px'
         });
     };
     AppComponent.prototype.signupDialog = function () {
-        this.matDialog.open(_core_auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_3__["SignupComponent"], {
+        this.matDialog.open(_core_auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_4__["SignupComponent"], {
             width: '400px'
         });
     };
@@ -145,7 +151,8 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialog"]])
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialog"],
+            _shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_2__["RolesService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -263,7 +270,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SubtitlesComponent", function() { return SubtitlesComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _shared_services_transl_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../../shared/services/transl.service */ "./src/app/shared/services/transl.service.ts");
+/* harmony import */ var _shared_services_translation_transl_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../shared/services/translation/transl.service */ "./src/app/shared/services/translation/transl.service.ts");
 /* harmony import */ var _translation_translation_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../translation/translation.component */ "./src/app/content/video/components/translation/translation.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -293,6 +300,7 @@ var SubtitlesComponent = /** @class */ (function () {
     SubtitlesComponent.prototype.wordClick = function (e) {
         var _this = this;
         if ("SPAN" === e.target.tagName) {
+            this.wordClicked.emit();
             this.lastClickedWord && this.lastClickedWord.classList.remove("clickedWord");
             this.lastClickedWord = e.target;
             e.target.classList.add("clickedWord");
@@ -325,7 +333,7 @@ var SubtitlesComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./subtitles.component.css */ "./src/app/content/video/components/subtitles/subtitles.component.css")]
         }),
         __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialog"],
-            _shared_services_transl_service__WEBPACK_IMPORTED_MODULE_2__["TranslService"]])
+            _shared_services_translation_transl_service__WEBPACK_IMPORTED_MODULE_2__["TranslService"]])
     ], SubtitlesComponent);
     return SubtitlesComponent;
 }());
@@ -506,7 +514,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VideoComponent", function() { return VideoComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _shared_services_db_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../shared/services/db.service */ "./src/app/shared/services/db.service.ts");
+/* harmony import */ var _shared_services_api_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../shared/services/api/api.service */ "./src/app/shared/services/api/api.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -520,7 +528,8 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var VideoComponent = /** @class */ (function () {
-    function VideoComponent(route, db) {
+    function VideoComponent(changeDetector, route, db) {
+        this.changeDetector = changeDetector;
         this.route = route;
         this.db = db;
     }
@@ -537,7 +546,6 @@ var VideoComponent = /** @class */ (function () {
             });
         });
         this.initPlayer();
-        setInterval(function () { return _this.subtOffset = _this.subtOffset; }, 100);
     };
     VideoComponent.prototype.ngOnDestroy = function () {
         this.interval && clearInterval(this.interval);
@@ -568,12 +576,14 @@ var VideoComponent = /** @class */ (function () {
     };
     VideoComponent.prototype.onStateChangeHandler = function (e) {
         var _this = this;
+        console.log(e.data);
         if (e.data == window['YT'].PlayerState.PLAYING) {
             this.interval = setInterval(function () {
                 console.log(_this);
                 var time = Math.round(10 * _this.player.getCurrentTime()) / 10;
                 if (_this.timeKeys.hasOwnProperty(time)) {
                     _this.subtOffset = _this.timeKeys[time] * 50;
+                    _this.changeDetector.detectChanges();
                     console.log('subtOffset: ' + _this.subtOffset);
                 }
             }, 100);
@@ -601,8 +611,9 @@ var VideoComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./video.component.html */ "./src/app/content/video/container/video.component.html"),
             styles: [__webpack_require__(/*! ./video.component.css */ "./src/app/content/video/container/video.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
-            _shared_services_db_service__WEBPACK_IMPORTED_MODULE_2__["DbService"]])
+        __metadata("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
+            _shared_services_api_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]])
     ], VideoComponent);
     return VideoComponent;
 }());
@@ -701,7 +712,7 @@ module.exports = "<h1>All the videos</h1>\r\n\r\n<div class=\"videos-wrap\">\r\n
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VideosListComponent", function() { return VideosListComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _shared_services_db_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../../shared/services/db.service */ "./src/app/shared/services/db.service.ts");
+/* harmony import */ var _shared_services_api_api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../../shared/services/api/api.service */ "./src/app/shared/services/api/api.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -714,11 +725,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var VideosListComponent = /** @class */ (function () {
-    function VideosListComponent(db) {
-        this.db = db;
+    function VideosListComponent(api) {
+        this.api = api;
     }
     VideosListComponent.prototype.ngOnInit = function () {
-        this.videos = this.db.getVideos();
+        this.videos = this.api.getVideos();
     };
     VideosListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -726,7 +737,7 @@ var VideosListComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./videos-list.component.html */ "./src/app/content/videos-list/container/videos-list.component.html"),
             styles: [__webpack_require__(/*! ./videos-list.component.css */ "./src/app/content/videos-list/container/videos-list.component.css")]
         }),
-        __metadata("design:paramtypes", [_shared_services_db_service__WEBPACK_IMPORTED_MODULE_1__["DbService"]])
+        __metadata("design:paramtypes", [_shared_services_api_api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"]])
     ], VideosListComponent);
     return VideosListComponent;
 }());
@@ -801,7 +812,7 @@ module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">Login</mat-toolbar>\r\n\r\n<form (ngSubmit)=logins()>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Login\" name=\"login\" [(ngModel)]=\"userLogin\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Password\" name=\"password\" [(ngModel)]=\"userPassword\">\r\n  </mat-form-field>\r\n  <button (click)=\"login($event)\" mat-stroked-button class=\"full-width\" color=\"primary\">Login</button>\r\n</form>"
+module.exports = "<mat-toolbar color=\"primary\">Login</mat-toolbar>\r\n\r\n<form (ngSubmit)=logins()>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Login\" name=\"login\" [(ngModel)]=\"userLogin\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Password\" name=\"password\" [(ngModel)]=\"userPassword\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <button (click)=\"login($event)\" mat-stroked-button class=\"full-width\" color=\"primary\">Login</button>\r\n</form>"
 
 /***/ }),
 
@@ -835,16 +846,14 @@ var LoginComponent = /** @class */ (function () {
     LoginComponent.prototype.ngOnInit = function () {
     };
     LoginComponent.prototype.login = function (e) {
-        console.log('login');
         e.preventDefault();
-        console.log(this.userLogin, this.userPassword);
+        console.log('login: ' + this.userLogin, this.userPassword);
         this.auth.login({
             login: this.userLogin,
             password: this.userPassword
-        }).subscribe(function (res) { return console.log(res); });
-    };
-    LoginComponent.prototype.logins = function () {
-        console.log('logins');
+        }).subscribe(function (res) {
+            console.log(res);
+        });
     };
     LoginComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -873,6 +882,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthService", function() { return AuthService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../../shared/services/roles/roles.service */ "./src/app/shared/services/roles/roles.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -884,20 +895,30 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
 var AuthService = /** @class */ (function () {
-    function AuthService(http) {
+    function AuthService(http, roles) {
         this.http = http;
-        this.authUrl = 'http://localhost:2500/';
+        this.roles = roles;
+        this.authUrl = 'http://localhost:2500/api/auth/';
     }
     AuthService.prototype.login = function (user) {
+        var _this = this;
         console.log(user);
-        return this.http.post(this.authUrl + 'login', user, {});
+        return this.http.post(this.authUrl + 'login', user, {}).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
+            console.log(res);
+            // res = res.json();
+            _this.roles.setRole(res.role);
+            return res;
+        }));
     };
     AuthService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"],
+            _shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_3__["RolesService"]])
     ], AuthService);
     return AuthService;
 }());
@@ -924,7 +945,7 @@ module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">Sign up</mat-toolbar>\r\n\r\n<form method=\"POST\" action=\"http://localhost:2500/sign-up\">\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Name\" name=\"name\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Surname\" name=\"surname\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Email\" name=\"email\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Login\" name=\"login\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Password\" name=\"password\">\r\n  </mat-form-field>\r\n  <button mat-stroked-button class=\"full-width\" color=\"primary\">Sign up</button>\r\n</form>"
+module.exports = "<mat-toolbar color=\"primary\">Sign up</mat-toolbar>\r\n\r\n<form ngNoForm method=\"POST\" action=\"http://localhost:2500/api/auth/sign-up\">\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Name\" name=\"name\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Surname\" name=\"surname\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Email\" name=\"email\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Login\" name=\"login\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Password\" name=\"password\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <button mat-stroked-button class=\"full-width\" color=\"primary\">Sign up</button>\r\n</form>"
 
 /***/ }),
 
@@ -953,6 +974,9 @@ var SignupComponent = /** @class */ (function () {
     function SignupComponent() {
     }
     SignupComponent.prototype.ngOnInit = function () {
+    };
+    SignupComponent.prototype.h = function () {
+        console.log('hello form');
     };
     SignupComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1065,16 +1089,16 @@ var SafePipe = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/shared/services/db.service.ts":
-/*!***********************************************!*\
-  !*** ./src/app/shared/services/db.service.ts ***!
-  \***********************************************/
-/*! exports provided: DbService */
+/***/ "./src/app/shared/services/api/api.service.ts":
+/*!****************************************************!*\
+  !*** ./src/app/shared/services/api/api.service.ts ***!
+  \****************************************************/
+/*! exports provided: ApiService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DbService", function() { return DbService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApiService", function() { return ApiService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -1088,33 +1112,97 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-var DbService = /** @class */ (function () {
-    function DbService(http) {
+var ApiService = /** @class */ (function () {
+    function ApiService(http) {
         this.http = http;
     }
-    DbService.prototype.getVideos = function () {
-        return this.http.get('http://localhost:2500/data/videos');
+    ApiService.prototype.getVideos = function () {
+        return this.http.get('http://localhost:2500/api/videos');
     };
-    DbService.prototype.getSubtitles = function (videoId) {
-        return this.http.get('http://localhost:2500/data/subts/' + videoId);
+    ApiService.prototype.getSubtitles = function (videoId) {
+        return this.http.get('http://localhost:2500/api/video/' + videoId);
     };
-    DbService = __decorate([
+    ApiService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
-    ], DbService);
-    return DbService;
+    ], ApiService);
+    return ApiService;
 }());
 
 
 
 /***/ }),
 
-/***/ "./src/app/shared/services/transl.service.ts":
-/*!***************************************************!*\
-  !*** ./src/app/shared/services/transl.service.ts ***!
-  \***************************************************/
+/***/ "./src/app/shared/services/roles/roles.service.ts":
+/*!********************************************************!*\
+  !*** ./src/app/shared/services/roles/roles.service.ts ***!
+  \********************************************************/
+/*! exports provided: RolesService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RolesService", function() { return RolesService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var RolesService = /** @class */ (function () {
+    function RolesService() {
+        this.roles = {
+            guest: 'guest',
+            user: 'user',
+            admin: 'admin'
+        };
+        this.role = this.roles.guest;
+    }
+    RolesService.prototype.setRole = function (role) {
+        if (role === this.roles.user || role === this.roles.admin) {
+            this.role = role;
+        }
+        else {
+            this.role = this.roles.guest;
+        }
+        console.log('setted role: ' + this.role);
+    };
+    RolesService.prototype.getRole = function () {
+        return this.role;
+    };
+    RolesService.prototype.isGuest = function () {
+        return this.role === this.roles.guest;
+    };
+    RolesService.prototype.isUser = function () {
+        return this.role === this.roles.user;
+    };
+    RolesService.prototype.isAdmin = function () {
+        return this.role === this.roles.admin;
+    };
+    RolesService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], RolesService);
+    return RolesService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/services/translation/transl.service.ts":
+/*!***************************************************************!*\
+  !*** ./src/app/shared/services/translation/transl.service.ts ***!
+  \***************************************************************/
 /*! exports provided: TranslService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1137,7 +1225,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var TranslService = /** @class */ (function () {
     function TranslService(http) {
         this.http = http;
-        this.url = 'http://localhost:2500/tr/';
+        this.url = 'http://localhost:2500/api/translate/';
     }
     TranslService.prototype.translate = function (word) {
         return this.http.get(this.url + word);
@@ -1167,14 +1255,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SharedModule", function() { return SharedModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var _services_db_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/db.service */ "./src/app/shared/services/db.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 var SharedModule = /** @class */ (function () {
@@ -1185,9 +1271,7 @@ var SharedModule = /** @class */ (function () {
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"]
             ],
-            providers: [
-                _services_db_service__WEBPACK_IMPORTED_MODULE_2__["DbService"]
-            ]
+            providers: []
         })
     ], SharedModule);
     return SharedModule;

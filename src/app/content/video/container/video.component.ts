@@ -1,7 +1,7 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { DbService } from './../../../shared/services/db.service';
+import { ApiService } from './../../../shared/services/api/api.service';
 
 @Component({
   selector: 'app-video',
@@ -18,8 +18,9 @@ export class VideoComponent implements OnInit {
   public subtOffset;
 
   constructor(
+    private changeDetector: ChangeDetectorRef,
     private route: ActivatedRoute,
-    private db: DbService
+    private db: ApiService
   ) { }
 
   ngOnInit() {
@@ -35,8 +36,6 @@ export class VideoComponent implements OnInit {
     });
 
     this.initPlayer();
-
-    setInterval(() => this.subtOffset = this.subtOffset, 100);
   }
 
   ngOnDestroy(){
@@ -70,18 +69,20 @@ export class VideoComponent implements OnInit {
   }
 
   onStateChangeHandler(e) {
+    console.log(e.data);
     if(e.data == window['YT'].PlayerState.PLAYING){
       this.interval = setInterval( () => {
         console.log(this);
         var time = Math.round(10 * this.player.getCurrentTime()) / 10;
         if(this.timeKeys.hasOwnProperty(time)){
           this.subtOffset = this.timeKeys[time] * 50;
+          this.changeDetector.detectChanges();
           console.log('subtOffset: ' + this.subtOffset);
         }
       }, 100);
     }
 
-    else{
+    else {
       this.interval && clearInterval(this.interval);
       this.interval = null;
     }

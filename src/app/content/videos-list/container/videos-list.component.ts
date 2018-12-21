@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DbService } from './../../../shared/services/db.service';
+import { ApiService } from './../../../shared/services/api/api.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -13,11 +13,11 @@ export class VideosListComponent implements OnInit {
   videos;
 
   constructor(
-    private db: DbService
+    private api: ApiService
   ) { }
 
   ngOnInit() {
-    this.videos = this.db.getVideos();
+    this.videos = this.api.getVideos();
   }
 
 }
