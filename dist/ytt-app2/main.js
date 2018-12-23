@@ -36,8 +36,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _content_videos_list_container_videos_list_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./content/videos-list/container/videos-list.component */ "./src/app/content/videos-list/container/videos-list.component.ts");
-/* harmony import */ var _content_video_container_video_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./content/video/container/video.component */ "./src/app/content/video/container/video.component.ts");
+/* harmony import */ var _shared_guards_auth_auth_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./shared/guards/auth/auth.guard */ "./src/app/shared/guards/auth/auth.guard.ts");
+/* harmony import */ var _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./core/auth/components/login/login.component */ "./src/app/core/auth/components/login/login.component.ts");
+/* harmony import */ var _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./core/auth/components/signup/signup.component */ "./src/app/core/auth/components/signup/signup.component.ts");
+/* harmony import */ var _content_videos_list_container_videos_list_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./content/videos-list/container/videos-list.component */ "./src/app/content/videos-list/container/videos-list.component.ts");
+/* harmony import */ var _content_video_container_video_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./content/video/container/video.component */ "./src/app/content/video/container/video.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -49,9 +52,14 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
+
 var routes = [
-    { path: 'videos', component: _content_videos_list_container_videos_list_component__WEBPACK_IMPORTED_MODULE_3__["VideosListComponent"] },
-    { path: 'video/:id', component: _content_video_container_video_component__WEBPACK_IMPORTED_MODULE_4__["VideoComponent"] }
+    { path: 'login', component: _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"], canActivate: [_shared_guards_auth_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]] },
+    { path: 'signup', component: _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_5__["SignupComponent"] },
+    { path: 'videos', component: _content_videos_list_container_videos_list_component__WEBPACK_IMPORTED_MODULE_6__["VideosListComponent"] },
+    { path: 'video/:id', component: _content_video_container_video_component__WEBPACK_IMPORTED_MODULE_7__["VideoComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -93,7 +101,7 @@ module.exports = "main {\r\n\tpadding: 0 50px;\r\n}\r\n\r\nmat-toolbar {\r\n\the
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color='primary'>\r\n  <button mat-button>Home</button>\r\n  <button mat-button routerLink=\"videos\">Videos</button>\r\n  <button *ngIf=\"roles.isGuest()\" mat-button (click)=\"loginDialog()\">Log in</button>\r\n  <button *ngIf=\"roles.isGuest()\" mat-button (click)=\"signupDialog()\">Sign up</button>\r\n  <button *ngIf=\"!roles.isGuest()\" mat-button>Log out</button>\r\n</mat-toolbar>\r\n\r\n<main>\r\n  <router-outlet></router-outlet>\r\n</main>\r\n\r\n\r\n"
+module.exports = "<mat-toolbar color='primary'>\r\n  <button mat-button routerLink=\"login\">Login page</button>\r\n  <button mat-button>Home</button>\r\n  <button mat-button routerLink=\"videos\">Videos</button>\r\n  <button *ngIf=\"roles.isGuest()\" mat-button (click)=\"loginDialog()\">Log in</button>\r\n  <button *ngIf=\"roles.isGuest()\" mat-button (click)=\"signupDialog()\">Sign up</button>\r\n  <button *ngIf=\"!roles.isGuest()\" mat-button (click)=\"logoutDialog()\">Log out</button>\r\n</mat-toolbar>\r\n\r\n<main>\r\n  <router-outlet></router-outlet>\r\n</main>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -110,8 +118,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared/services/roles/roles.service */ "./src/app/shared/services/roles/roles.service.ts");
-/* harmony import */ var _core_auth_login_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./core/auth/login/login.component */ "./src/app/core/auth/login/login.component.ts");
-/* harmony import */ var _core_auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./core/auth/signup/signup.component */ "./src/app/core/auth/signup/signup.component.ts");
+/* harmony import */ var _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./core/auth/components/login/login.component */ "./src/app/core/auth/components/login/login.component.ts");
+/* harmony import */ var _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./core/auth/components/signup/signup.component */ "./src/app/core/auth/components/signup/signup.component.ts");
+/* harmony import */ var _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./core/auth/components/log-out/log-out.component */ "./src/app/core/auth/components/log-out/log-out.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -126,22 +135,29 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AppComponent = /** @class */ (function () {
     function AppComponent(matDialog, roles) {
         this.matDialog = matDialog;
         this.roles = roles;
         this.title = 'ytt-app2';
+        roles.getAndSetRoleFromServer();
     }
     AppComponent.prototype.ngOnInit = function () {
         console.log(this.roles.getRole());
     };
     AppComponent.prototype.loginDialog = function () {
-        this.matDialog.open(_core_auth_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"], {
+        this.matDialog.open(_core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"], {
             width: '400px'
         });
     };
     AppComponent.prototype.signupDialog = function () {
-        this.matDialog.open(_core_auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_4__["SignupComponent"], {
+        this.matDialog.open(_core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_4__["SignupComponent"], {
+            width: '400px'
+        });
+    };
+    AppComponent.prototype.logoutDialog = function () {
+        this.matDialog.open(_core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_5__["LogOutComponent"], {
             width: '400px'
         });
     };
@@ -181,14 +197,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _content_videos_list_videos_list_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./content/videos-list/videos-list.module */ "./src/app/content/videos-list/videos-list.module.ts");
 /* harmony import */ var _content_video_video_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./content/video/video.module */ "./src/app/content/video/video.module.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _core_auth_login_login_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./core/auth/login/login.component */ "./src/app/core/auth/login/login.component.ts");
-/* harmony import */ var _core_auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./core/auth/signup/signup.component */ "./src/app/core/auth/signup/signup.component.ts");
+/* harmony import */ var _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./core/auth/components/login/login.component */ "./src/app/core/auth/components/login/login.component.ts");
+/* harmony import */ var _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./core/auth/components/signup/signup.component */ "./src/app/core/auth/components/signup/signup.component.ts");
+/* harmony import */ var _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./core/auth/components/log-out/log-out.component */ "./src/app/core/auth/components/log-out/log-out.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -208,8 +226,9 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"],
-                _core_auth_login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"],
-                _core_auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_11__["SignupComponent"]
+                _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"],
+                _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_11__["SignupComponent"],
+                _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_12__["LogOutComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -223,8 +242,9 @@ var AppModule = /** @class */ (function () {
             ],
             providers: [],
             entryComponents: [
-                _core_auth_login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"],
-                _core_auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_11__["SignupComponent"]
+                _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"],
+                _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_11__["SignupComponent"],
+                _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_12__["LogOutComponent"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"]]
         })
@@ -794,10 +814,73 @@ var VideosListModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/core/auth/login/login.component.css":
-/*!*****************************************************!*\
-  !*** ./src/app/core/auth/login/login.component.css ***!
-  \*****************************************************/
+/***/ "./src/app/core/auth/components/log-out/log-out.component.css":
+/*!********************************************************************!*\
+  !*** ./src/app/core/auth/components/log-out/log-out.component.css ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.full-width {\r\n\twidth: 100%;\r\n}"
+
+/***/ }),
+
+/***/ "./src/app/core/auth/components/log-out/log-out.component.html":
+/*!*********************************************************************!*\
+  !*** ./src/app/core/auth/components/log-out/log-out.component.html ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<mat-toolbar color=\"primary\">Are you sure, you want to log out?</mat-toolbar>\n\n<form ngNoForm method=\"POST\" action=\"http://localhost:2500/api/auth/log-out\">\n  <button type=\"submit\" mat-stroked-button class=\"full-width\" color=\"primary\">Log out</button>\n</form>\n"
+
+/***/ }),
+
+/***/ "./src/app/core/auth/components/log-out/log-out.component.ts":
+/*!*******************************************************************!*\
+  !*** ./src/app/core/auth/components/log-out/log-out.component.ts ***!
+  \*******************************************************************/
+/*! exports provided: LogOutComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LogOutComponent", function() { return LogOutComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var LogOutComponent = /** @class */ (function () {
+    function LogOutComponent() {
+    }
+    LogOutComponent.prototype.ngOnInit = function () {
+    };
+    LogOutComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-log-out',
+            template: __webpack_require__(/*! ./log-out.component.html */ "./src/app/core/auth/components/log-out/log-out.component.html"),
+            styles: [__webpack_require__(/*! ./log-out.component.css */ "./src/app/core/auth/components/log-out/log-out.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], LogOutComponent);
+    return LogOutComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/core/auth/components/login/login.component.css":
+/*!****************************************************************!*\
+  !*** ./src/app/core/auth/components/login/login.component.css ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -805,21 +888,21 @@ module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\
 
 /***/ }),
 
-/***/ "./src/app/core/auth/login/login.component.html":
-/*!******************************************************!*\
-  !*** ./src/app/core/auth/login/login.component.html ***!
-  \******************************************************/
+/***/ "./src/app/core/auth/components/login/login.component.html":
+/*!*****************************************************************!*\
+  !*** ./src/app/core/auth/components/login/login.component.html ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">Login</mat-toolbar>\r\n\r\n<form (ngSubmit)=logins()>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Login\" name=\"login\" [(ngModel)]=\"userLogin\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Password\" name=\"password\" [(ngModel)]=\"userPassword\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <button (click)=\"login($event)\" mat-stroked-button class=\"full-width\" color=\"primary\">Login</button>\r\n</form>"
+module.exports = "<mat-toolbar color=\"primary\">Login</mat-toolbar>\r\n\r\n<form ngNoForm method=\"POST\" action=\"http://localhost:2500/api/auth/login\">\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Login\" name=\"login\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Password\" name=\"password\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <button type=\"submit\" mat-stroked-button class=\"full-width\" color=\"primary\">Login</button>\r\n</form>"
 
 /***/ }),
 
-/***/ "./src/app/core/auth/login/login.component.ts":
-/*!****************************************************!*\
-  !*** ./src/app/core/auth/login/login.component.ts ***!
-  \****************************************************/
+/***/ "./src/app/core/auth/components/login/login.component.ts":
+/*!***************************************************************!*\
+  !*** ./src/app/core/auth/components/login/login.component.ts ***!
+  \***************************************************************/
 /*! exports provided: LoginComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -827,7 +910,7 @@ module.exports = "<mat-toolbar color=\"primary\">Login</mat-toolbar>\r\n\r\n<for
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginComponent", function() { return LoginComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../services/auth.service */ "./src/app/core/auth/services/auth.service.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../services/auth.service */ "./src/app/core/auth/services/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -845,21 +928,11 @@ var LoginComponent = /** @class */ (function () {
     }
     LoginComponent.prototype.ngOnInit = function () {
     };
-    LoginComponent.prototype.login = function (e) {
-        e.preventDefault();
-        console.log('login: ' + this.userLogin, this.userPassword);
-        this.auth.login({
-            login: this.userLogin,
-            password: this.userPassword
-        }).subscribe(function (res) {
-            console.log(res);
-        });
-    };
     LoginComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-login',
-            template: __webpack_require__(/*! ./login.component.html */ "./src/app/core/auth/login/login.component.html"),
-            styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/core/auth/login/login.component.css")]
+            template: __webpack_require__(/*! ./login.component.html */ "./src/app/core/auth/components/login/login.component.html"),
+            styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/core/auth/components/login/login.component.css")]
         }),
         __metadata("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]])
     ], LoginComponent);
@@ -870,67 +943,10 @@ var LoginComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/core/auth/services/auth.service.ts":
-/*!****************************************************!*\
-  !*** ./src/app/core/auth/services/auth.service.ts ***!
-  \****************************************************/
-/*! exports provided: AuthService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthService", function() { return AuthService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../../shared/services/roles/roles.service */ "./src/app/shared/services/roles/roles.service.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var AuthService = /** @class */ (function () {
-    function AuthService(http, roles) {
-        this.http = http;
-        this.roles = roles;
-        this.authUrl = 'http://localhost:2500/api/auth/';
-    }
-    AuthService.prototype.login = function (user) {
-        var _this = this;
-        console.log(user);
-        return this.http.post(this.authUrl + 'login', user, {}).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
-            console.log(res);
-            // res = res.json();
-            _this.roles.setRole(res.role);
-            return res;
-        }));
-    };
-    AuthService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"],
-            _shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_3__["RolesService"]])
-    ], AuthService);
-    return AuthService;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/core/auth/signup/signup.component.css":
-/*!*******************************************************!*\
-  !*** ./src/app/core/auth/signup/signup.component.css ***!
-  \*******************************************************/
+/***/ "./src/app/core/auth/components/signup/signup.component.css":
+/*!******************************************************************!*\
+  !*** ./src/app/core/auth/components/signup/signup.component.css ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -938,21 +954,21 @@ module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\
 
 /***/ }),
 
-/***/ "./src/app/core/auth/signup/signup.component.html":
-/*!********************************************************!*\
-  !*** ./src/app/core/auth/signup/signup.component.html ***!
-  \********************************************************/
+/***/ "./src/app/core/auth/components/signup/signup.component.html":
+/*!*******************************************************************!*\
+  !*** ./src/app/core/auth/components/signup/signup.component.html ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">Sign up</mat-toolbar>\r\n\r\n<form ngNoForm method=\"POST\" action=\"http://localhost:2500/api/auth/sign-up\">\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Name\" name=\"name\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Surname\" name=\"surname\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Email\" name=\"email\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Login\" name=\"login\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Password\" name=\"password\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <button mat-stroked-button class=\"full-width\" color=\"primary\">Sign up</button>\r\n</form>"
+module.exports = "<mat-toolbar color=\"primary\">Sign up</mat-toolbar>\r\n\r\n<form ngNoForm method=\"POST\" action=\"http://localhost:2500/api/auth/sign-up\">\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Name\" name=\"name\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Surname\" name=\"surname\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Email\" name=\"email\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Login\" name=\"login\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Password\" name=\"password\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <button type=\"submit\" mat-stroked-button class=\"full-width\" color=\"primary\">Sign up</button>\r\n</form>"
 
 /***/ }),
 
-/***/ "./src/app/core/auth/signup/signup.component.ts":
-/*!******************************************************!*\
-  !*** ./src/app/core/auth/signup/signup.component.ts ***!
-  \******************************************************/
+/***/ "./src/app/core/auth/components/signup/signup.component.ts":
+/*!*****************************************************************!*\
+  !*** ./src/app/core/auth/components/signup/signup.component.ts ***!
+  \*****************************************************************/
 /*! exports provided: SignupComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -981,12 +997,57 @@ var SignupComponent = /** @class */ (function () {
     SignupComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-signup',
-            template: __webpack_require__(/*! ./signup.component.html */ "./src/app/core/auth/signup/signup.component.html"),
-            styles: [__webpack_require__(/*! ./signup.component.css */ "./src/app/core/auth/signup/signup.component.css")]
+            template: __webpack_require__(/*! ./signup.component.html */ "./src/app/core/auth/components/signup/signup.component.html"),
+            styles: [__webpack_require__(/*! ./signup.component.css */ "./src/app/core/auth/components/signup/signup.component.css")]
         }),
         __metadata("design:paramtypes", [])
     ], SignupComponent);
     return SignupComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/core/auth/services/auth.service.ts":
+/*!****************************************************!*\
+  !*** ./src/app/core/auth/services/auth.service.ts ***!
+  \****************************************************/
+/*! exports provided: AuthService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthService", function() { return AuthService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../shared/services/roles/roles.service */ "./src/app/shared/services/roles/roles.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var AuthService = /** @class */ (function () {
+    function AuthService(http, roles) {
+        this.http = http;
+        this.roles = roles;
+        this.authUrl = 'http://localhost:2500/api/auth/';
+    }
+    AuthService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"],
+            _shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_2__["RolesService"]])
+    ], AuthService);
+    return AuthService;
 }());
 
 
@@ -1040,6 +1101,51 @@ var MaterialModule = /** @class */ (function () {
         })
     ], MaterialModule);
     return MaterialModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/guards/auth/auth.guard.ts":
+/*!**************************************************!*\
+  !*** ./src/app/shared/guards/auth/auth.guard.ts ***!
+  \**************************************************/
+/*! exports provided: AuthGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuard", function() { return AuthGuard; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_roles_roles_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../services/roles/roles.service */ "./src/app/shared/services/roles/roles.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var AuthGuard = /** @class */ (function () {
+    function AuthGuard(roles) {
+        this.roles = roles;
+    }
+    AuthGuard.prototype.canActivate = function (next, state) {
+        console.log('guard');
+        this.roles.getAndSetRoleFromServer();
+        return !this.roles.isAuthorized();
+    };
+    AuthGuard = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_1__["RolesService"]])
+    ], AuthGuard);
+    return AuthGuard;
 }());
 
 
@@ -1116,6 +1222,9 @@ var ApiService = /** @class */ (function () {
     function ApiService(http) {
         this.http = http;
     }
+    ApiService.prototype.getRole = function () {
+        return this.http.get('http://localhost:2500/api/role');
+    };
     ApiService.prototype.getVideos = function () {
         return this.http.get('http://localhost:2500/api/videos');
     };
@@ -1146,6 +1255,7 @@ var ApiService = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RolesService", function() { return RolesService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _api_api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../api/api.service */ "./src/app/shared/services/api/api.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1156,14 +1266,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var RolesService = /** @class */ (function () {
-    function RolesService() {
+    function RolesService(api) {
+        this.api = api;
         this.roles = {
             guest: 'guest',
             user: 'user',
             admin: 'admin'
         };
         this.role = this.roles.guest;
+        this.isRoleSetted = false;
     }
     RolesService.prototype.setRole = function (role) {
         if (role === this.roles.user || role === this.roles.admin) {
@@ -1174,8 +1287,20 @@ var RolesService = /** @class */ (function () {
         }
         console.log('setted role: ' + this.role);
     };
+    RolesService.prototype.getAndSetRoleFromServer = function () {
+        var _this = this;
+        if (!this.isRoleSetted) {
+            this.isRoleSetted = true;
+            this.api.getRole().subscribe(function (roleObj) {
+                _this.setRole(roleObj.role);
+            });
+        }
+    };
     RolesService.prototype.getRole = function () {
         return this.role;
+    };
+    RolesService.prototype.isAuthorized = function () {
+        return this.role !== this.roles.guest;
     };
     RolesService.prototype.isGuest = function () {
         return this.role === this.roles.guest;
@@ -1190,7 +1315,7 @@ var RolesService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_api_api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"]])
     ], RolesService);
     return RolesService;
 }());

@@ -3,8 +3,9 @@ import { MatDialog } from '@angular/material';
 
 import { RolesService } from './shared/services/roles/roles.service';
 
-import { LoginComponent } from './core/auth/login/login.component';
-import { SignupComponent } from './core/auth/signup/signup.component';
+import { LoginComponent } from './core/auth/components/login/login.component';
+import { SignupComponent } from './core/auth/components/signup/signup.component';
+import { LogOutComponent } from './core/auth/components/log-out/log-out.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,9 @@ export class AppComponent {
   constructor(
     private matDialog: MatDialog,
     private roles: RolesService
-  ){}
+  ){
+    roles.getAndSetRoleFromServer();
+  }
 
   ngOnInit(){
     console.log(this.roles.getRole());
@@ -31,6 +34,12 @@ export class AppComponent {
 
   signupDialog(){
     this.matDialog.open(SignupComponent, {
+      width: '400px'
+    });
+  }
+
+  logoutDialog(){
+    this.matDialog.open(LogOutComponent, {
       width: '400px'
     });
   }

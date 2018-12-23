@@ -11,14 +11,16 @@ import { VideosListModule } from './content/videos-list/videos-list.module';
 import { VideoModule } from './content/video/video.module';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './core/auth/login/login.component';
-import { SignupComponent } from './core/auth/signup/signup.component';
+import { LoginComponent } from './core/auth/components/login/login.component';
+import { SignupComponent } from './core/auth/components/signup/signup.component';
+import { LogOutComponent } from './core/auth/components/log-out/log-out.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    LogOutComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,8 @@ import { SignupComponent } from './core/auth/signup/signup.component';
   providers: [],
   entryComponents: [
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    LogOutComponent
   ],
   bootstrap: [AppComponent]
 })

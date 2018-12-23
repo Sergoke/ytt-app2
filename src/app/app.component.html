@@ -1,9 +1,10 @@
 <mat-toolbar color='primary'>
+  <button mat-button routerLink="login">Login page</button>
   <button mat-button>Home</button>
   <button mat-button routerLink="videos">Videos</button>
   <button *ngIf="roles.isGuest()" mat-button (click)="loginDialog()">Log in</button>
   <button *ngIf="roles.isGuest()" mat-button (click)="signupDialog()">Sign up</button>
-  <button *ngIf="!roles.isGuest()" mat-button>Log out</button>
+  <button *ngIf="!roles.isGuest()" mat-button (click)="logoutDialog()">Log out</button>
 </mat-toolbar>
 
 <main>

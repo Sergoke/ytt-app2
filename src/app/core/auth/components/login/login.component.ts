@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService } from './../services/auth.service';
+import { AuthService } from './../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -20,17 +20,17 @@ export class LoginComponent implements OnInit {
 
   }
 
-  login(e){
-    e.preventDefault();
+  // login(e){
+  //   e.preventDefault();
 
-    console.log('login: ' + this.userLogin, this.userPassword);
+  //   console.log('login: ' + this.userLogin, this.userPassword);
 
-    this.auth.login({
-      login: this.userLogin,
-      password: this.userPassword
-    }).subscribe(res => {
-      console.log(res)
-    });
-  }
+  //   this.auth.login({
+  //     login: this.userLogin,
+  //     password: this.userPassword
+  //   }).subscribe(res => {
+  //     console.log(res)
+  //   });
+  // }
   
 }

@@ -3,8 +3,6 @@ const User = require('../../../models/UserModel');
 
 router.post('/login', function(req, res){
 
-	console.log('login:' + req.body.login + ', password:' + req.body.password);
-
 	User.findOne({login: req.body.login}, (err, user) => {
 
 		if(err) return res.sendStatus(500);
@@ -12,7 +10,7 @@ router.post('/login', function(req, res){
 		if(user && user.checkPassword(req.body.password)){
 			console.log(req.session);
 			req.session.userId = user._id;
-			res.status(200).send({role: user.role});
+			res.redirect('/videos');
 		}
 
 		else{
@@ -35,8 +33,15 @@ router.post('/sign-up', function(req, res){
 
 	user.save(function(err, user){
 		if(err) res.status(422).send('Error. Please, verify your login');
-		res.send(user);
+		res.redirect('/login');
 	});
+});
+
+router.post('/log-out', function(req, res){
+
+	req.session.destroy();
+	res.redirect('/');
+
 });
 
 module.exports = router;

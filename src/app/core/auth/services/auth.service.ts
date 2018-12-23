@@ -18,15 +18,15 @@ export class AuthService {
     private roles: RolesService
   ) { }
 
-  login(user){
-    console.log(user);
-    return this.http.post(this.authUrl + 'login', user, {}).pipe(
-      map((res: any) => {
-        console.log(res);
-        // res = res.json();
-        this.roles.setRole(res.role);
-        return res;
-      })
-    );
-  }
+  // login(user){
+  //   console.log(user);
+  //   return this.http.post(this.authUrl + 'login', user, {}).pipe(
+  //     map((res: any) => {
+  //       console.log(res);
+  //       // res = res.json();
+  //       this.roles.setRole(res.role);
+  //       return res;
+  //     })
+  //   );
+  // }
 }

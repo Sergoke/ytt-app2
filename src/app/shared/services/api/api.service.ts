@@ -12,6 +12,10 @@ export class ApiService {
     private http: HttpClient
   ) { }
 
+  getRole(): Observable<any>{
+    return this.http.get('http://localhost:2500/api/role');
+  }
+
   getVideos(): Observable<any>{
     return this.http.get('http://localhost:2500/api/videos');
   }

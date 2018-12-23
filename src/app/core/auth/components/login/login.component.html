@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">Login</mat-toolbar>
+
+<form ngNoForm method="POST" action="http://localhost:2500/api/auth/login">
+  <mat-form-field class="full-width">
+    <input matInput required placeholder="Login" name="login" autocomplete="off">
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input matInput required placeholder="Password" name="password" autocomplete="off">
+  </mat-form-field>
+  <button type="submit" mat-stroked-button class="full-width" color="primary">Login</button>
+</form>
