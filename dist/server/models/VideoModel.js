@@ -5,7 +5,7 @@ const VideoSchema = new Schema({
 	videoId: {type: String},
 	isDemo: {type: Boolean},
 	timeKeys: [{type: Number}],
-	subts: [[{type: String}]]
+	subts: {'en': [[{type: String}]]}
 });
 
 module.exports = mongoose.model('subt', VideoSchema);

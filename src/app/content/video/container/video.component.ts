@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from './../../../shared/services/api/api.service';
 
 @Component({
@@ -13,13 +13,14 @@ export class VideoComponent implements OnInit {
   embedUrl: string;
   private player;
   private interval;
-  private subtitles: Array<Array<string>>;
+  private subtitles: {(key: string): Array<Array<string>>};
   private timeKeys: {};
   public subtOffset;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
     private route: ActivatedRoute,
+    private router: Router,
     private db: ApiService
   ) { }
 
@@ -32,6 +33,9 @@ export class VideoComponent implements OnInit {
         this.createTimeKeys(subts['timeKeys']);
         console.log(this.timeKeys)
         this.subtOffset = 0;
+      },
+      error => {
+        this.router.navigate(['/unauthorized']);
       });
     });
 

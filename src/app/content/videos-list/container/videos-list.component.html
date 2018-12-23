@@ -1,9 +1,11 @@
 <h1>All the videos</h1>
 
+<mat-spinner *ngIf="!(videos$ | async)" strokeWidth="7" diameter="100"></mat-spinner>
+
 <div class="videos-wrap">
-  <div class="mat-card-wrap" *ngFor="let video of videos | async" routerLink="/video/{{video.id}}">
+  <div class="mat-card-wrap" *ngFor="let video of videos$ | async; let i = index" routerLink="/video/{{video.id}}">
     <mat-card>
-      <img mat-card-image [src]="video.thumbnail" alt="thumbnail">
+      <img mat-card-image [src]="videos[i].thumbnail" alt="thumbnail">
       <mat-card-title>{{video.title}}</mat-card-title>
       <mat-card-actions>
         <button mat-button>LIKE</button>

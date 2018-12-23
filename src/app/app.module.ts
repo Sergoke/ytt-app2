@@ -7,8 +7,8 @@ import { MaterialModule } from './material/material.module';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { VideosListModule } from './content/videos-list/videos-list.module';
-import { VideoModule } from './content/video/video.module';
+
+import { ContentModule } from './content/content.module';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './core/auth/components/login/login.component';
@@ -29,8 +29,7 @@ import { LogOutComponent } from './core/auth/components/log-out/log-out.componen
     FormsModule,
     SharedModule,
     MaterialModule,
-    VideosListModule,
-    VideoModule
+    ContentModule
   ],
   providers: [],
   entryComponents: [

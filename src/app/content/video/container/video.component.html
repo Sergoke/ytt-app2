@@ -1,2 +1,4 @@
 <yt-player [embedUrl]="embedUrl"></yt-player>
-<subtitles [subtitles]="subtitles" [subtOffset]="subtOffset" (wordClicked)="stopPlayer()"></subtitles>
+<subtitles [subtitles]="subtitles?.en" [subtOffset]="subtOffset" (wordClicked)="stopPlayer()"></subtitles>
+<hr>
+<subtitles [subtitles]="subtitles?.ru" [subtOffset]="subtOffset" [disableWordClick]="true"></subtitles>

@@ -1,7 +1,13 @@
 const router = require('express').Router();
+
 const User = require('../../../models/UserModel');
 
-router.post('/login', function(req, res){
+const isAuth = require('./../../../middleware/isAuth');
+const isGuest = require('./../../../middleware/isGuest');
+
+router.post('/login', isGuest, function(req, res){
+
+	console.log(req.body);
 
 	User.findOne({login: req.body.login}, (err, user) => {
 
@@ -20,7 +26,7 @@ router.post('/login', function(req, res){
 
 });
 
-router.post('/sign-up', function(req, res){
+router.post('/sign-up', isGuest, function(req, res){
 	console.log('name: ' + req.body.name + ', surname: ' + req.body.surname + ', email: ' + req.body.email + ', login:' + req.body.login + ', password: ' + req.body.password);
 
 	let user = new User({
@@ -37,7 +43,7 @@ router.post('/sign-up', function(req, res){
 	});
 });
 
-router.post('/log-out', function(req, res){
+router.post('/log-out', isAuth, function(req, res){
 
 	req.session.destroy();
 	res.redirect('/');

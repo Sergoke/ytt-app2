@@ -41,6 +41,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./core/auth/components/signup/signup.component */ "./src/app/core/auth/components/signup/signup.component.ts");
 /* harmony import */ var _content_videos_list_container_videos_list_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./content/videos-list/container/videos-list.component */ "./src/app/content/videos-list/container/videos-list.component.ts");
 /* harmony import */ var _content_video_container_video_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./content/video/container/video.component */ "./src/app/content/video/container/video.component.ts");
+/* harmony import */ var _content_home_container_home_home_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./content/home/container/home/home.component */ "./src/app/content/home/container/home/home.component.ts");
+/* harmony import */ var _shared_components_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./shared/components/not-found/not-found.component */ "./src/app/shared/components/not-found/not-found.component.ts");
+/* harmony import */ var _shared_components_unauthorized_unauthorized_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./shared/components/unauthorized/unauthorized.component */ "./src/app/shared/components/unauthorized/unauthorized.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -55,11 +58,19 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
+
 var routes = [
-    { path: 'login', component: _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"], canActivate: [_shared_guards_auth_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]] },
-    { path: 'signup', component: _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_5__["SignupComponent"] },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: 'home', component: _content_home_container_home_home_component__WEBPACK_IMPORTED_MODULE_8__["HomeComponent"] },
+    { path: 'login', component: _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"], canActivate: [_shared_guards_auth_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]], data: { role: 'guest' } },
+    { path: 'signup', component: _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_5__["SignupComponent"], canActivate: [_shared_guards_auth_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]], data: { role: 'guest' } },
     { path: 'videos', component: _content_videos_list_container_videos_list_component__WEBPACK_IMPORTED_MODULE_6__["VideosListComponent"] },
-    { path: 'video/:id', component: _content_video_container_video_component__WEBPACK_IMPORTED_MODULE_7__["VideoComponent"] }
+    { path: 'video/:id', component: _content_video_container_video_component__WEBPACK_IMPORTED_MODULE_7__["VideoComponent"] },
+    { path: 'unauthorized', component: _shared_components_unauthorized_unauthorized_component__WEBPACK_IMPORTED_MODULE_10__["UnauthorizedComponent"] },
+    { path: '404', component: _shared_components_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_9__["NotFoundComponent"] },
+    { path: '**', component: _shared_components_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_9__["NotFoundComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -101,7 +112,7 @@ module.exports = "main {\r\n\tpadding: 0 50px;\r\n}\r\n\r\nmat-toolbar {\r\n\the
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color='primary'>\r\n  <button mat-button routerLink=\"login\">Login page</button>\r\n  <button mat-button>Home</button>\r\n  <button mat-button routerLink=\"videos\">Videos</button>\r\n  <button *ngIf=\"roles.isGuest()\" mat-button (click)=\"loginDialog()\">Log in</button>\r\n  <button *ngIf=\"roles.isGuest()\" mat-button (click)=\"signupDialog()\">Sign up</button>\r\n  <button *ngIf=\"!roles.isGuest()\" mat-button (click)=\"logoutDialog()\">Log out</button>\r\n</mat-toolbar>\r\n\r\n<main>\r\n  <router-outlet></router-outlet>\r\n</main>\r\n\r\n\r\n"
+module.exports = "<mat-toolbar color='primary'>\r\n  <button *isGuest=\"true\" mat-button routerLink=\"login\">Login page</button>\r\n  <button mat-button routerLink=\"home\">Home</button>\r\n  <button mat-button routerLink=\"videos\">Videos</button>\r\n  <button *isGuest=\"true\" mat-button (click)=\"loginDialog()\">Log in</button>\r\n  <button *isGuest=\"true\" mat-button (click)=\"signupDialog()\">Sign up</button>\r\n  <button *isGuest=\"false\" mat-button (click)=\"logoutDialog()\">Log out</button>\r\n</mat-toolbar>\r\n\r\n<main>\r\n  <router-outlet></router-outlet>\r\n</main>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -117,10 +128,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared/services/roles/roles.service */ "./src/app/shared/services/roles/roles.service.ts");
-/* harmony import */ var _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./core/auth/components/login/login.component */ "./src/app/core/auth/components/login/login.component.ts");
-/* harmony import */ var _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./core/auth/components/signup/signup.component */ "./src/app/core/auth/components/signup/signup.component.ts");
-/* harmony import */ var _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./core/auth/components/log-out/log-out.component */ "./src/app/core/auth/components/log-out/log-out.component.ts");
+/* harmony import */ var _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./core/auth/components/login/login.component */ "./src/app/core/auth/components/login/login.component.ts");
+/* harmony import */ var _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./core/auth/components/signup/signup.component */ "./src/app/core/auth/components/signup/signup.component.ts");
+/* harmony import */ var _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./core/auth/components/log-out/log-out.component */ "./src/app/core/auth/components/log-out/log-out.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -135,29 +145,24 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
 var AppComponent = /** @class */ (function () {
-    function AppComponent(matDialog, roles) {
+    function AppComponent(matDialog) {
         this.matDialog = matDialog;
-        this.roles = roles;
         this.title = 'ytt-app2';
-        roles.getAndSetRoleFromServer();
     }
-    AppComponent.prototype.ngOnInit = function () {
-        console.log(this.roles.getRole());
-    };
+    AppComponent.prototype.ngOnInit = function () { };
     AppComponent.prototype.loginDialog = function () {
-        this.matDialog.open(_core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"], {
+        this.matDialog.open(_core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_2__["LoginComponent"], {
             width: '400px'
         });
     };
     AppComponent.prototype.signupDialog = function () {
-        this.matDialog.open(_core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_4__["SignupComponent"], {
+        this.matDialog.open(_core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_3__["SignupComponent"], {
             width: '400px'
         });
     };
     AppComponent.prototype.logoutDialog = function () {
-        this.matDialog.open(_core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_5__["LogOutComponent"], {
+        this.matDialog.open(_core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_4__["LogOutComponent"], {
             width: '400px'
         });
     };
@@ -167,8 +172,7 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialog"],
-            _shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_2__["RolesService"]])
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialog"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -194,12 +198,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_material_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./material/material.module */ "./src/app/material/material.module.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _content_videos_list_videos_list_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./content/videos-list/videos-list.module */ "./src/app/content/videos-list/videos-list.module.ts");
-/* harmony import */ var _content_video_video_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./content/video/video.module */ "./src/app/content/video/video.module.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./core/auth/components/login/login.component */ "./src/app/core/auth/components/login/login.component.ts");
-/* harmony import */ var _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./core/auth/components/signup/signup.component */ "./src/app/core/auth/components/signup/signup.component.ts");
-/* harmony import */ var _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./core/auth/components/log-out/log-out.component */ "./src/app/core/auth/components/log-out/log-out.component.ts");
+/* harmony import */ var _content_content_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./content/content.module */ "./src/app/content/content.module.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./core/auth/components/login/login.component */ "./src/app/core/auth/components/login/login.component.ts");
+/* harmony import */ var _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./core/auth/components/signup/signup.component */ "./src/app/core/auth/components/signup/signup.component.ts");
+/* harmony import */ var _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./core/auth/components/log-out/log-out.component */ "./src/app/core/auth/components/log-out/log-out.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -218,17 +221,16 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"],
-                _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"],
-                _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_11__["SignupComponent"],
-                _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_12__["LogOutComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"],
+                _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_9__["LoginComponent"],
+                _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_10__["SignupComponent"],
+                _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_11__["LogOutComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -237,19 +239,168 @@ var AppModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"],
                 _shared_shared_module__WEBPACK_IMPORTED_MODULE_3__["SharedModule"],
                 _material_material_module__WEBPACK_IMPORTED_MODULE_4__["MaterialModule"],
-                _content_videos_list_videos_list_module__WEBPACK_IMPORTED_MODULE_7__["VideosListModule"],
-                _content_video_video_module__WEBPACK_IMPORTED_MODULE_8__["VideoModule"]
+                _content_content_module__WEBPACK_IMPORTED_MODULE_7__["ContentModule"]
             ],
             providers: [],
             entryComponents: [
-                _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"],
-                _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_11__["SignupComponent"],
-                _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_12__["LogOutComponent"]
+                _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_9__["LoginComponent"],
+                _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_10__["SignupComponent"],
+                _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_11__["LogOutComponent"]
             ],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/content/content.module.ts":
+/*!*******************************************!*\
+  !*** ./src/app/content/content.module.ts ***!
+  \*******************************************/
+/*! exports provided: ContentModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContentModule", function() { return ContentModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _home_home_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home/home.module */ "./src/app/content/home/home.module.ts");
+/* harmony import */ var _video_video_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./video/video.module */ "./src/app/content/video/video.module.ts");
+/* harmony import */ var _videos_list_videos_list_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./videos-list/videos-list.module */ "./src/app/content/videos-list/videos-list.module.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+var ContentModule = /** @class */ (function () {
+    function ContentModule() {
+    }
+    ContentModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            declarations: [],
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+                _home_home_module__WEBPACK_IMPORTED_MODULE_2__["HomeModule"],
+                _video_video_module__WEBPACK_IMPORTED_MODULE_3__["VideoModule"],
+                _videos_list_videos_list_module__WEBPACK_IMPORTED_MODULE_4__["VideosListModule"]
+            ]
+        })
+    ], ContentModule);
+    return ContentModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/content/home/container/home/home.component.css":
+/*!****************************************************************!*\
+  !*** ./src/app/content/home/container/home/home.component.css ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/content/home/container/home/home.component.html":
+/*!*****************************************************************!*\
+  !*** ./src/app/content/home/container/home/home.component.html ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p isGuest>\n  You are at home :)\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/content/home/container/home/home.component.ts":
+/*!***************************************************************!*\
+  !*** ./src/app/content/home/container/home/home.component.ts ***!
+  \***************************************************************/
+/*! exports provided: HomeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var HomeComponent = /** @class */ (function () {
+    function HomeComponent() {
+    }
+    HomeComponent.prototype.ngOnInit = function () {
+    };
+    HomeComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-home',
+            template: __webpack_require__(/*! ./home.component.html */ "./src/app/content/home/container/home/home.component.html"),
+            styles: [__webpack_require__(/*! ./home.component.css */ "./src/app/content/home/container/home/home.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], HomeComponent);
+    return HomeComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/content/home/home.module.ts":
+/*!*********************************************!*\
+  !*** ./src/app/content/home/home.module.ts ***!
+  \*********************************************/
+/*! exports provided: HomeModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeModule", function() { return HomeModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _container_home_home_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./container/home/home.component */ "./src/app/content/home/container/home/home.component.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var HomeModule = /** @class */ (function () {
+    function HomeModule() {
+    }
+    HomeModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            declarations: [_container_home_home_component__WEBPACK_IMPORTED_MODULE_2__["HomeComponent"]],
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"]
+            ]
+        })
+    ], HomeModule);
+    return HomeModule;
 }());
 
 
@@ -274,7 +425,7 @@ module.exports = ".subts-wrap {\r\n    height: 50px;\r\n    background-color: #6
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"subts-wrap\">\n  <ul [ngStyle]=\"{'transform': 'translateY(-' + subtOffset + 'px)'}\" (click)=\"wordClick($event)\">\n    <li class=\"string\" *ngFor=\"let string of subtitles\">\n      <span *ngFor=\"let word of string\">{{word}}</span>\n    </li>\n  </ul>\n</div>\n\n<h2>{{subtOffset}}</h2>\n\n"
+module.exports = "<div class=\"subts-wrap\">\n  <ul [ngStyle]=\"{'transform': 'translateY(-' + subtOffset + 'px)'}\" (click)=\"wordClick($event)\">\n    <li class=\"string\" *ngFor=\"let string of subtitles\">\n      <span *ngFor=\"let word of string\">{{word}}</span>\n    </li>\n  </ul>\n</div>\n\n"
 
 /***/ }),
 
@@ -310,6 +461,7 @@ var SubtitlesComponent = /** @class */ (function () {
         this.dialog = dialog;
         this.tr = tr;
         this.wordClicked = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.disableWordClick = false;
     }
     SubtitlesComponent.prototype.ngOnInit = function () {
         console.log(this.subtOffset);
@@ -319,18 +471,19 @@ var SubtitlesComponent = /** @class */ (function () {
     };
     SubtitlesComponent.prototype.wordClick = function (e) {
         var _this = this;
-        if ("SPAN" === e.target.tagName) {
+        if ("SPAN" === e.target.tagName && !this.disableWordClick) {
             this.wordClicked.emit();
             this.lastClickedWord && this.lastClickedWord.classList.remove("clickedWord");
             this.lastClickedWord = e.target;
-            e.target.classList.add("clickedWord");
+            this.lastClickedWord.classList.add("clickedWord");
             this.tr.translate(e.target.textContent).subscribe(function (word) {
-                _this.dialog.open(_translation_translation_component__WEBPACK_IMPORTED_MODULE_3__["TranslationComponent"], {
+                var dialogRef = _this.dialog.open(_translation_translation_component__WEBPACK_IMPORTED_MODULE_3__["TranslationComponent"], {
                     data: {
                         originWord: e.target.textContent,
                         translatedWord: word
                     }
                 });
+                dialogRef.afterClosed().subscribe(function () { return _this.lastClickedWord.classList.remove("clickedWord"); });
             });
         }
     };
@@ -346,6 +499,10 @@ var SubtitlesComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Object)
     ], SubtitlesComponent.prototype, "subtOffset", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Boolean)
+    ], SubtitlesComponent.prototype, "disableWordClick", void 0);
     SubtitlesComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'subtitles',
@@ -450,7 +607,7 @@ module.exports = ".responsive {\r\n    width: 100%;\r\n    height: 0;\r\n    pad
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  yt-player works!\n</p>\n\n<div class=\"responsive\">\n  <iframe id=\"player\" [src]=\"embedUrl | safe\" frameborder=\"0\"></iframe>\n</div>\n\n"
+module.exports = "<div class=\"responsive\">\n  <iframe id=\"player\" [src]=\"embedUrl | safe\" frameborder=\"0\"></iframe>\n</div>\n\n"
 
 /***/ }),
 
@@ -518,7 +675,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<yt-player [embedUrl]=\"embedUrl\"></yt-player>\n<subtitles [subtitles]=\"subtitles\" [subtOffset]=\"subtOffset\" (wordClicked)=\"stopPlayer()\"></subtitles>"
+module.exports = "<yt-player [embedUrl]=\"embedUrl\"></yt-player>\n<subtitles [subtitles]=\"subtitles?.en\" [subtOffset]=\"subtOffset\" (wordClicked)=\"stopPlayer()\"></subtitles>\n<hr>\n<subtitles [subtitles]=\"subtitles?.ru\" [subtOffset]=\"subtOffset\" [disableWordClick]=\"true\"></subtitles>"
 
 /***/ }),
 
@@ -548,9 +705,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var VideoComponent = /** @class */ (function () {
-    function VideoComponent(changeDetector, route, db) {
+    function VideoComponent(changeDetector, route, router, db) {
         this.changeDetector = changeDetector;
         this.route = route;
+        this.router = router;
         this.db = db;
     }
     VideoComponent.prototype.ngOnInit = function () {
@@ -563,6 +721,8 @@ var VideoComponent = /** @class */ (function () {
                 _this.createTimeKeys(subts['timeKeys']);
                 console.log(_this.timeKeys);
                 _this.subtOffset = 0;
+            }, function (error) {
+                _this.router.navigate(['/unauthorized']);
             });
         });
         this.initPlayer();
@@ -633,6 +793,7 @@ var VideoComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
             _shared_services_api_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]])
     ], VideoComponent);
     return VideoComponent;
@@ -706,7 +867,7 @@ var VideoModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".videos-wrap {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    justify-content: space-around;\r\n}\r\n\r\n.mat-card-wrap {\r\n    max-width: 320px;\r\n    width: 320px;\r\n    min-width: 200px;\r\n    margin: 0 20px 50px 20px;\r\n    cursor: pointer;\r\n}\r\n\r\nmat-card {\r\n    height: 100%;\r\n    box-sizing: border-box;\r\n}"
+module.exports = ".videos-wrap {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    justify-content: space-around;\r\n}\r\n\r\n.mat-card-wrap {\r\n    max-width: 320px;\r\n    width: 320px;\r\n    min-width: 200px;\r\n    margin: 0 20px 50px 20px;\r\n    cursor: pointer;\r\n}\r\n\r\nmat-card {\r\n    height: 100%;\r\n    box-sizing: border-box;\r\n}\r\n\r\nmat-spinner {\r\n    position: absolute;\r\n    top: 200px;\r\n    left: calc(50% - 50px);\r\n    z-index: 1;\r\n}"
 
 /***/ }),
 
@@ -717,7 +878,7 @@ module.exports = ".videos-wrap {\r\n    display: flex;\r\n    flex-wrap: wrap;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>All the videos</h1>\r\n\r\n<div class=\"videos-wrap\">\r\n  <div class=\"mat-card-wrap\" *ngFor=\"let video of videos | async\" routerLink=\"/video/{{video.id}}\">\r\n    <mat-card>\r\n      <img mat-card-image [src]=\"video.thumbnail\" alt=\"thumbnail\">\r\n      <mat-card-title>{{video.title}}</mat-card-title>\r\n      <mat-card-actions>\r\n        <button mat-button>LIKE</button>\r\n        <button mat-button>SHARE</button>\r\n      </mat-card-actions>\r\n    </mat-card>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<h1>All the videos</h1>\r\n\r\n<mat-spinner *ngIf=\"!(videos$ | async)\" strokeWidth=\"7\" diameter=\"100\"></mat-spinner>\r\n\r\n<div class=\"videos-wrap\">\r\n  <div class=\"mat-card-wrap\" *ngFor=\"let video of videos$ | async\" routerLink=\"/video/{{video.id}}\">\r\n    <mat-card>\r\n      <img mat-card-image [src]=\"video.thumbnail || urlt\" alt=\"thumbnail\">\r\n      <mat-card-title>{{video.title}}</mat-card-title>\r\n      <mat-card-actions>\r\n        <button mat-button>LIKE</button>\r\n        <button mat-button>SHARE</button>\r\n      </mat-card-actions>\r\n    </mat-card>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -747,9 +908,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var VideosListComponent = /** @class */ (function () {
     function VideosListComponent(api) {
         this.api = api;
+        this.urlt = 'data:image/jpeg;base64,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';
     }
     VideosListComponent.prototype.ngOnInit = function () {
-        this.videos = this.api.getVideos();
+        this.videos$ = this.api.getVideos();
     };
     VideosListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -832,7 +994,7 @@ module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">Are you sure, you want to log out?</mat-toolbar>\n\n<form ngNoForm method=\"POST\" action=\"http://localhost:2500/api/auth/log-out\">\n  <button type=\"submit\" mat-stroked-button class=\"full-width\" color=\"primary\">Log out</button>\n</form>\n"
+module.exports = "<mat-toolbar color=\"primary\">Are you sure, you want to log out?</mat-toolbar>\n\n<form ngNoForm method=\"POST\" action=\"http://localhost:2500/log-out\">\n  <button type=\"submit\" mat-stroked-button class=\"full-width\" color=\"primary\">Log out</button>\n</form>\n"
 
 /***/ }),
 
@@ -895,7 +1057,7 @@ module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">Login</mat-toolbar>\r\n\r\n<form ngNoForm method=\"POST\" action=\"http://localhost:2500/api/auth/login\">\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Login\" name=\"login\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Password\" name=\"password\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <button type=\"submit\" mat-stroked-button class=\"full-width\" color=\"primary\">Login</button>\r\n</form>"
+module.exports = "<mat-toolbar color=\"primary\">Login</mat-toolbar>\r\n\r\n<form ngNoForm method=\"POST\" action=\"http://localhost:2500/login\">\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Login\" name=\"login\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Password\" name=\"password\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <button type=\"submit\" mat-stroked-button class=\"full-width\" color=\"primary\">Login</button>\r\n</form>"
 
 /***/ }),
 
@@ -961,7 +1123,7 @@ module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">Sign up</mat-toolbar>\r\n\r\n<form ngNoForm method=\"POST\" action=\"http://localhost:2500/api/auth/sign-up\">\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Name\" name=\"name\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Surname\" name=\"surname\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Email\" name=\"email\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Login\" name=\"login\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Password\" name=\"password\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <button type=\"submit\" mat-stroked-button class=\"full-width\" color=\"primary\">Sign up</button>\r\n</form>"
+module.exports = "<mat-toolbar color=\"primary\">Sign up</mat-toolbar>\r\n\r\n<form ngNoForm method=\"POST\" action=\"http://localhost:2500/sign-up\">\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Name\" name=\"name\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Surname\" name=\"surname\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Email\" name=\"email\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Login\" name=\"login\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Password\" name=\"password\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <button type=\"submit\" mat-stroked-button class=\"full-width\" color=\"primary\">Sign up</button>\r\n</form>"
 
 /***/ }),
 
@@ -1088,19 +1250,209 @@ var MaterialModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatButtonModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatInputModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatCardModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatCardModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatProgressSpinnerModule"]
             ],
             exports: [
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatToolbarModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatButtonModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatInputModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatCardModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatCardModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatProgressSpinnerModule"]
             ],
             declarations: []
         })
     ], MaterialModule);
     return MaterialModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/components/not-found/not-found.component.css":
+/*!*********************************************************************!*\
+  !*** ./src/app/shared/components/not-found/not-found.component.css ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/shared/components/not-found/not-found.component.html":
+/*!**********************************************************************!*\
+  !*** ./src/app/shared/components/not-found/not-found.component.html ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  not-found works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/shared/components/not-found/not-found.component.ts":
+/*!********************************************************************!*\
+  !*** ./src/app/shared/components/not-found/not-found.component.ts ***!
+  \********************************************************************/
+/*! exports provided: NotFoundComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotFoundComponent", function() { return NotFoundComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var NotFoundComponent = /** @class */ (function () {
+    function NotFoundComponent() {
+    }
+    NotFoundComponent.prototype.ngOnInit = function () {
+    };
+    NotFoundComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-not-found',
+            template: __webpack_require__(/*! ./not-found.component.html */ "./src/app/shared/components/not-found/not-found.component.html"),
+            styles: [__webpack_require__(/*! ./not-found.component.css */ "./src/app/shared/components/not-found/not-found.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], NotFoundComponent);
+    return NotFoundComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/components/unauthorized/unauthorized.component.css":
+/*!***************************************************************************!*\
+  !*** ./src/app/shared/components/unauthorized/unauthorized.component.css ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/shared/components/unauthorized/unauthorized.component.html":
+/*!****************************************************************************!*\
+  !*** ./src/app/shared/components/unauthorized/unauthorized.component.html ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  unauthorized works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/shared/components/unauthorized/unauthorized.component.ts":
+/*!**************************************************************************!*\
+  !*** ./src/app/shared/components/unauthorized/unauthorized.component.ts ***!
+  \**************************************************************************/
+/*! exports provided: UnauthorizedComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UnauthorizedComponent", function() { return UnauthorizedComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var UnauthorizedComponent = /** @class */ (function () {
+    function UnauthorizedComponent() {
+    }
+    UnauthorizedComponent.prototype.ngOnInit = function () {
+    };
+    UnauthorizedComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-unauthorized',
+            template: __webpack_require__(/*! ./unauthorized.component.html */ "./src/app/shared/components/unauthorized/unauthorized.component.html"),
+            styles: [__webpack_require__(/*! ./unauthorized.component.css */ "./src/app/shared/components/unauthorized/unauthorized.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], UnauthorizedComponent);
+    return UnauthorizedComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/directives/is-guest/is-guest.directive.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/shared/directives/is-guest/is-guest.directive.ts ***!
+  \******************************************************************/
+/*! exports provided: IsGuestDirective */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IsGuestDirective", function() { return IsGuestDirective; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_roles_roles_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../services/roles/roles.service */ "./src/app/shared/services/roles/roles.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var IsGuestDirective = /** @class */ (function () {
+    function IsGuestDirective(roles, templateRef, viewContainer) {
+        this.roles = roles;
+        this.templateRef = templateRef;
+        this.viewContainer = viewContainer;
+        console.log('isGuestDirective');
+    }
+    IsGuestDirective.prototype.ngOnInit = function () {
+        var _this = this;
+        this.roles.getRoleAsync().subscribe(function (role) {
+            if (_this.isGuest && role === 'guest' || !_this.isGuest && role !== 'guest') {
+                _this.viewContainer.createEmbeddedView(_this.templateRef);
+                console.log('showed: is guest');
+            }
+            else {
+                _this.viewContainer.clear();
+                console.log('cleared: is not guest');
+            }
+        });
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Boolean)
+    ], IsGuestDirective.prototype, "isGuest", void 0);
+    IsGuestDirective = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"])({
+            selector: '[isGuest]'
+        }),
+        __metadata("design:paramtypes", [_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_1__["RolesService"],
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["TemplateRef"],
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewContainerRef"]])
+    ], IsGuestDirective);
+    return IsGuestDirective;
 }());
 
 
@@ -1136,8 +1488,8 @@ var AuthGuard = /** @class */ (function () {
     }
     AuthGuard.prototype.canActivate = function (next, state) {
         console.log('guard');
-        this.roles.getAndSetRoleFromServer();
-        return !this.roles.isAuthorized();
+        var role = next.data.role;
+        return this.roles.getRoleFromLocalStorage() === role;
     };
     AuthGuard = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -1256,6 +1608,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RolesService", function() { return RolesService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _api_api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../api/api.service */ "./src/app/shared/services/api/api.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1265,6 +1619,8 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
+
 
 
 var RolesService = /** @class */ (function () {
@@ -1285,19 +1641,37 @@ var RolesService = /** @class */ (function () {
         else {
             this.role = this.roles.guest;
         }
+        this.isRoleSetted = true;
+        localStorage.setItem('role', this.role);
         console.log('setted role: ' + this.role);
     };
     RolesService.prototype.getAndSetRoleFromServer = function () {
         var _this = this;
         if (!this.isRoleSetted) {
-            this.isRoleSetted = true;
             this.api.getRole().subscribe(function (roleObj) {
                 _this.setRole(roleObj.role);
             });
         }
     };
+    RolesService.prototype.getRoleAsync = function () {
+        var _this = this;
+        if (!this.isRoleSetted) {
+            return this.api.getRole().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (roleObj) {
+                _this.setRole(roleObj.role);
+                return _this.role;
+            }));
+        }
+        else {
+            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].create(function (observer) {
+                observer.next(_this.role);
+            });
+        }
+    };
     RolesService.prototype.getRole = function () {
         return this.role;
+    };
+    RolesService.prototype.getRoleFromLocalStorage = function () {
+        return localStorage.getItem('role');
     };
     RolesService.prototype.isAuthorized = function () {
         return this.role !== this.roles.guest;
@@ -1380,12 +1754,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SharedModule", function() { return SharedModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _components_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/not-found/not-found.component */ "./src/app/shared/components/not-found/not-found.component.ts");
+/* harmony import */ var _components_unauthorized_unauthorized_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/unauthorized/unauthorized.component */ "./src/app/shared/components/unauthorized/unauthorized.component.ts");
+/* harmony import */ var _directives_is_guest_is_guest_directive__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./directives/is-guest/is-guest.directive */ "./src/app/shared/directives/is-guest/is-guest.directive.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 var SharedModule = /** @class */ (function () {
@@ -1396,7 +1776,13 @@ var SharedModule = /** @class */ (function () {
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"]
             ],
-            providers: []
+            providers: [],
+            declarations: [
+                _components_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_2__["NotFoundComponent"],
+                _components_unauthorized_unauthorized_component__WEBPACK_IMPORTED_MODULE_3__["UnauthorizedComponent"],
+                _directives_is_guest_is_guest_directive__WEBPACK_IMPORTED_MODULE_4__["IsGuestDirective"]
+            ],
+            exports: [_directives_is_guest_is_guest_directive__WEBPACK_IMPORTED_MODULE_4__["IsGuestDirective"]]
         })
     ], SharedModule);
     return SharedModule;

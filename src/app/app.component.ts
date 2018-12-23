@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { RolesService } from './shared/services/roles/roles.service';
-
 import { LoginComponent } from './core/auth/components/login/login.component';
 import { SignupComponent } from './core/auth/components/signup/signup.component';
 import { LogOutComponent } from './core/auth/components/log-out/log-out.component';
@@ -16,15 +14,10 @@ export class AppComponent {
   title = 'ytt-app2';
 
   constructor(
-    private matDialog: MatDialog,
-    private roles: RolesService
-  ){
-    roles.getAndSetRoleFromServer();
-  }
+    private matDialog: MatDialog
+  ){}
 
-  ngOnInit(){
-    console.log(this.roles.getRole());
-  }
+  ngOnInit(){}
 
   loginDialog(){
     this.matDialog.open(LoginComponent, {

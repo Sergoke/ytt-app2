@@ -16,3 +16,10 @@ mat-card {
     height: 100%;
     box-sizing: border-box;
 }
+
+mat-spinner {
+    position: absolute;
+    top: 200px;
+    left: calc(50% - 50px);
+    z-index: 1;
+}

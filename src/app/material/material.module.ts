@@ -8,6 +8,7 @@ import {
   MatDialogModule,
   MatInputModule,
   MatCardModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 @NgModule({
@@ -18,14 +19,16 @@ import {
     MatButtonModule,
     MatDialogModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatToolbarModule,
     MatButtonModule,
     MatDialogModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   declarations: []
 })

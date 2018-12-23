@@ -7,7 +7,9 @@ const express = require('express'),
 
 var app = express();
 
-app.use(require('cors')());//tmp
+app.use(require('cors')({
+	origin: 'http://localhost:4200'
+}));//tmp
 
 var sessionStore = new mongoStore({mongooseConnection: mongoose.connection});
 
@@ -35,6 +37,7 @@ mongoose.set('debug', true);
 mongoose.connect(config.dbHost, {useNewUrlParser: true });
 
 app.use('/api', require('./routes/api/index'));
+app.use(require('./routes/auth/index'));
 app.use(require('./routes/angular/index'));
 
 mongoose.connection.on('open', function(){

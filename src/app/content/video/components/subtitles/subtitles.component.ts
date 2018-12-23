@@ -17,6 +17,7 @@ export class SubtitlesComponent implements OnInit {
 
   @Input() subtitles: Array<Array<string>>;
   @Input() subtOffset;
+  @Input() disableWordClick: boolean = false;
 
   private lastClickedWord;
 
@@ -34,19 +35,21 @@ export class SubtitlesComponent implements OnInit {
   }
 
   wordClick(e){
-    if ("SPAN" === e.target.tagName) {
+    if ("SPAN" === e.target.tagName && !this.disableWordClick) {
       this.wordClicked.emit();
       this.lastClickedWord && this.lastClickedWord.classList.remove("clickedWord");
       this.lastClickedWord = e.target;
-      e.target.classList.add("clickedWord");
+      this.lastClickedWord.classList.add("clickedWord");
 
       this.tr.translate(e.target.textContent).subscribe( word => {
-        this.dialog.open(TranslationComponent, {
+        const dialogRef = this.dialog.open(TranslationComponent, {
           data: {
             originWord: e.target.textContent,
             translatedWord: word
           }
-        });        
+        });   
+        
+        dialogRef.afterClosed().subscribe(() => this.lastClickedWord.classList.remove("clickedWord"));
       });
     }
   }
