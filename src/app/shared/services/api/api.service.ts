@@ -24,4 +24,7 @@ export class ApiService {
     return this.http.get('http://localhost:2500/api/video/' + videoId);
   }
   
+  addVideo(video: {}){
+    return this.http.post('http://localhost:2500/api/add-video', video);
+  }
 }

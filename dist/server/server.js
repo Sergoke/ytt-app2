@@ -23,7 +23,6 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {//tmp
-	console.log(req.session.numVisited);
 	req.session.numVisited = req.session.numVisited + 1;
 	next();
 });

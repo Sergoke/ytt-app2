@@ -17,3 +17,7 @@ button {
 button:hover {
 	border: 1px solid white;
 }
+
+.admin-btn {
+	background-color: rgba(0, 0, 0, 0.6);
+}

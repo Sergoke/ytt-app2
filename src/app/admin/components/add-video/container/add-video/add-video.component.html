@@ -1,0 +1,26 @@
+<form [formGroup]="videoForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="full-width">
+    <input formControlName="id" maxLength="11" matInput placeholder="video id" autocomplete="off">
+    <mat-hint *ngIf="!videoForm.controls['id'].valid && videoForm.controls['id'].touched">video id length must be 11 characters</mat-hint>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="isDemo">Demo</mat-checkbox>
+
+  <div formArrayName="timeKeys" class="full-width time-keys">
+    <span>Time keys</span>
+    <input *ngFor="let key of videoForm.get('timeKeys').controls; let i = index" [formControlName]="i" (focus)="onTimeKeyFocus(i)" (focusout)="onTimeKeyFocusOut(i)" type="number" step="0.1" matInput placeholder="key" autocomplete="off">
+    <button type="button" (click)="removeLastTimeKey()" mat-raised-button color="primary">Remove last key</button>
+  </div>
+
+  <mat-form-field class="full-width">
+    <textarea matInput placeholder="Time keys" name="timeKeys"></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+      <textarea matInput placeholder="Subtitles" name="subts"></textarea>
+  </mat-form-field>
+
+  <button type="submit" mat-raised-button [disabled]="!videoForm.valid" class="full-width" color="primary">Add</button>
+</form>
+
+

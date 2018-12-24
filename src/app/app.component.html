@@ -4,6 +4,7 @@
   <button mat-button routerLink="videos">Videos</button>
   <button *isGuest="true" mat-button (click)="loginDialog()">Log in</button>
   <button *isGuest="true" mat-button (click)="signupDialog()">Sign up</button>
+  <button class="admin-btn" mat-button routerLink="admin">Administrate</button>
   <button *isGuest="false" mat-button (click)="logoutDialog()">Log out</button>
 </mat-toolbar>
 

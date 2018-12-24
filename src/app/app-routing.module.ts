@@ -10,6 +10,8 @@ import { SignupComponent } from './core/auth/components/signup/signup.component'
 import { VideosListComponent } from './content/videos-list/container/videos-list.component';
 import { VideoComponent } from './content/video/container/video.component';
 import { HomeComponent } from './content/home/container/home/home.component';
+import { AdminPageComponent } from './admin/components/admin-page/container/admin-page.component';
+import { AddVideoComponent } from './admin/components/add-video/container/add-video/add-video.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
 
@@ -21,6 +23,8 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent, canActivate: [AuthGuard], data: {role: 'guest'}},
   {path: 'videos', component: VideosListComponent},
   {path: 'video/:id', component: VideoComponent},
+  {path: 'admin', component: AdminPageComponent},
+  {path: 'admin/add-video', component: AddVideoComponent}, 
   {path: 'unauthorized', component: UnauthorizedComponent},
   {path: '404', component: NotFoundComponent},
   {path: '**', component: NotFoundComponent}

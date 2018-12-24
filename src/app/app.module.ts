@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ContentModule } from './content/content.module';
+import { AdminModule } from './admin/admin.module';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './core/auth/components/login/login.component';
@@ -27,6 +28,7 @@ import { LogOutComponent } from './core/auth/components/log-out/log-out.componen
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    AdminModule,
     SharedModule,
     MaterialModule,
     ContentModule
