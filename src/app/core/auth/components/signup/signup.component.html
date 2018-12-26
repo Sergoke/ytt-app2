@@ -1,20 +1,39 @@
+<!-- {{diagnostic}}
+
 <mat-toolbar color="primary">Sign up</mat-toolbar>
 
-<form ngNoForm method="POST" action="http://localhost:2500/sign-up">
+<form #userForm="ngForm">
   <mat-form-field class="full-width">
-    <input matInput required placeholder="Name" name="name" autocomplete="off">
+    <input [(ngModel)]="user.name" name="name" matInput placeholder="Name" autocomplete="off"
+      #name="ngModel" 
+      required
+      minlength="2"
+      maxlength="20"
+      pattern="[a-zA-ZА-Яа-яёЁ]*"
+    >
+
+    <mat-hint *ngIf="name.invalid && (name.dirty || name.touched) && name.errors.required">Это поле является обязательным</mat-hint>
+    <mat-hint *ngIf="name.invalid && (name.dirty || name.touched) && name.errors.pattern">Недопустимые символы</mat-hint>
+    <mat-hint *ngIf="name.invalid && (name.dirty || name.touched) && !name.errors.pattern && name.errors.minlength">Минимальная длина имени 2 буквы</mat-hint>
+  </mat-form-field>
+
+
+
+
+
+
+
+  <mat-form-field class="full-width">
+    <input [(ngModel)]="user.surname" name="surname" matInput required placeholder="Surname" autocomplete="off">
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput required placeholder="Surname" name="surname" autocomplete="off">
+    <input [(ngModel)]="user.email" name="email" type="email" matInput required placeholder="Email" autocomplete="off">
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput required placeholder="Email" name="email" autocomplete="off">
+    <input [(ngModel)]="user.login" name="login" matInput required placeholder="Login" autocomplete="off">
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput required placeholder="Login" name="login" autocomplete="off">
+    <input [(ngModel)]="user.password" name="password" matInput required placeholder="Password" autocomplete="off">
   </mat-form-field>
-  <mat-form-field class="full-width">
-    <input matInput required placeholder="Password" name="password" autocomplete="off">
-  </mat-form-field>
-  <button type="submit" mat-stroked-button class="full-width" color="primary">Sign up</button>
-</form>
+  <button [disabled]="userForm.form.invalid" type="submit" mat-raised-button class="full-width" color="primary">Sign up</button>
+</form> -->

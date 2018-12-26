@@ -16,11 +16,11 @@ router.post('/login', isGuest, function(req, res){
 		if(user && user.checkPassword(req.body.password)){
 			console.log(req.session);
 			req.session.userId = user._id;
-			res.redirect('/videos');
+			res.json({role: user.role});
 		}
 
 		else{
-			res.send('this user doesn\'t exist');
+			res.status(401).send('this user doesn\'t exist');
 		}
 	});
 

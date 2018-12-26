@@ -6,7 +6,6 @@
 }
 
 ul {
-    position: absolute;
     margin: 0 20px;
     padding: 0;
     list-style: none;
@@ -31,4 +30,16 @@ li {
 .clickedWord {
     background-color: #3e9e3c;
     border-radius: 4px;
+}
+
+.controls {
+    position: absolute;
+    top: 15px;
+    left: 9px;
+    color: white;
+    font-weight: bold;
+}
+
+.controls div {
+    cursor: pointer;
 }

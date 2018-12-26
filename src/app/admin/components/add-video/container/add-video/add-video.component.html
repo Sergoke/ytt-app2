@@ -6,21 +6,67 @@
 
   <mat-checkbox formControlName="isDemo">Demo</mat-checkbox>
 
-  <div formArrayName="timeKeys" class="full-width time-keys">
-    <span>Time keys</span>
-    <input *ngFor="let key of videoForm.get('timeKeys').controls; let i = index" [formControlName]="i" (focus)="onTimeKeyFocus(i)" (focusout)="onTimeKeyFocusOut(i)" type="number" step="0.1" matInput placeholder="key" autocomplete="off">
-    <button type="button" (click)="removeLastTimeKey()" mat-raised-button color="primary">Remove last key</button>
+  <div class="subts-wrap">
+    <table formArrayName="timeKeys" style="width: 100px;">
+      <tr><th>Keys</th></tr>
+      <tr *ngFor="let key of videoForm.get('timeKeys').controls; let i = index">
+        <td>
+          <input [formControlName]="i" type="number" step="0.1" matInput placeholder="key" autocomplete="off">
+        </td>
+      </tr>
+    </table>
+  
+    <div formGroupName="subts" class="subts-overflow">
+      <div class="subts-langs-wrap">
+        <table formArrayName="en" class="full-width">
+            <tr><th>English</th></tr>
+            <tr *ngFor="let key of videoForm.get('subts').get('en').controls; let i = index">
+              <td class="full-width">
+                <input [formControlName]="i" type="text" matInput placeholder="subtitle" autocomplete="off">
+              </td>
+            </tr>
+          </table>
+  
+          <table formArrayName="ru" class="full-width">
+            <tr><th>Russian</th></tr>
+            <tr *ngFor="let key of videoForm.get('subts').get('ru').controls; let i = index">
+              <td class="full-width">
+                <input [formControlName]="i" type="text" matInput placeholder="subtitle" autocomplete="off">
+              </td>
+            </tr>
+          </table>
+      </div>
+
+      <table style="width: auto;">
+        <tr><th>Del</th></tr>
+        <tr *ngFor="let key of videoForm.get('subts').get('en').controls; let i = index">
+          <td><button type="button" (click)="removeSubt(i)" mat-raised-button color="warn" class="remove-btn">X</button></td>
+        </tr>
+      </table>
+    </div>
   </div>
 
-  <mat-form-field class="full-width">
-    <textarea matInput placeholder="Time keys" name="timeKeys"></textarea>
-  </mat-form-field>
+  <div class="subts-controls">
+    <button type="button" (click)="addSubt(newSubtsNum.value)" mat-raised-button color="primary">Add new subts</button>
+    <input #newSubtsNum type="number" matInput value="1" autocomplete="off">
+  </div>
 
-  <mat-form-field class="full-width">
-      <textarea matInput placeholder="Subtitles" name="subts"></textarea>
-  </mat-form-field>
+  <div class="parser" [formGroup]="parseForm">
+    <mat-form-field class="full-width">
+        <textarea #subts matInput placeholder="Subtitles"></textarea>
+    </mat-form-field>
+    <mat-radio-group formControlName="updateOrAdd" class="full-width">
+        <mat-radio-button value="1">Update</mat-radio-button>
+        <mat-radio-button value="2">Add</mat-radio-button>
+    </mat-radio-group>
+    <mat-radio-group formControlName="timeKeys_or_EN_or_RU" class="full-width">
+        <mat-radio-button value="1">TimeKeys</mat-radio-button>
+        <mat-radio-button value="2">En</mat-radio-button>
+        <mat-radio-button value="3">Ru</mat-radio-button>
+    </mat-radio-group>
+    <button type="button" (click)="parseSubts(subts.value)" mat-raised-button color="primary">Parse subts</button>
+  </div>
+
 
   <button type="submit" mat-raised-button [disabled]="!videoForm.valid" class="full-width" color="primary">Add</button>
 </form>
-
-

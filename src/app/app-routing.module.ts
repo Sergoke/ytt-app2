@@ -23,8 +23,8 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent, canActivate: [AuthGuard], data: {role: 'guest'}},
   {path: 'videos', component: VideosListComponent},
   {path: 'video/:id', component: VideoComponent},
-  {path: 'admin', component: AdminPageComponent},
-  {path: 'admin/add-video', component: AddVideoComponent}, 
+  {path: 'admin', component: AdminPageComponent, canActivate: [AuthGuard], data: {role: 'admin'}},
+  {path: 'admin/add-video', component: AddVideoComponent, canActivate: [AuthGuard], data: {role: 'admin'}}, 
   {path: 'unauthorized', component: UnauthorizedComponent},
   {path: '404', component: NotFoundComponent},
   {path: '**', component: NotFoundComponent}

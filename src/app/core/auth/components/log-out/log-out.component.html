@@ -1,5 +1,4 @@
 <mat-toolbar color="primary">Are you sure, you want to log out?</mat-toolbar>
 
-<form ngNoForm method="POST" action="http://localhost:2500/log-out">
-  <button type="submit" mat-stroked-button class="full-width" color="primary">Log out</button>
-</form>
+<button (click)="auth.logout()" mat-stroked-button class="full-width" color="primary">Log out</button>
+

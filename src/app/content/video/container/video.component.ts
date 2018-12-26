@@ -15,6 +15,7 @@ export class VideoComponent implements OnInit {
   private interval;
   private subtitles: {(key: string): Array<Array<string>>};
   private timeKeys: {};
+  private timeKeysArray;
   public subtOffset;
 
   constructor(
@@ -30,6 +31,7 @@ export class VideoComponent implements OnInit {
       this.db.getSubtitles(params.id).subscribe( subts => {
         console.log(subts);
         this.subtitles = subts['subts'];
+        this.timeKeysArray = subts['timeKeys'];
         this.createTimeKeys(subts['timeKeys']);
         console.log(this.timeKeys)
         this.subtOffset = 0;
@@ -73,37 +75,45 @@ export class VideoComponent implements OnInit {
   }
 
   onStateChangeHandler(e) {
-    console.log(e.data);
     if(e.data == window['YT'].PlayerState.PLAYING){
+      if(this.interval) return;
       this.interval = setInterval( () => {
-        console.log(this);
         var time = Math.round(10 * this.player.getCurrentTime()) / 10;
         if(this.timeKeys.hasOwnProperty(time)){
           this.subtOffset = this.timeKeys[time] * 50;
           this.changeDetector.detectChanges();
-          console.log('subtOffset: ' + this.subtOffset);
         }
       }, 100);
     }
-
-    else {
-      this.interval && clearInterval(this.interval);
-      this.interval = null;
-    }
   }
 
-  createTimeKeys(timeKeys: [number]){
+  createTimeKeys(keys: [number]){
+    console.log(keys);
     this.timeKeys = {};
-    timeKeys.forEach(function(key, index, arr){
-      for(var i = key; i !== timeKeys.length - 1 && i < timeKeys[index + 1]; i += .1){
+    keys.forEach(function(key, index, arr){
+      for(var i = key; i !== keys.length - 1 && i < keys[index + 1]; i += .1){
         i = Math.round(10 * i) / 10;
         this.timeKeys[i] = index;
       }
     }, this);
   }
 
-  stopPlayer(){
-    this.player.pauseVideo();
+  stopOrStartPlayer(stop: boolean = true){
+    if(stop) return this.player.pauseVideo();
+    this.player.playVideo();
+  }
+
+  scrollSubts(down: boolean){
+    console.log('yes, scroll', down);
+
+    var step = down? 1 : -1;
+
+    var time = Math.round(10 * this.player.getCurrentTime()) / 10;
+    if(this.timeKeys.hasOwnProperty(time)){
+      let seekVal = this.timeKeysArray[this.timeKeys[time] + step];
+      this.player.seekTo(seekVal);
+      this.changeDetector.detectChanges();
+    }
   }
 
 }

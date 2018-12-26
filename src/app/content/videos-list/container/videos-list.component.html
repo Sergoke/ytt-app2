@@ -5,7 +5,10 @@
 <div class="videos-wrap">
   <div class="mat-card-wrap" *ngFor="let video of videos$ | async; let i = index" routerLink="/video/{{video.id}}">
     <mat-card>
-      <img mat-card-image [src]="videos[i].thumbnail" alt="thumbnail">
+      <div mat-card-image class="video-thumbnail-wrap" [ngStyle]="{'background-color': 'red', 'background-image': 'url(' + video.thumbnail + ')', 'background-size': 'cover'}">
+          
+      </div>
+      <!-- <img mat-card-image [src]="video.thumbnail" alt="thumbnail"> -->
       <mat-card-title>{{video.title}}</mat-card-title>
       <mat-card-actions>
         <button mat-button>LIKE</button>

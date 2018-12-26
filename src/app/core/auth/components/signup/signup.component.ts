@@ -5,14 +5,19 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
 
-  constructor() { }
+  user: {};
 
-  ngOnInit() {
+  constructor() {
+    this.user = {
+      login: '',
+      password: ''
+    };
   }
-  
-  h(){
-    console.log('hello form');
+
+  get diagnostic(){
+    return JSON.stringify(this.user);
   }
+
 }

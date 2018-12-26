@@ -11,11 +11,24 @@ import { TranslationComponent } from './../translation/translation.component';
   templateUrl: './subtitles.component.html',
   styleUrls: ['./subtitles.component.css']
 })
-export class SubtitlesComponent implements OnInit {
+export class SubtitlesComponent {
 
   @Output() wordClicked = new EventEmitter();
+  @Output() scrollSubts = new EventEmitter();
 
-  @Input() subtitles: Array<Array<string>>;
+  private _subtitles;
+
+  @Input('subtitles')
+  set subtitles(subtitles: Array<string>){
+    if(subtitles){
+      this._subtitles = subtitles.map( (string: string) => string.split(' '));
+    }
+  }
+
+  get subtitles(){
+    return this._subtitles;
+  }
+
   @Input() subtOffset;
   @Input() disableWordClick: boolean = false;
 
@@ -26,17 +39,9 @@ export class SubtitlesComponent implements OnInit {
     private tr: TranslService
   ) { }
 
-  ngOnInit() {
-    console.log(this.subtOffset);
-  }
-
-  ngOnChanges(){
-    console.log('changed:' + this.subtOffset);
-  }
-
   wordClick(e){
     if ("SPAN" === e.target.tagName && !this.disableWordClick) {
-      this.wordClicked.emit();
+      this.wordClicked.emit(true);
       this.lastClickedWord && this.lastClickedWord.classList.remove("clickedWord");
       this.lastClickedWord = e.target;
       this.lastClickedWord.classList.add("clickedWord");
@@ -49,9 +54,20 @@ export class SubtitlesComponent implements OnInit {
           }
         });   
         
-        dialogRef.afterClosed().subscribe(() => this.lastClickedWord.classList.remove("clickedWord"));
+        dialogRef.afterClosed().subscribe(() => {
+          this.wordClicked.emit(false);
+          this.lastClickedWord.classList.remove("clickedWord");
+        });
       });
     }
+  }
+
+  scrollSubtsDown(){
+    this.scrollSubts.emit(true);
+  }
+
+  scrollSubtsUp(){
+    this.scrollSubts.emit(false);
   }
 
 }

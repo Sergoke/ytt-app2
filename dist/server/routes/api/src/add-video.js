@@ -6,16 +6,17 @@ router.post('/', function(req, res){
     console.log(req.body);
 
     var video = new Video({
-        videoId: req.body.videoId
+        videoId: req.body.id,
+        isDemo: req.body.isDemo,
+        timeKeys: req.body.timeKeys,
+        subts: req.body.subts
     });
     
-    // video.save((err, video) => {
-    //     if(err) return res.sendStatus(500);
+    video.save((err, video) => {
+        if(err) return res.sendStatus(500);
 
-    //     res.sendStatus(200);
-    // });
-
-    res.send(req.body);
+        res.sendStatus(200);
+    });
   
 });
 

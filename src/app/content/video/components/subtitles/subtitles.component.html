@@ -4,5 +4,9 @@
       <span *ngFor="let word of string">{{word}}</span>
     </li>
   </ul>
+  <div class="controls">
+    <div (click)="scrollSubtsUp()"><</div>
+    <div (click)="scrollSubtsDown()">></div>
+  </div>
 </div>
 

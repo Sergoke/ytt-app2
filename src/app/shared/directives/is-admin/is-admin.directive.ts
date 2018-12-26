@@ -3,26 +3,23 @@ import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angula
 import { RolesService } from './../../services/roles/roles.service';
 
 @Directive({
-  selector: '[isGuest]'
+  selector: '[isAdmin]'
 })
-export class IsGuestDirective implements OnInit {
-
-  @Input() private isGuest: boolean;
+export class IsAdminDirective implements OnInit{
 
   constructor(
     private roles: RolesService,
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef
-  ) {
-    console.log('isGuestDirective');
+  ) { 
+    console.log('admin directive');
   }
 
   ngOnInit(){
-    console.log('hello from is-gest directive!!!')
     // this.roles.getRoleAsync().subscribe(role => {
       var role = this.roles.getRole();
-
-      if(this.isGuest && role === 'guest' || !this.isGuest && role !== 'guest'){
+      
+      if(role === 'admin'){
         this.viewContainer.createEmbeddedView(this.templateRef);
       }
 

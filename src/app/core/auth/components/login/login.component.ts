@@ -1,36 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from './../../services/auth.service';
+import { Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  public userLogin: string;
-  public userPassword: string;
+  user: {};
 
   constructor(
-    private auth: AuthService
-  ) { }
-
-  ngOnInit() {
-
+    private auth: AuthService,
+    private router: Router,
+    private dialogRef: MatDialogRef<LoginComponent>
+  ) {
+    this.user = {
+      login: '',
+      password: ''
+    };
   }
 
-  // login(e){
-  //   e.preventDefault();
+  get diagnostic(){
+    return JSON.stringify(this.user);
+  }
 
-  //   console.log('login: ' + this.userLogin, this.userPassword);
-
-  //   this.auth.login({
-  //     login: this.userLogin,
-  //     password: this.userPassword
-  //   }).subscribe(res => {
-  //     console.log(res)
-  //   });
-  // }
+  logIn(){
+    this.auth.login(this.user).subscribe(res => {
+      console.log(res);
+      this.dialogRef.close();
+      this.router.navigate(['/videos']);
+    },
+    error => {
+      console.log('error, my friend')
+    });
+  }
   
 }

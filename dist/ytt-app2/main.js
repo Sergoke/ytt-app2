@@ -125,7 +125,7 @@ var AddVideoModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.full-width {\r\n\twidth: 100%;\r\n}\r\n\r\nmat-radio-group div {\r\n    display: inline-block;\r\n    margin: 10px 20px 15px 0;\r\n    font-size: 15pt;\r\n}\r\n\r\nmat-radio-button {\r\n    margin: 10px 0;\r\n    display: block;\r\n}\r\n\r\nbutton {\r\n\tmargin-top: 10px;\r\n}"
+module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.full-width {\r\n\twidth: 100%;\r\n}\r\n\r\nbutton {\r\n\tmargin-top: 10px;\r\n}\r\n\r\n.subts-wrap {\r\n    display: flex;\r\n    margin-top: 20px;\r\n}\r\n\r\n.time-keys {\r\n    margin: 30px 0 20px 0;\r\n}\r\n\r\n.time-keys span {\r\n    display: inline-block;\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.time-keys input {\r\n    margin: 7px;\r\n}\r\n\r\n.subts-overflow {\r\n    width: 100%;\r\n    display: flex;\r\n    overflow: hidden;\r\n}\r\n\r\n.subts-langs-wrap {\r\n    width: 100%;\r\n    display: flex;\r\n    overflow: auto;\r\n}\r\n\r\n.subts-langs-wrap table {\r\n    min-width: 300px;\r\n    height: 99%;\r\n}\r\n\r\n.remove-btn {\r\n    min-width: 45px;\r\n    margin: 0;\r\n    line-height: 18px;\r\n}\r\n\r\n.subts-controls {\r\n    display: flex;\r\n}\r\n\r\n.subts-controls input {\r\n    width: 40px;\r\n    margin: 10px 0 0 7px;\r\n    padding: 9px;\r\n    background: #673ab7;\r\n    color: white;\r\n    border-radius: 4px;\r\n}\r\n\r\ntable {\r\n    font-family: arial, sans-serif;\r\n    border-collapse: collapse;\r\n    width: 100%;\r\n  }\r\n\r\ntd, th {\r\n  border: 1px solid #dddddd;\r\n  text-align: left;\r\n  padding: 8px;\r\n}\r\n\r\ntr:nth-child(odd) {\r\n  background-color: #eff8f9;\r\n}\r\n\r\n.parser {\r\n    margin-top: 30px;\r\n}\r\n\r\nmat-radio-group {\r\n    display: block;\r\n    margin-bottom: 30px;\r\n}\r\n\r\nmat-radio-group mat-radio-button {\r\n    margin-right: 30px;\r\n}"
 
 /***/ }),
 
@@ -136,7 +136,7 @@ module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form [formGroup]=\"video\">\n  <mat-form-field class=\"full-width\">\n    <input formControlName=\"id\" matInput required placeholder=\"video id\" autocomplete=\"off\">\n  </mat-form-field>\n\n  <mat-radio-group name=\"isDemo\">\n    <div><span>Is video demo?</span></div>\n    <mat-radio-button value=\"true\">Yes</mat-radio-button>\n    <mat-radio-button value=\"false\">No</mat-radio-button>\n  </mat-radio-group>\n\n  <p>{{video.id}}</p>\n\n\n  <mat-form-field class=\"full-width\">\n    <textarea matInput placeholder=\"Time keys\" name=\"timeKeys\"></textarea>\n  </mat-form-field>\n\n  <input type=\"radio\" name=\"gender\" value=\"male\">\n  <input type=\"radio\" name=\"gender\" value=\"female\">\n\n  <mat-form-field class=\"full-width\">\n      <textarea matInput placeholder=\"Subtitles\" name=\"subts\"></textarea>\n  </mat-form-field>\n\n  <button type=\"submit\" mat-raised-button class=\"full-width\" color=\"primary\">Add</button>\n</form>\n\n\n"
+module.exports = "<form [formGroup]=\"videoForm\" (ngSubmit)=\"onSubmit()\">\n  <mat-form-field class=\"full-width\">\n    <input formControlName=\"id\" maxLength=\"11\" matInput placeholder=\"video id\" autocomplete=\"off\">\n    <mat-hint *ngIf=\"!videoForm.controls['id'].valid && videoForm.controls['id'].touched\">video id length must be 11 characters</mat-hint>\n  </mat-form-field>\n\n  <mat-checkbox formControlName=\"isDemo\">Demo</mat-checkbox>\n\n  <div class=\"subts-wrap\">\n    <table formArrayName=\"timeKeys\" style=\"width: 100px;\">\n      <tr><th>Keys</th></tr>\n      <tr *ngFor=\"let key of videoForm.get('timeKeys').controls; let i = index\">\n        <td>\n          <input [formControlName]=\"i\" type=\"number\" step=\"0.1\" matInput placeholder=\"key\" autocomplete=\"off\">\n        </td>\n      </tr>\n    </table>\n  \n    <div formGroupName=\"subts\" class=\"subts-overflow\">\n      <div class=\"subts-langs-wrap\">\n        <table formArrayName=\"en\" class=\"full-width\">\n            <tr><th>English</th></tr>\n            <tr *ngFor=\"let key of videoForm.get('subts').get('en').controls; let i = index\">\n              <td class=\"full-width\">\n                <input [formControlName]=\"i\" type=\"text\" matInput placeholder=\"subtitle\" autocomplete=\"off\">\n              </td>\n            </tr>\n          </table>\n  \n          <table formArrayName=\"ru\" class=\"full-width\">\n            <tr><th>Russian</th></tr>\n            <tr *ngFor=\"let key of videoForm.get('subts').get('ru').controls; let i = index\">\n              <td class=\"full-width\">\n                <input [formControlName]=\"i\" type=\"text\" matInput placeholder=\"subtitle\" autocomplete=\"off\">\n              </td>\n            </tr>\n          </table>\n      </div>\n\n      <table style=\"width: auto;\">\n        <tr><th>Del</th></tr>\n        <tr *ngFor=\"let key of videoForm.get('subts').get('en').controls; let i = index\">\n          <td><button type=\"button\" (click)=\"removeSubt(i)\" mat-raised-button color=\"warn\" class=\"remove-btn\">X</button></td>\n        </tr>\n      </table>\n    </div>\n  </div>\n\n  <div class=\"subts-controls\">\n    <button type=\"button\" (click)=\"addSubt(newSubtsNum.value)\" mat-raised-button color=\"primary\">Add new subts</button>\n    <input #newSubtsNum type=\"number\" matInput value=\"1\" autocomplete=\"off\">\n  </div>\n\n  <div class=\"parser\" [formGroup]=\"parseForm\">\n    <mat-form-field class=\"full-width\">\n        <textarea #subts matInput placeholder=\"Subtitles\"></textarea>\n    </mat-form-field>\n    <mat-radio-group formControlName=\"updateOrAdd\" class=\"full-width\">\n        <mat-radio-button value=\"1\">Update</mat-radio-button>\n        <mat-radio-button value=\"2\">Add</mat-radio-button>\n    </mat-radio-group>\n    <mat-radio-group formControlName=\"timeKeys_or_EN_or_RU\" class=\"full-width\">\n        <mat-radio-button value=\"1\">TimeKeys</mat-radio-button>\n        <mat-radio-button value=\"2\">En</mat-radio-button>\n        <mat-radio-button value=\"3\">Ru</mat-radio-button>\n    </mat-radio-group>\n    <button type=\"button\" (click)=\"parseSubts(subts.value)\" mat-raised-button color=\"primary\">Parse subts</button>\n  </div>\n\n\n  <button type=\"submit\" mat-raised-button [disabled]=\"!videoForm.valid\" class=\"full-width\" color=\"primary\">Add</button>\n</form>"
 
 /***/ }),
 
@@ -152,6 +152,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddVideoComponent", function() { return AddVideoComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _shared_services_api_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../../../shared/services/api/api.service */ "./src/app/shared/services/api/api.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -163,14 +164,98 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var AddVideoComponent = /** @class */ (function () {
-    function AddVideoComponent() {
-        this.video = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
-            id: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](),
-            isDemo: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]()
+    function AddVideoComponent(fb, api) {
+        this.fb = fb;
+        this.api = api;
+        this.videoForm = this.fb.group({
+            'id': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].pattern('[0-9A-Za-z_-]{10}[048AEIMQUYcgkosw]')])],
+            'isDemo': [false],
+            'timeKeys': this.fb.array([]),
+            'subts': this.fb.group({
+                'en': this.fb.array([]),
+                'ru': this.fb.array([])
+            })
         });
+        this.timeKeyControls = this.videoForm.get('timeKeys');
+        this.subtGroup = this.videoForm.get('subts');
+        this.addSubt(1);
+        this.parseForm = this.fb.group({
+            'updateOrAdd': ['1'],
+            'timeKeys_or_EN_or_RU': ['2']
+        });
+        // this.videoForm.valueChanges.subscribe(status => {
+        //   console.log(status);
+        //   console.log(this.timeKeyControls.at(this.timeKeyControls.length - 1));
+        // });
     }
-    AddVideoComponent.prototype.ngOnInit = function () {
+    AddVideoComponent.prototype.onSubmit = function () {
+        console.log(this.videoForm.value);
+        this.api.addVideo(this.videoForm.value).subscribe(function (res) {
+            console.log(res);
+        });
+    };
+    AddVideoComponent.prototype.addSubt = function (num) {
+        for (var i = 0; i < num; i++) {
+            this.timeKeyControls.push(this.fb.control(null, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]));
+            this.subtGroup.get('en').push(this.fb.control(null, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]));
+            this.subtGroup.get('ru').push(this.fb.control(null, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]));
+        }
+    };
+    AddVideoComponent.prototype.removeSubt = function (i) {
+        this.timeKeyControls.removeAt(i);
+        this.subtGroup.get('en').removeAt(i);
+        this.subtGroup.get('ru').removeAt(i);
+    };
+    AddVideoComponent.prototype.removeLastTimeKey = function () {
+        if (this.timeKeyControls.length > 1) {
+            this.timeKeyControls.removeAt(this.timeKeyControls.length - 1);
+        }
+    };
+    AddVideoComponent.prototype.parseSubts = function (subts) {
+        var _this = this;
+        console.log(this.parseForm.value);
+        var result = subts.split('\n');
+        if (this.parseForm.get('updateOrAdd').value === '1') {
+            if (this.parseForm.get('timeKeys_or_EN_or_RU').value === '1') {
+                this.timeKeyControls.setValue(result);
+            }
+            else if (this.parseForm.get('timeKeys_or_EN_or_RU').value === '2') {
+                this.subtGroup.get('en').setValue(result);
+            }
+            else if (this.parseForm.get('timeKeys_or_EN_or_RU').value === '3') {
+                this.subtGroup.get('ru').setValue(result);
+            }
+        }
+        else {
+            while (this.timeKeyControls.length !== 0) {
+                this.timeKeyControls.removeAt(0);
+                this.subtGroup.get('en').removeAt(0);
+                this.subtGroup.get('ru').removeAt(0);
+            }
+            if (this.parseForm.get('timeKeys_or_EN_or_RU').value === '1') {
+                result.forEach(function (string) {
+                    _this.timeKeyControls.push(_this.fb.control(string, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]));
+                    _this.subtGroup.get('en').push(_this.fb.control(null, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]));
+                    _this.subtGroup.get('ru').push(_this.fb.control(null, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]));
+                });
+            }
+            else if (this.parseForm.get('timeKeys_or_EN_or_RU').value === '2') {
+                result.forEach(function (string) {
+                    _this.timeKeyControls.push(_this.fb.control(null, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]));
+                    _this.subtGroup.get('en').push(_this.fb.control(string, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]));
+                    _this.subtGroup.get('ru').push(_this.fb.control(null, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]));
+                });
+            }
+            else if (this.parseForm.get('timeKeys_or_EN_or_RU').value === '3') {
+                result.forEach(function (string) {
+                    _this.timeKeyControls.push(_this.fb.control(null, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]));
+                    _this.subtGroup.get('en').push(_this.fb.control(null, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]));
+                    _this.subtGroup.get('ru').push(_this.fb.control(string, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]));
+                });
+            }
+        }
     };
     AddVideoComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -178,7 +263,8 @@ var AddVideoComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./add-video.component.html */ "./src/app/admin/components/add-video/container/add-video/add-video.component.html"),
             styles: [__webpack_require__(/*! ./add-video.component.css */ "./src/app/admin/components/add-video/container/add-video/add-video.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"],
+            _shared_services_api_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]])
     ], AddVideoComponent);
     return AddVideoComponent;
 }());
@@ -345,8 +431,8 @@ var routes = [
     { path: 'signup', component: _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_5__["SignupComponent"], canActivate: [_shared_guards_auth_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]], data: { role: 'guest' } },
     { path: 'videos', component: _content_videos_list_container_videos_list_component__WEBPACK_IMPORTED_MODULE_6__["VideosListComponent"] },
     { path: 'video/:id', component: _content_video_container_video_component__WEBPACK_IMPORTED_MODULE_7__["VideoComponent"] },
-    { path: 'admin', component: _admin_components_admin_page_container_admin_page_component__WEBPACK_IMPORTED_MODULE_9__["AdminPageComponent"] },
-    { path: 'admin/add-video', component: _admin_components_add_video_container_add_video_add_video_component__WEBPACK_IMPORTED_MODULE_10__["AddVideoComponent"] },
+    { path: 'admin', component: _admin_components_admin_page_container_admin_page_component__WEBPACK_IMPORTED_MODULE_9__["AdminPageComponent"], canActivate: [_shared_guards_auth_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]], data: { role: 'admin' } },
+    { path: 'admin/add-video', component: _admin_components_add_video_container_add_video_add_video_component__WEBPACK_IMPORTED_MODULE_10__["AddVideoComponent"], canActivate: [_shared_guards_auth_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]], data: { role: 'admin' } },
     { path: 'unauthorized', component: _shared_components_unauthorized_unauthorized_component__WEBPACK_IMPORTED_MODULE_12__["UnauthorizedComponent"] },
     { path: '404', component: _shared_components_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_11__["NotFoundComponent"] },
     { path: '**', component: _shared_components_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_11__["NotFoundComponent"] }
@@ -391,7 +477,7 @@ module.exports = "main {\r\n\tpadding: 0 50px;\r\n}\r\n\r\nmat-toolbar {\r\n\the
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color='primary'>\r\n  <button *isGuest=\"true\" mat-button routerLink=\"login\">Login page</button>\r\n  <button mat-button routerLink=\"home\">Home</button>\r\n  <button mat-button routerLink=\"videos\">Videos</button>\r\n  <button *isGuest=\"true\" mat-button (click)=\"loginDialog()\">Log in</button>\r\n  <button *isGuest=\"true\" mat-button (click)=\"signupDialog()\">Sign up</button>\r\n  <button class=\"admin-btn\" mat-button routerLink=\"admin\">Administrate</button>\r\n  <button *isGuest=\"false\" mat-button (click)=\"logoutDialog()\">Log out</button>\r\n</mat-toolbar>\r\n\r\n<main>\r\n  <router-outlet></router-outlet>\r\n</main>\r\n\r\n\r\n"
+module.exports = "<mat-toolbar color='primary'>\r\n  <button *ngIf=\"roles.role === 'admin'\" mat-button>Only for admin</button>\r\n  <button *ngIf=\"roles.role === 'guest'\" mat-button routerLink=\"login\">Login page</button>\r\n  <button mat-button routerLink=\"home\">Home</button>\r\n  <button mat-button routerLink=\"videos\">Videos</button>\r\n  <button *ngIf=\"roles.role === 'guest'\" mat-button (click)=\"loginDialog()\">Log in</button>\r\n  <button *ngIf=\"roles.role === 'guest'\" mat-button (click)=\"signupDialog()\">Sign up</button>\r\n  <button *ngIf=\"roles.role !== 'guest'\" class=\"admin-btn\" mat-button routerLink=\"admin\">Administrate</button>\r\n  <button *ngIf=\"roles.role !== 'guest'\" mat-button (click)=\"logoutDialog()\">Log out</button>\r\n</mat-toolbar>\r\n\r\n<main>\r\n  <router-outlet></router-outlet>\r\n</main>"
 
 /***/ }),
 
@@ -407,9 +493,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./core/auth/components/login/login.component */ "./src/app/core/auth/components/login/login.component.ts");
-/* harmony import */ var _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./core/auth/components/signup/signup.component */ "./src/app/core/auth/components/signup/signup.component.ts");
-/* harmony import */ var _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./core/auth/components/log-out/log-out.component */ "./src/app/core/auth/components/log-out/log-out.component.ts");
+/* harmony import */ var _shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared/services/roles/roles.service */ "./src/app/shared/services/roles/roles.service.ts");
+/* harmony import */ var _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./core/auth/components/login/login.component */ "./src/app/core/auth/components/login/login.component.ts");
+/* harmony import */ var _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./core/auth/components/signup/signup.component */ "./src/app/core/auth/components/signup/signup.component.ts");
+/* harmony import */ var _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./core/auth/components/log-out/log-out.component */ "./src/app/core/auth/components/log-out/log-out.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -424,24 +511,27 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent(matDialog) {
+    function AppComponent(roles, matDialog) {
+        this.roles = roles;
         this.matDialog = matDialog;
         this.title = 'ytt-app2';
+        this.roles.checkRoleAsync();
     }
     AppComponent.prototype.ngOnInit = function () { };
     AppComponent.prototype.loginDialog = function () {
-        this.matDialog.open(_core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_2__["LoginComponent"], {
+        this.matDialog.open(_core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"], {
             width: '400px'
         });
     };
     AppComponent.prototype.signupDialog = function () {
-        this.matDialog.open(_core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_3__["SignupComponent"], {
+        this.matDialog.open(_core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_4__["SignupComponent"], {
             width: '400px'
         });
     };
     AppComponent.prototype.logoutDialog = function () {
-        this.matDialog.open(_core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_4__["LogOutComponent"], {
+        this.matDialog.open(_core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_5__["LogOutComponent"], {
             width: '400px'
         });
     };
@@ -451,7 +541,8 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialog"]])
+        __metadata("design:paramtypes", [_shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_2__["RolesService"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialog"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -696,7 +787,7 @@ var HomeModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".subts-wrap {\r\n    height: 50px;\r\n    background-color: #625a86;\r\n    overflow: hidden;\r\n    position: relative;\r\n}\r\n\r\nul {\r\n    position: absolute;\r\n    margin: 0 20px;\r\n    padding: 0;\r\n    list-style: none;\r\n    font-family: 'Concert One',cursive;\r\n    transition: transform .5s ease-out;\r\n    transition: transform .5s ease-out, -webkit-transform .5s ease-out;\r\n    transition: -webkit-transform .5s ease-out;\r\n}\r\n\r\nli {\r\n    height: 30px;\r\n    padding: 10px 0;\r\n    line-height: 30px;\r\n    font-size: 24px;\r\n    color: #c0ffee;\r\n}\r\n\r\n.string span {\r\n    padding: 3px 7px;\r\n    cursor: pointer;\r\n}\r\n\r\n.clickedWord {\r\n    background-color: #3e9e3c;\r\n    border-radius: 4px;\r\n}"
+module.exports = ".subts-wrap {\r\n    height: 50px;\r\n    background-color: #625a86;\r\n    overflow: hidden;\r\n    position: relative;\r\n}\r\n\r\nul {\r\n    margin: 0 20px;\r\n    padding: 0;\r\n    list-style: none;\r\n    font-family: 'Concert One',cursive;\r\n    transition: transform .5s ease-out;\r\n    transition: transform .5s ease-out, -webkit-transform .5s ease-out;\r\n    transition: -webkit-transform .5s ease-out;\r\n}\r\n\r\nli {\r\n    height: 30px;\r\n    padding: 10px 0;\r\n    line-height: 30px;\r\n    font-size: 24px;\r\n    color: #c0ffee;\r\n}\r\n\r\n.string span {\r\n    padding: 3px 7px;\r\n    cursor: pointer;\r\n}\r\n\r\n.clickedWord {\r\n    background-color: #3e9e3c;\r\n    border-radius: 4px;\r\n}\r\n\r\n.controls {\r\n    position: absolute;\r\n    top: 15px;\r\n    left: 9px;\r\n    color: white;\r\n    font-weight: bold;\r\n}\r\n\r\n.controls div {\r\n    cursor: pointer;\r\n}"
 
 /***/ }),
 
@@ -707,7 +798,7 @@ module.exports = ".subts-wrap {\r\n    height: 50px;\r\n    background-color: #6
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"subts-wrap\">\n  <ul [ngStyle]=\"{'transform': 'translateY(-' + subtOffset + 'px)'}\" (click)=\"wordClick($event)\">\n    <li class=\"string\" *ngFor=\"let string of subtitles\">\n      <span *ngFor=\"let word of string\">{{word}}</span>\n    </li>\n  </ul>\n</div>\n\n"
+module.exports = "<div class=\"subts-wrap\">\n  <ul [ngStyle]=\"{'transform': 'translateY(-' + subtOffset + 'px)'}\" (click)=\"wordClick($event)\">\n    <li class=\"string\" *ngFor=\"let string of subtitles\">\n      <span *ngFor=\"let word of string\">{{word}}</span>\n    </li>\n  </ul>\n  <div class=\"controls\">\n    <div (click)=\"scrollSubtsUp()\"><</div>\n    <div (click)=\"scrollSubtsDown()\">></div>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -743,18 +834,25 @@ var SubtitlesComponent = /** @class */ (function () {
         this.dialog = dialog;
         this.tr = tr;
         this.wordClicked = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.scrollSubts = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.disableWordClick = false;
     }
-    SubtitlesComponent.prototype.ngOnInit = function () {
-        console.log(this.subtOffset);
-    };
-    SubtitlesComponent.prototype.ngOnChanges = function () {
-        console.log('changed:' + this.subtOffset);
-    };
+    Object.defineProperty(SubtitlesComponent.prototype, "subtitles", {
+        get: function () {
+            return this._subtitles;
+        },
+        set: function (subtitles) {
+            if (subtitles) {
+                this._subtitles = subtitles.map(function (string) { return string.split(' '); });
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     SubtitlesComponent.prototype.wordClick = function (e) {
         var _this = this;
         if ("SPAN" === e.target.tagName && !this.disableWordClick) {
-            this.wordClicked.emit();
+            this.wordClicked.emit(true);
             this.lastClickedWord && this.lastClickedWord.classList.remove("clickedWord");
             this.lastClickedWord = e.target;
             this.lastClickedWord.classList.add("clickedWord");
@@ -765,18 +863,32 @@ var SubtitlesComponent = /** @class */ (function () {
                         translatedWord: word
                     }
                 });
-                dialogRef.afterClosed().subscribe(function () { return _this.lastClickedWord.classList.remove("clickedWord"); });
+                dialogRef.afterClosed().subscribe(function () {
+                    _this.wordClicked.emit(false);
+                    _this.lastClickedWord.classList.remove("clickedWord");
+                });
             });
         }
+    };
+    SubtitlesComponent.prototype.scrollSubtsDown = function () {
+        this.scrollSubts.emit(true);
+    };
+    SubtitlesComponent.prototype.scrollSubtsUp = function () {
+        this.scrollSubts.emit(false);
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
         __metadata("design:type", Object)
     ], SubtitlesComponent.prototype, "wordClicked", void 0);
     __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Array)
-    ], SubtitlesComponent.prototype, "subtitles", void 0);
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], SubtitlesComponent.prototype, "scrollSubts", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])('subtitles'),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], SubtitlesComponent.prototype, "subtitles", null);
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Object)
@@ -878,7 +990,7 @@ var TranslationComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".responsive {\r\n    width: 100%;\r\n    height: 0;\r\n    padding-bottom: 56.25%;\r\n    position: relative;\r\n}\r\n\r\niframe {\r\n    width: 100%;\r\n    height: 100%;\r\n    position: absolute;\r\n}"
+module.exports = ".responsive {\r\n    width: 100%;\r\n    height: 0;\r\n    padding-bottom: 56.25%;\r\n    background-color: #000;\r\n    position: relative;\r\n}\r\n\r\niframe {\r\n    width: 100%;\r\n    height: 100%;\r\n    position: absolute;\r\n}"
 
 /***/ }),
 
@@ -957,7 +1069,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<yt-player [embedUrl]=\"embedUrl\"></yt-player>\n<subtitles [subtitles]=\"subtitles?.en\" [subtOffset]=\"subtOffset\" (wordClicked)=\"stopPlayer()\"></subtitles>\n<hr>\n<subtitles [subtitles]=\"subtitles?.ru\" [subtOffset]=\"subtOffset\" [disableWordClick]=\"true\"></subtitles>"
+module.exports = "<yt-player [embedUrl]=\"embedUrl\"></yt-player>\n<subtitles [subtitles]=\"subtitles?.en\" [subtOffset]=\"subtOffset\" (wordClicked)=\"stopOrStartPlayer($event)\" (scrollSubts)=\"scrollSubts($event)\"></subtitles>\n<hr>\n<subtitles [subtitles]=\"subtitles?.ru\" [subtOffset]=\"subtOffset\" [disableWordClick]=\"true\"></subtitles>"
 
 /***/ }),
 
@@ -1000,6 +1112,7 @@ var VideoComponent = /** @class */ (function () {
             _this.db.getSubtitles(params.id).subscribe(function (subts) {
                 console.log(subts);
                 _this.subtitles = subts['subts'];
+                _this.timeKeysArray = subts['timeKeys'];
                 _this.createTimeKeys(subts['timeKeys']);
                 console.log(_this.timeKeys);
                 _this.subtOffset = 0;
@@ -1038,34 +1151,43 @@ var VideoComponent = /** @class */ (function () {
     };
     VideoComponent.prototype.onStateChangeHandler = function (e) {
         var _this = this;
-        console.log(e.data);
         if (e.data == window['YT'].PlayerState.PLAYING) {
+            if (this.interval)
+                return;
             this.interval = setInterval(function () {
-                console.log(_this);
                 var time = Math.round(10 * _this.player.getCurrentTime()) / 10;
                 if (_this.timeKeys.hasOwnProperty(time)) {
                     _this.subtOffset = _this.timeKeys[time] * 50;
                     _this.changeDetector.detectChanges();
-                    console.log('subtOffset: ' + _this.subtOffset);
                 }
             }, 100);
         }
-        else {
-            this.interval && clearInterval(this.interval);
-            this.interval = null;
-        }
     };
-    VideoComponent.prototype.createTimeKeys = function (timeKeys) {
+    VideoComponent.prototype.createTimeKeys = function (keys) {
+        console.log(keys);
         this.timeKeys = {};
-        timeKeys.forEach(function (key, index, arr) {
-            for (var i = key; i !== timeKeys.length - 1 && i < timeKeys[index + 1]; i += .1) {
+        keys.forEach(function (key, index, arr) {
+            for (var i = key; i !== keys.length - 1 && i < keys[index + 1]; i += .1) {
                 i = Math.round(10 * i) / 10;
                 this.timeKeys[i] = index;
             }
         }, this);
     };
-    VideoComponent.prototype.stopPlayer = function () {
-        this.player.pauseVideo();
+    VideoComponent.prototype.stopOrStartPlayer = function (stop) {
+        if (stop === void 0) { stop = true; }
+        if (stop)
+            return this.player.pauseVideo();
+        this.player.playVideo();
+    };
+    VideoComponent.prototype.scrollSubts = function (down) {
+        console.log('yes, scroll', down);
+        var step = down ? 1 : -1;
+        var time = Math.round(10 * this.player.getCurrentTime()) / 10;
+        if (this.timeKeys.hasOwnProperty(time)) {
+            var seekVal = this.timeKeysArray[this.timeKeys[time] + step];
+            this.player.seekTo(seekVal);
+            this.changeDetector.detectChanges();
+        }
     };
     VideoComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1149,7 +1271,7 @@ var VideoModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".videos-wrap {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    justify-content: space-around;\r\n}\r\n\r\n.mat-card-wrap {\r\n    max-width: 320px;\r\n    width: 320px;\r\n    min-width: 200px;\r\n    margin: 0 20px 50px 20px;\r\n    cursor: pointer;\r\n}\r\n\r\nmat-card {\r\n    height: 100%;\r\n    box-sizing: border-box;\r\n}\r\n\r\nmat-spinner {\r\n    position: absolute;\r\n    top: 200px;\r\n    left: calc(50% - 50px);\r\n    z-index: 1;\r\n}"
+module.exports = ".videos-wrap {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    justify-content: space-around;\r\n}\r\n\r\n.mat-card-wrap {\r\n    max-width: 400px;\r\n    min-width: 200px;\r\n    margin: 0 20px 50px 20px;\r\n    cursor: pointer;\r\n}\r\n\r\n.video-thumbnail-wrap {\r\n    padding-top: calc(56.25% + 18px);\r\n}\r\n\r\nmat-card {\r\n    height: 100%;\r\n    box-sizing: border-box;\r\n}\r\n\r\nmat-spinner {\r\n    position: absolute;\r\n    top: 200px;\r\n    left: calc(50% - 50px);\r\n    z-index: 1;\r\n}"
 
 /***/ }),
 
@@ -1160,7 +1282,7 @@ module.exports = ".videos-wrap {\r\n    display: flex;\r\n    flex-wrap: wrap;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>All the videos</h1>\r\n\r\n<mat-spinner *ngIf=\"!(videos$ | async)\" strokeWidth=\"7\" diameter=\"100\"></mat-spinner>\r\n\r\n<div class=\"videos-wrap\">\r\n  <div class=\"mat-card-wrap\" *ngFor=\"let video of videos$ | async; let i = index\" routerLink=\"/video/{{video.id}}\">\r\n    <mat-card>\r\n      <img mat-card-image [src]=\"videos[i].thumbnail\" alt=\"thumbnail\">\r\n      <mat-card-title>{{video.title}}</mat-card-title>\r\n      <mat-card-actions>\r\n        <button mat-button>LIKE</button>\r\n        <button mat-button>SHARE</button>\r\n      </mat-card-actions>\r\n    </mat-card>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<h1>All the videos</h1>\r\n\r\n<mat-spinner *ngIf=\"!(videos$ | async)\" strokeWidth=\"7\" diameter=\"100\"></mat-spinner>\r\n\r\n<div class=\"videos-wrap\">\r\n  <div class=\"mat-card-wrap\" *ngFor=\"let video of videos$ | async; let i = index\" routerLink=\"/video/{{video.id}}\">\r\n    <mat-card>\r\n      <div mat-card-image class=\"video-thumbnail-wrap\" [ngStyle]=\"{'background-color': 'red', 'background-image': 'url(' + video.thumbnail + ')', 'background-size': 'cover'}\">\r\n          \r\n      </div>\r\n      <!-- <img mat-card-image [src]=\"video.thumbnail\" alt=\"thumbnail\"> -->\r\n      <mat-card-title>{{video.title}}</mat-card-title>\r\n      <mat-card-actions>\r\n        <button mat-button>LIKE</button>\r\n        <button mat-button>SHARE</button>\r\n      </mat-card-actions>\r\n    </mat-card>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1281,7 +1403,7 @@ module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">Are you sure, you want to log out?</mat-toolbar>\n\n<form ngNoForm method=\"POST\" action=\"http://localhost:2500/log-out\">\n  <button type=\"submit\" mat-stroked-button class=\"full-width\" color=\"primary\">Log out</button>\n</form>\n"
+module.exports = "<mat-toolbar color=\"primary\">Are you sure, you want to log out?</mat-toolbar>\n\n<button (click)=\"auth.logout()\" mat-stroked-button class=\"full-width\" color=\"primary\">Log out</button>\n\n"
 
 /***/ }),
 
@@ -1296,6 +1418,7 @@ module.exports = "<mat-toolbar color=\"primary\">Are you sure, you want to log o
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LogOutComponent", function() { return LogOutComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../services/auth.service */ "./src/app/core/auth/services/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1306,18 +1429,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var LogOutComponent = /** @class */ (function () {
-    function LogOutComponent() {
+    function LogOutComponent(auth) {
+        this.auth = auth;
     }
-    LogOutComponent.prototype.ngOnInit = function () {
-    };
     LogOutComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-log-out',
             template: __webpack_require__(/*! ./log-out.component.html */ "./src/app/core/auth/components/log-out/log-out.component.html"),
             styles: [__webpack_require__(/*! ./log-out.component.css */ "./src/app/core/auth/components/log-out/log-out.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]])
     ], LogOutComponent);
     return LogOutComponent;
 }());
@@ -1333,7 +1456,7 @@ var LogOutComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.full-width {\r\n\twidth: 100%;\r\n}\r\n\r\nbutton {\r\n\tmargin-top: 10px;\r\n}"
+module.exports = ".login-form {\r\n\twidth: 100%;\r\n\tdisplay: flex;\r\n\tflex-direction: column;\r\n\talign-items: center;\r\n}\r\n\r\n.mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.full-width {\r\n\twidth: 400px;\r\n}\r\n\r\nmat-hint {\r\n\tcolor: #f00!important;\r\n}\r\n\r\n.w400 {\r\n\twidth: 400px;\r\n}\r\n\r\nbutton {\r\n\tmargin-top: 10px;\r\n}"
 
 /***/ }),
 
@@ -1344,7 +1467,7 @@ module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">Login</mat-toolbar>\r\n\r\n<form ngNoForm method=\"POST\" action=\"http://localhost:2500/login\">\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Login\" name=\"login\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Password\" name=\"password\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <button type=\"submit\" mat-stroked-button class=\"full-width\" color=\"primary\">Login</button>\r\n</form>"
+module.exports = "<div>{{diagnostic}}</div>\r\n\r\n<div class=\"login-form\">\r\n    <mat-toolbar color=\"primary\" class=\"w400\">Login</mat-toolbar>\r\n\r\n    <form #userForm=\"ngForm\" (ngSubmit)=\"logIn()\" class=\"w400\">\r\n      <mat-form-field class=\"full-width\">\r\n        <input [(ngModel)]=\"user.login\" name=\"login\" type=\"text\" matInput placeholder=\"Login\" autocomplete=\"off\"\r\n          #login=\"ngModel\" \r\n          required\r\n          minlength=\"4\"\r\n          maxlength=\"8\"\r\n          pattern=\"[a-zA-Z0-9]*\"\r\n        >\r\n        <mat-hint *ngIf=\"login.invalid && (login.dirty || login.touched) && login.errors.required\">Это поле является обязательным</mat-hint>\r\n        <mat-hint *ngIf=\"login.invalid && (login.dirty || login.touched) && login.errors.pattern\">Только латинские буквы и цифры</mat-hint>\r\n        <mat-hint *ngIf=\"login.invalid && (login.dirty || login.touched) && !login.errors.pattern && login.errors.minlength\">Минимальная длина логина 4 символа</mat-hint>\r\n      </mat-form-field>\r\n\r\n      <mat-form-field class=\"full-width\">\r\n        <input [(ngModel)]=\"user.password\" name=\"password\" matInput placeholder=\"Password\" autocomplete=\"off\"\r\n          #password=\"ngModel\"\r\n          required\r\n          minlength=\"6\"\r\n          maxlength=\"20\"\r\n          pattern=\"[\\w]*\"\r\n        >\r\n        <mat-hint *ngIf=\"password.invalid && (password.dirty || password.touched) && password.errors.required\">Это поле является обязательным</mat-hint>\r\n        <mat-hint *ngIf=\"password.invalid && (password.dirty || password.touched) && password.errors.pattern\">Только латинские буквы цифры, и символ нижнего подчеркивания</mat-hint>\r\n        <mat-hint *ngIf=\"password.invalid && (password.dirty || password.touched) && !password.errors.pattern && password.errors.minlength\">Минимальная длина пароля 6 символов</mat-hint>\r\n      </mat-form-field>\r\n\r\n      <button type=\"submit\" [disabled]=\"userForm.form.invalid\" mat-raised-button class=\"full-width\" color=\"primary\">Login</button>\r\n    </form>\r\n</div>"
 
 /***/ }),
 
@@ -1360,6 +1483,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginComponent", function() { return LoginComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../services/auth.service */ "./src/app/core/auth/services/auth.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1371,11 +1496,34 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(auth) {
+    function LoginComponent(auth, router, dialogRef) {
         this.auth = auth;
+        this.router = router;
+        this.dialogRef = dialogRef;
+        this.user = {
+            login: '',
+            password: ''
+        };
     }
-    LoginComponent.prototype.ngOnInit = function () {
+    Object.defineProperty(LoginComponent.prototype, "diagnostic", {
+        get: function () {
+            return JSON.stringify(this.user);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    LoginComponent.prototype.logIn = function () {
+        var _this = this;
+        this.auth.login(this.user).subscribe(function (res) {
+            console.log(res);
+            _this.dialogRef.close();
+            _this.router.navigate(['/videos']);
+        }, function (error) {
+            console.log('error, my friend');
+        });
     };
     LoginComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1383,7 +1531,9 @@ var LoginComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./login.component.html */ "./src/app/core/auth/components/login/login.component.html"),
             styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/core/auth/components/login/login.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]])
+        __metadata("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogRef"]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -1410,7 +1560,7 @@ module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">Sign up</mat-toolbar>\r\n\r\n<form ngNoForm method=\"POST\" action=\"http://localhost:2500/sign-up\">\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Name\" name=\"name\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Surname\" name=\"surname\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Email\" name=\"email\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Login\" name=\"login\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input matInput required placeholder=\"Password\" name=\"password\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <button type=\"submit\" mat-stroked-button class=\"full-width\" color=\"primary\">Sign up</button>\r\n</form>"
+module.exports = "<!-- {{diagnostic}}\r\n\r\n<mat-toolbar color=\"primary\">Sign up</mat-toolbar>\r\n\r\n<form #userForm=\"ngForm\">\r\n  <mat-form-field class=\"full-width\">\r\n    <input [(ngModel)]=\"user.name\" name=\"name\" matInput placeholder=\"Name\" autocomplete=\"off\"\r\n      #name=\"ngModel\" \r\n      required\r\n      minlength=\"2\"\r\n      maxlength=\"20\"\r\n      pattern=\"[a-zA-ZА-Яа-яёЁ]*\"\r\n    >\r\n\r\n    <mat-hint *ngIf=\"name.invalid && (name.dirty || name.touched) && name.errors.required\">Это поле является обязательным</mat-hint>\r\n    <mat-hint *ngIf=\"name.invalid && (name.dirty || name.touched) && name.errors.pattern\">Недопустимые символы</mat-hint>\r\n    <mat-hint *ngIf=\"name.invalid && (name.dirty || name.touched) && !name.errors.pattern && name.errors.minlength\">Минимальная длина имени 2 буквы</mat-hint>\r\n  </mat-form-field>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n  <mat-form-field class=\"full-width\">\r\n    <input [(ngModel)]=\"user.surname\" name=\"surname\" matInput required placeholder=\"Surname\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input [(ngModel)]=\"user.email\" name=\"email\" type=\"email\" matInput required placeholder=\"Email\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input [(ngModel)]=\"user.login\" name=\"login\" matInput required placeholder=\"Login\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input [(ngModel)]=\"user.password\" name=\"password\" matInput required placeholder=\"Password\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <button [disabled]=\"userForm.form.invalid\" type=\"submit\" mat-raised-button class=\"full-width\" color=\"primary\">Sign up</button>\r\n</form> -->"
 
 /***/ }),
 
@@ -1437,12 +1587,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var SignupComponent = /** @class */ (function () {
     function SignupComponent() {
+        this.user = {
+            login: '',
+            password: ''
+        };
     }
-    SignupComponent.prototype.ngOnInit = function () {
-    };
-    SignupComponent.prototype.h = function () {
-        console.log('hello form');
-    };
+    Object.defineProperty(SignupComponent.prototype, "diagnostic", {
+        get: function () {
+            return JSON.stringify(this.user);
+        },
+        enumerable: true,
+        configurable: true
+    });
     SignupComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-signup',
@@ -1470,7 +1626,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthService", function() { return AuthService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../shared/services/roles/roles.service */ "./src/app/shared/services/roles/roles.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../../shared/services/roles/roles.service */ "./src/app/shared/services/roles/roles.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1483,18 +1641,37 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var AuthService = /** @class */ (function () {
-    function AuthService(http, roles) {
+    function AuthService(http, roles, router) {
         this.http = http;
         this.roles = roles;
-        this.authUrl = 'http://localhost:2500/api/auth/';
+        this.router = router;
+        this.authUrl = 'http://localhost:2500/';
     }
+    AuthService.prototype.login = function (user) {
+        var _this = this;
+        return this.http.post(this.authUrl + 'login', user, {}).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
+            _this.roles.setRole(res.role);
+            return res;
+        }));
+    };
+    AuthService.prototype.logout = function () {
+        var _this = this;
+        this.http.post(this.authUrl + 'log-out', {}, {}).subscribe(function (res) {
+            console.log(res);
+            _this.roles.removeRole();
+            _this.router.navigate(['/home']);
+        });
+    };
     AuthService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"],
-            _shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_2__["RolesService"]])
+            _shared_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_4__["RolesService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], AuthService);
     return AuthService;
 }());
@@ -1539,6 +1716,8 @@ var MaterialModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatInputModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatCardModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatProgressSpinnerModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatCheckboxModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatRadioModule"]
             ],
             exports: [
@@ -1548,6 +1727,8 @@ var MaterialModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatInputModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatCardModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatProgressSpinnerModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatCheckboxModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatRadioModule"]
             ],
             declarations: []
@@ -1686,6 +1867,62 @@ var UnauthorizedComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/shared/directives/is-admin/is-admin.directive.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/shared/directives/is-admin/is-admin.directive.ts ***!
+  \******************************************************************/
+/*! exports provided: IsAdminDirective */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IsAdminDirective", function() { return IsAdminDirective; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_roles_roles_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../services/roles/roles.service */ "./src/app/shared/services/roles/roles.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var IsAdminDirective = /** @class */ (function () {
+    function IsAdminDirective(roles, templateRef, viewContainer) {
+        this.roles = roles;
+        this.templateRef = templateRef;
+        this.viewContainer = viewContainer;
+        console.log('admin directive');
+    }
+    IsAdminDirective.prototype.ngOnInit = function () {
+        // this.roles.getRoleAsync().subscribe(role => {
+        var role = this.roles.getRole();
+        if (role === 'admin') {
+            this.viewContainer.createEmbeddedView(this.templateRef);
+        }
+        else {
+            this.viewContainer.clear();
+        }
+        // });
+    };
+    IsAdminDirective = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"])({
+            selector: '[isAdmin]'
+        }),
+        __metadata("design:paramtypes", [_services_roles_roles_service__WEBPACK_IMPORTED_MODULE_1__["RolesService"],
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["TemplateRef"],
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewContainerRef"]])
+    ], IsAdminDirective);
+    return IsAdminDirective;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/shared/directives/is-guest/is-guest.directive.ts":
 /*!******************************************************************!*\
   !*** ./src/app/shared/directives/is-guest/is-guest.directive.ts ***!
@@ -1717,17 +1954,16 @@ var IsGuestDirective = /** @class */ (function () {
         console.log('isGuestDirective');
     }
     IsGuestDirective.prototype.ngOnInit = function () {
-        var _this = this;
-        this.roles.getRoleAsync().subscribe(function (role) {
-            if (_this.isGuest && role === 'guest' || !_this.isGuest && role !== 'guest') {
-                _this.viewContainer.createEmbeddedView(_this.templateRef);
-                console.log('showed: is guest');
-            }
-            else {
-                _this.viewContainer.clear();
-                console.log('cleared: is not guest');
-            }
-        });
+        console.log('hello from is-gest directive!!!');
+        // this.roles.getRoleAsync().subscribe(role => {
+        var role = this.roles.getRole();
+        if (this.isGuest && role === 'guest' || !this.isGuest && role !== 'guest') {
+            this.viewContainer.createEmbeddedView(this.templateRef);
+        }
+        else {
+            this.viewContainer.clear();
+        }
+        // });
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
@@ -1778,7 +2014,7 @@ var AuthGuard = /** @class */ (function () {
     AuthGuard.prototype.canActivate = function (next, state) {
         console.log('guard');
         var role = next.data.role;
-        return this.roles.getRoleFromLocalStorage() === role;
+        return this.roles.getRole() === role;
     };
     AuthGuard = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -1872,6 +2108,9 @@ var ApiService = /** @class */ (function () {
     ApiService.prototype.getSubtitles = function (videoId) {
         return this.http.get('http://localhost:2500/api/video/' + videoId);
     };
+    ApiService.prototype.addVideo = function (video) {
+        return this.http.post('http://localhost:2500/api/add-video', video);
+    };
     ApiService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
@@ -1897,8 +2136,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RolesService", function() { return RolesService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _api_api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../api/api.service */ "./src/app/shared/services/api/api.service.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1910,8 +2147,6 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-
-
 var RolesService = /** @class */ (function () {
     function RolesService(api) {
         this.api = api;
@@ -1920,59 +2155,34 @@ var RolesService = /** @class */ (function () {
             user: 'user',
             admin: 'admin'
         };
-        this.role = this.roles.guest;
-        this.isRoleSetted = false;
     }
     RolesService.prototype.setRole = function (role) {
         if (role === this.roles.user || role === this.roles.admin) {
-            this.role = role;
+            localStorage.setItem('role', role);
         }
         else {
-            this.role = this.roles.guest;
+            localStorage.setItem('role', this.roles.guest);
         }
-        this.isRoleSetted = true;
-        localStorage.setItem('role', this.role);
-        console.log('setted role: ' + this.role);
-    };
-    RolesService.prototype.getAndSetRoleFromServer = function () {
-        var _this = this;
-        if (!this.isRoleSetted) {
-            this.api.getRole().subscribe(function (roleObj) {
-                _this.setRole(roleObj.role);
-            });
-        }
-    };
-    RolesService.prototype.getRoleAsync = function () {
-        var _this = this;
-        if (!this.isRoleSetted) {
-            return this.api.getRole().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (roleObj) {
-                _this.setRole(roleObj.role);
-                return _this.role;
-            }));
-        }
-        else {
-            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].create(function (observer) {
-                observer.next(_this.role);
-            });
-        }
+        console.log('setted role: ' + localStorage.getItem('role'));
     };
     RolesService.prototype.getRole = function () {
-        return this.role;
+        return localStorage.getItem('role') || this.roles.guest;
     };
-    RolesService.prototype.getRoleFromLocalStorage = function () {
-        return localStorage.getItem('role');
+    Object.defineProperty(RolesService.prototype, "role", {
+        get: function () {
+            return localStorage.getItem('role');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    RolesService.prototype.removeRole = function () {
+        localStorage.removeItem('role');
     };
-    RolesService.prototype.isAuthorized = function () {
-        return this.role !== this.roles.guest;
-    };
-    RolesService.prototype.isGuest = function () {
-        return this.role === this.roles.guest;
-    };
-    RolesService.prototype.isUser = function () {
-        return this.role === this.roles.user;
-    };
-    RolesService.prototype.isAdmin = function () {
-        return this.role === this.roles.admin;
+    RolesService.prototype.checkRoleAsync = function () {
+        var _this = this;
+        this.api.getRole().subscribe(function (roleObj) {
+            _this.setRole(roleObj.role);
+        });
     };
     RolesService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -2046,12 +2256,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/not-found/not-found.component */ "./src/app/shared/components/not-found/not-found.component.ts");
 /* harmony import */ var _components_unauthorized_unauthorized_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/unauthorized/unauthorized.component */ "./src/app/shared/components/unauthorized/unauthorized.component.ts");
 /* harmony import */ var _directives_is_guest_is_guest_directive__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./directives/is-guest/is-guest.directive */ "./src/app/shared/directives/is-guest/is-guest.directive.ts");
+/* harmony import */ var _directives_is_admin_is_admin_directive__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./directives/is-admin/is-admin.directive */ "./src/app/shared/directives/is-admin/is-admin.directive.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -2069,9 +2281,13 @@ var SharedModule = /** @class */ (function () {
             declarations: [
                 _components_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_2__["NotFoundComponent"],
                 _components_unauthorized_unauthorized_component__WEBPACK_IMPORTED_MODULE_3__["UnauthorizedComponent"],
-                _directives_is_guest_is_guest_directive__WEBPACK_IMPORTED_MODULE_4__["IsGuestDirective"]
+                _directives_is_guest_is_guest_directive__WEBPACK_IMPORTED_MODULE_4__["IsGuestDirective"],
+                _directives_is_admin_is_admin_directive__WEBPACK_IMPORTED_MODULE_5__["IsAdminDirective"]
             ],
-            exports: [_directives_is_guest_is_guest_directive__WEBPACK_IMPORTED_MODULE_4__["IsGuestDirective"]]
+            exports: [
+                _directives_is_guest_is_guest_directive__WEBPACK_IMPORTED_MODULE_4__["IsGuestDirective"],
+                _directives_is_admin_is_admin_directive__WEBPACK_IMPORTED_MODULE_5__["IsAdminDirective"]
+            ]
         })
     ], SharedModule);
     return SharedModule;
