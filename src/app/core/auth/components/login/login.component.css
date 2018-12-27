@@ -1,27 +1,45 @@
-.login-form {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
 .mat-toolbar {
 	height: 50px;
     margin-bottom: 20px;
 }
 
 .full-width {
-	width: 400px;
+	width: 100%;
 }
 
 mat-hint {
 	color: #f00!important;
 }
 
-.w400 {
-	width: 400px;
-}
-
 button {
 	margin-top: 10px;
+}
+
+.error {
+	padding: 10px;
+	margin-bottom: 10px;
+	background-color: #faacac;
+	border-radius: 2px;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.error header{
+	font-size: 20pt;
+	color: #d01b1b;;
+}
+
+.error div{
+	margin: 10px;
+	font-size: 13pt;
+	color: #1e1818;
+}
+
+.error button {
+    min-width: 40px;
+	margin: 5px 5px 0 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 20px;
 }

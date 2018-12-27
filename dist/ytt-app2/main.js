@@ -477,7 +477,7 @@ module.exports = "main {\r\n\tpadding: 0 50px;\r\n}\r\n\r\nmat-toolbar {\r\n\the
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color='primary'>\r\n  <button *ngIf=\"roles.role === 'admin'\" mat-button>Only for admin</button>\r\n  <button *ngIf=\"roles.role === 'guest'\" mat-button routerLink=\"login\">Login page</button>\r\n  <button mat-button routerLink=\"home\">Home</button>\r\n  <button mat-button routerLink=\"videos\">Videos</button>\r\n  <button *ngIf=\"roles.role === 'guest'\" mat-button (click)=\"loginDialog()\">Log in</button>\r\n  <button *ngIf=\"roles.role === 'guest'\" mat-button (click)=\"signupDialog()\">Sign up</button>\r\n  <button *ngIf=\"roles.role !== 'guest'\" class=\"admin-btn\" mat-button routerLink=\"admin\">Administrate</button>\r\n  <button *ngIf=\"roles.role !== 'guest'\" mat-button (click)=\"logoutDialog()\">Log out</button>\r\n</mat-toolbar>\r\n\r\n<main>\r\n  <router-outlet></router-outlet>\r\n</main>"
+module.exports = "<mat-toolbar color='primary'>\r\n  <button mat-button routerLink=\"home\">Главная</button>\r\n  <button mat-button routerLink=\"videos\">Видео</button>\r\n  <button *ngIf=\"roles.role === 'guest'\" mat-button (click)=\"loginDialog()\">Вход</button>\r\n  <button *ngIf=\"roles.role === 'guest'\" mat-button (click)=\"signupDialog()\">Регистрация</button>\r\n  <button *ngIf=\"roles.role === 'admin'\" class=\"admin-btn\" mat-button routerLink=\"admin\">Administrate</button>\r\n  <button *ngIf=\"roles.role !== 'guest'\" mat-button (click)=\"logoutDialog()\">Выйти</button>\r\n</mat-toolbar>\r\n\r\n<main>\r\n  <router-outlet></router-outlet>\r\n</main>"
 
 /***/ }),
 
@@ -574,12 +574,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./core/auth/components/login/login.component */ "./src/app/core/auth/components/login/login.component.ts");
 /* harmony import */ var _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./core/auth/components/signup/signup.component */ "./src/app/core/auth/components/signup/signup.component.ts");
 /* harmony import */ var _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./core/auth/components/log-out/log-out.component */ "./src/app/core/auth/components/log-out/log-out.component.ts");
+/* harmony import */ var _core_auth_components_error_msg_error_msg_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./core/auth/components/error-msg/error-msg.component */ "./src/app/core/auth/components/error-msg/error-msg.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -602,7 +604,8 @@ var AppModule = /** @class */ (function () {
                 _app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"],
                 _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"],
                 _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_11__["SignupComponent"],
-                _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_12__["LogOutComponent"]
+                _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_12__["LogOutComponent"],
+                _core_auth_components_error_msg_error_msg_component__WEBPACK_IMPORTED_MODULE_13__["ErrorMsgComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -618,7 +621,8 @@ var AppModule = /** @class */ (function () {
             entryComponents: [
                 _core_auth_components_login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"],
                 _core_auth_components_signup_signup_component__WEBPACK_IMPORTED_MODULE_11__["SignupComponent"],
-                _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_12__["LogOutComponent"]
+                _core_auth_components_log_out_log_out_component__WEBPACK_IMPORTED_MODULE_12__["LogOutComponent"],
+                _core_auth_components_error_msg_error_msg_component__WEBPACK_IMPORTED_MODULE_13__["ErrorMsgComponent"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"]]
         })
@@ -1271,7 +1275,7 @@ var VideoModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".videos-wrap {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    justify-content: space-around;\r\n}\r\n\r\n.mat-card-wrap {\r\n    max-width: 400px;\r\n    min-width: 200px;\r\n    margin: 0 20px 50px 20px;\r\n    cursor: pointer;\r\n}\r\n\r\n.video-thumbnail-wrap {\r\n    padding-top: calc(56.25% + 18px);\r\n}\r\n\r\nmat-card {\r\n    height: 100%;\r\n    box-sizing: border-box;\r\n}\r\n\r\nmat-spinner {\r\n    position: absolute;\r\n    top: 200px;\r\n    left: calc(50% - 50px);\r\n    z-index: 1;\r\n}"
+module.exports = ".videos-wrap {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    justify-content: space-around;\r\n}\r\n\r\n.mat-card-wrap {\r\n    max-width: 400px;\r\n    min-width: 200px;\r\n    flex: 1;\r\n    margin: 0 20px 50px 20px;\r\n    cursor: pointer;\r\n}\r\n\r\n.video-thumbnail-wrap {\r\n    padding-top: calc(56.25% + 18px);\r\n}\r\n\r\nmat-card {\r\n    height: 100%;\r\n    box-sizing: border-box;\r\n}\r\n\r\nmat-spinner {\r\n    position: absolute;\r\n    top: 200px;\r\n    left: calc(50% - 50px);\r\n    z-index: 1;\r\n}"
 
 /***/ }),
 
@@ -1385,6 +1389,76 @@ var VideosListModule = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/core/auth/components/error-msg/error-msg.component.css":
+/*!************************************************************************!*\
+  !*** ./src/app/core/auth/components/error-msg/error-msg.component.css ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/core/auth/components/error-msg/error-msg.component.html":
+/*!*************************************************************************!*\
+  !*** ./src/app/core/auth/components/error-msg/error-msg.component.html ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "{{msg}}\n<button width=\"100%\" mat-raised-button color=\"primary\">Попробовать еще раз</button>\n"
+
+/***/ }),
+
+/***/ "./src/app/core/auth/components/error-msg/error-msg.component.ts":
+/*!***********************************************************************!*\
+  !*** ./src/app/core/auth/components/error-msg/error-msg.component.ts ***!
+  \***********************************************************************/
+/*! exports provided: ErrorMsgComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ErrorMsgComponent", function() { return ErrorMsgComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+var ErrorMsgComponent = /** @class */ (function () {
+    function ErrorMsgComponent(msg) {
+        this.msg = msg;
+    }
+    ErrorMsgComponent.prototype.ngOnInit = function () {
+    };
+    ErrorMsgComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-error-msg',
+            template: __webpack_require__(/*! ./error-msg.component.html */ "./src/app/core/auth/components/error-msg/error-msg.component.html"),
+            styles: [__webpack_require__(/*! ./error-msg.component.css */ "./src/app/core/auth/components/error-msg/error-msg.component.css")]
+        }),
+        __param(0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_1__["MAT_DIALOG_DATA"])),
+        __metadata("design:paramtypes", [Object])
+    ], ErrorMsgComponent);
+    return ErrorMsgComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/core/auth/components/log-out/log-out.component.css":
 /*!********************************************************************!*\
   !*** ./src/app/core/auth/components/log-out/log-out.component.css ***!
@@ -1403,7 +1477,7 @@ module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">Are you sure, you want to log out?</mat-toolbar>\n\n<button (click)=\"auth.logout()\" mat-stroked-button class=\"full-width\" color=\"primary\">Log out</button>\n\n"
+module.exports = "<mat-toolbar color=\"primary\">Are you sure, you want to log out?</mat-toolbar>\n\n<button (click)=\"onClick()\" mat-stroked-button class=\"full-width\" color=\"primary\">Log out</button>\n\n"
 
 /***/ }),
 
@@ -1419,6 +1493,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LogOutComponent", function() { return LogOutComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../services/auth.service */ "./src/app/core/auth/services/auth.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1430,17 +1505,24 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var LogOutComponent = /** @class */ (function () {
-    function LogOutComponent(auth) {
+    function LogOutComponent(auth, dialogRef) {
         this.auth = auth;
+        this.dialogRef = dialogRef;
     }
+    LogOutComponent.prototype.onClick = function () {
+        this.dialogRef.close();
+        this.auth.logout();
+    };
     LogOutComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-log-out',
             template: __webpack_require__(/*! ./log-out.component.html */ "./src/app/core/auth/components/log-out/log-out.component.html"),
             styles: [__webpack_require__(/*! ./log-out.component.css */ "./src/app/core/auth/components/log-out/log-out.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]])
+        __metadata("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"]])
     ], LogOutComponent);
     return LogOutComponent;
 }());
@@ -1467,7 +1549,7 @@ module.exports = ".login-form {\r\n\twidth: 100%;\r\n\tdisplay: flex;\r\n\tflex-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>{{diagnostic}}</div>\r\n\r\n<div class=\"login-form\">\r\n    <mat-toolbar color=\"primary\" class=\"w400\">Login</mat-toolbar>\r\n\r\n    <form #userForm=\"ngForm\" (ngSubmit)=\"logIn()\" class=\"w400\">\r\n      <mat-form-field class=\"full-width\">\r\n        <input [(ngModel)]=\"user.login\" name=\"login\" type=\"text\" matInput placeholder=\"Login\" autocomplete=\"off\"\r\n          #login=\"ngModel\" \r\n          required\r\n          minlength=\"4\"\r\n          maxlength=\"8\"\r\n          pattern=\"[a-zA-Z0-9]*\"\r\n        >\r\n        <mat-hint *ngIf=\"login.invalid && (login.dirty || login.touched) && login.errors.required\">Это поле является обязательным</mat-hint>\r\n        <mat-hint *ngIf=\"login.invalid && (login.dirty || login.touched) && login.errors.pattern\">Только латинские буквы и цифры</mat-hint>\r\n        <mat-hint *ngIf=\"login.invalid && (login.dirty || login.touched) && !login.errors.pattern && login.errors.minlength\">Минимальная длина логина 4 символа</mat-hint>\r\n      </mat-form-field>\r\n\r\n      <mat-form-field class=\"full-width\">\r\n        <input [(ngModel)]=\"user.password\" name=\"password\" matInput placeholder=\"Password\" autocomplete=\"off\"\r\n          #password=\"ngModel\"\r\n          required\r\n          minlength=\"6\"\r\n          maxlength=\"20\"\r\n          pattern=\"[\\w]*\"\r\n        >\r\n        <mat-hint *ngIf=\"password.invalid && (password.dirty || password.touched) && password.errors.required\">Это поле является обязательным</mat-hint>\r\n        <mat-hint *ngIf=\"password.invalid && (password.dirty || password.touched) && password.errors.pattern\">Только латинские буквы цифры, и символ нижнего подчеркивания</mat-hint>\r\n        <mat-hint *ngIf=\"password.invalid && (password.dirty || password.touched) && !password.errors.pattern && password.errors.minlength\">Минимальная длина пароля 6 символов</mat-hint>\r\n      </mat-form-field>\r\n\r\n      <button type=\"submit\" [disabled]=\"userForm.form.invalid\" mat-raised-button class=\"full-width\" color=\"primary\">Login</button>\r\n    </form>\r\n</div>"
+module.exports = "<div>{{diagnostic}}</div>\r\n\r\n<div class=\"login-form\">\r\n    <mat-toolbar color=\"primary\" class=\"w400\">Вход</mat-toolbar>\r\n\r\n    <form #userForm=\"ngForm\" (ngSubmit)=\"onSubmit()\" class=\"w400\">\r\n      <mat-form-field class=\"full-width\">\r\n        <input [(ngModel)]=\"user.login\" name=\"login\" type=\"text\" matInput placeholder=\"Логин\" autocomplete=\"off\"\r\n          #login=\"ngModel\" \r\n          required\r\n          minlength=\"4\"\r\n          maxlength=\"8\"\r\n          pattern=\"[a-zA-Z0-9]*\"\r\n        >\r\n        <mat-hint *ngIf=\"login.invalid && (login.dirty || login.touched) && login.errors.required\">Это поле является обязательным</mat-hint>\r\n        <mat-hint *ngIf=\"login.invalid && (login.dirty || login.touched) && login.errors.pattern\">Только латинские буквы и цифры</mat-hint>\r\n        <mat-hint *ngIf=\"login.invalid && (login.dirty || login.touched) && !login.errors.pattern && login.errors.minlength\">Минимальная длина логина 4 символа</mat-hint>\r\n      </mat-form-field>\r\n\r\n      <mat-form-field class=\"full-width\">\r\n        <input [(ngModel)]=\"user.password\" name=\"password\" matInput placeholder=\"Пароль\" autocomplete=\"off\"\r\n          #password=\"ngModel\"\r\n          required\r\n          minlength=\"6\"\r\n          maxlength=\"20\"\r\n          pattern=\"[\\w]*\"\r\n        >\r\n        <mat-hint *ngIf=\"password.invalid && (password.dirty || password.touched) && password.errors.required\">Это поле является обязательным</mat-hint>\r\n        <mat-hint *ngIf=\"password.invalid && (password.dirty || password.touched) && password.errors.pattern\">Только латинские буквы цифры, и символ нижнего подчеркивания</mat-hint>\r\n        <mat-hint *ngIf=\"password.invalid && (password.dirty || password.touched) && !password.errors.pattern && password.errors.minlength\">Минимальная длина пароля 6 символов</mat-hint>\r\n      </mat-form-field>\r\n\r\n      <button type=\"submit\" [disabled]=\"userForm.form.invalid\" mat-raised-button class=\"full-width\" color=\"primary\">Войти</button>\r\n    </form>\r\n</div>"
 
 /***/ }),
 
@@ -1515,12 +1597,12 @@ var LoginComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    LoginComponent.prototype.logIn = function () {
+    LoginComponent.prototype.onSubmit = function () {
         var _this = this;
         this.auth.login(this.user).subscribe(function (res) {
             console.log(res);
             _this.dialogRef.close();
-            _this.router.navigate(['/videos']);
+            _this.router.navigate(['/profile']);
         }, function (error) {
             console.log('error, my friend');
         });
@@ -1560,7 +1642,7 @@ module.exports = ".mat-toolbar {\r\n\theight: 50px;\r\n    margin-bottom: 20px;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- {{diagnostic}}\r\n\r\n<mat-toolbar color=\"primary\">Sign up</mat-toolbar>\r\n\r\n<form #userForm=\"ngForm\">\r\n  <mat-form-field class=\"full-width\">\r\n    <input [(ngModel)]=\"user.name\" name=\"name\" matInput placeholder=\"Name\" autocomplete=\"off\"\r\n      #name=\"ngModel\" \r\n      required\r\n      minlength=\"2\"\r\n      maxlength=\"20\"\r\n      pattern=\"[a-zA-ZА-Яа-яёЁ]*\"\r\n    >\r\n\r\n    <mat-hint *ngIf=\"name.invalid && (name.dirty || name.touched) && name.errors.required\">Это поле является обязательным</mat-hint>\r\n    <mat-hint *ngIf=\"name.invalid && (name.dirty || name.touched) && name.errors.pattern\">Недопустимые символы</mat-hint>\r\n    <mat-hint *ngIf=\"name.invalid && (name.dirty || name.touched) && !name.errors.pattern && name.errors.minlength\">Минимальная длина имени 2 буквы</mat-hint>\r\n  </mat-form-field>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n  <mat-form-field class=\"full-width\">\r\n    <input [(ngModel)]=\"user.surname\" name=\"surname\" matInput required placeholder=\"Surname\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input [(ngModel)]=\"user.email\" name=\"email\" type=\"email\" matInput required placeholder=\"Email\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input [(ngModel)]=\"user.login\" name=\"login\" matInput required placeholder=\"Login\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <mat-form-field class=\"full-width\">\r\n    <input [(ngModel)]=\"user.password\" name=\"password\" matInput required placeholder=\"Password\" autocomplete=\"off\">\r\n  </mat-form-field>\r\n  <button [disabled]=\"userForm.form.invalid\" type=\"submit\" mat-raised-button class=\"full-width\" color=\"primary\">Sign up</button>\r\n</form> -->"
+module.exports = "{{diagnostic}}\r\n\r\n<mat-toolbar color=\"primary\">Регистрация</mat-toolbar>\r\n\r\n<div *ngIf=\"errorMsg\" class=\"error\">{{errorMsg}}</div>\r\n\r\n<form #userForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\r\n  <mat-form-field class=\"full-width\">\r\n    <input [(ngModel)]=\"user.name\" name=\"name\" matInput placeholder=\"Имя\" autocomplete=\"off\"\r\n      #name=\"ngModel\" \r\n      required\r\n      minlength=\"2\"\r\n      maxlength=\"20\"\r\n      pattern=\"[a-zA-ZА-Яа-яёЁ]*\"\r\n    >\r\n    <mat-hint *ngIf=\"name.invalid && (name.dirty || name.touched) && name.errors.required\">Это поле является обязательным</mat-hint>\r\n    <mat-hint *ngIf=\"name.invalid && (name.dirty || name.touched) && name.errors.pattern\">Недопустимые символы</mat-hint>\r\n    <mat-hint *ngIf=\"name.invalid && (name.dirty || name.touched) && !name.errors.pattern && name.errors.minlength\">Минимальная длина имени 2 буквы</mat-hint>\r\n  </mat-form-field>\r\n\r\n  <mat-form-field class=\"full-width\">\r\n    <input [(ngModel)]=\"user.surname\" name=\"surname\" matInput placeholder=\"Фамилия\" autocomplete=\"off\"\r\n      #surname=\"ngModel\" \r\n      required\r\n      minlength=\"2\"\r\n      maxlength=\"20\"\r\n      pattern=\"[a-zA-ZА-Яа-яёЁ]*\"      \r\n    >\r\n    <mat-hint *ngIf=\"surname.invalid && (surname.dirty || surname.touched) && surname.errors.required\">Это поле является обязательным</mat-hint>\r\n    <mat-hint *ngIf=\"surname.invalid && (surname.dirty || surname.touched) && surname.errors.pattern\">Недопустимые символы</mat-hint>\r\n    <mat-hint *ngIf=\"surname.invalid && (surname.dirty || surname.touched) && !surname.errors.pattern && surname.errors.minlength\">Минимальная длина фамилии 2 буквы</mat-hint>\r\n  </mat-form-field>\r\n\r\n\r\n  <mat-form-field class=\"full-width\">\r\n    <input [(ngModel)]=\"user.email\" name=\"email\" type=\"email\" email matInput placeholder=\"Email\" autocomplete=\"off\"\r\n      #email=\"ngModel\"\r\n      required\r\n      pattern=\"\"\r\n    >\r\n    <mat-hint *ngIf=\"email.invalid && (email.dirty || email.touched) && email.errors.required\">Это поле является обязательным</mat-hint>\r\n    <mat-hint *ngIf=\"email.invalid && (email.dirty || email.touched) && email.errors.email\">Неверный email</mat-hint>\r\n  </mat-form-field>\r\n\r\n  <mat-form-field class=\"full-width\">\r\n    <input [(ngModel)]=\"user.login\" name=\"login\" type=\"text\" matInput placeholder=\"Логин\" autocomplete=\"off\"\r\n      #login=\"ngModel\" \r\n      required\r\n      minlength=\"4\"\r\n      maxlength=\"8\"\r\n      pattern=\"[a-zA-Z0-9]*\"\r\n    >\r\n    <mat-hint *ngIf=\"login.invalid && (login.dirty || login.touched) && login.errors.required\">Это поле является обязательным</mat-hint>\r\n    <mat-hint *ngIf=\"login.invalid && (login.dirty || login.touched) && login.errors.pattern\">Только латинские буквы и цифры</mat-hint>\r\n    <mat-hint *ngIf=\"login.invalid && (login.dirty || login.touched) && !login.errors.pattern && login.errors.minlength\">Минимальная длина логина 4 символа</mat-hint>\r\n  </mat-form-field>\r\n\r\n  <mat-form-field class=\"full-width\">\r\n    <input [(ngModel)]=\"user.password\" name=\"password\" matInput placeholder=\"Пароль\" autocomplete=\"off\"\r\n      #password=\"ngModel\"\r\n      required\r\n      minlength=\"6\"\r\n      maxlength=\"20\"\r\n      pattern=\"[\\w]*\"\r\n    >\r\n    <mat-hint *ngIf=\"password.invalid && (password.dirty || password.touched) && password.errors.required\">Это поле является обязательным</mat-hint>\r\n    <mat-hint *ngIf=\"password.invalid && (password.dirty || password.touched) && password.errors.pattern\">Только латинские буквы цифры, и символ нижнего подчеркивания</mat-hint>\r\n    <mat-hint *ngIf=\"password.invalid && (password.dirty || password.touched) && !password.errors.pattern && password.errors.minlength\">Минимальная длина пароля 6 символов</mat-hint>\r\n  </mat-form-field>\r\n\r\n  <button [disabled]=\"userForm.form.invalid\" type=\"submit\" mat-raised-button class=\"full-width\" color=\"primary\">Зарегистрироваться</button>\r\n</form>"
 
 /***/ }),
 
@@ -1575,6 +1657,9 @@ module.exports = "<!-- {{diagnostic}}\r\n\r\n<mat-toolbar color=\"primary\">Sign
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignupComponent", function() { return SignupComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../services/auth.service */ "./src/app/core/auth/services/auth.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _error_msg_error_msg_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../error-msg/error-msg.component */ "./src/app/core/auth/components/error-msg/error-msg.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1585,13 +1670,36 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var SignupComponent = /** @class */ (function () {
-    function SignupComponent() {
+    function SignupComponent(dialogRef, auth, matDialog) {
+        this.dialogRef = dialogRef;
+        this.auth = auth;
+        this.matDialog = matDialog;
         this.user = {
+            name: '',
+            surname: '',
+            email: '',
             login: '',
             password: ''
         };
     }
+    SignupComponent.prototype.onSubmit = function () {
+        var _this = this;
+        this.auth.signup(this.user).subscribe(function (res) {
+            console.log(res);
+            _this.dialogRef.close();
+        }, function (error) {
+            _this.errorMsg = error.error;
+            _this.matDialog.open(_error_msg_error_msg_component__WEBPACK_IMPORTED_MODULE_3__["ErrorMsgComponent"], {
+                width: '300px',
+                data: error.error
+            });
+            console.log(_this.errorMsg);
+        });
+    };
     Object.defineProperty(SignupComponent.prototype, "diagnostic", {
         get: function () {
             return JSON.stringify(this.user);
@@ -1605,7 +1713,9 @@ var SignupComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./signup.component.html */ "./src/app/core/auth/components/signup/signup.component.html"),
             styles: [__webpack_require__(/*! ./signup.component.css */ "./src/app/core/auth/components/signup/signup.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"],
+            _services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialog"]])
     ], SignupComponent);
     return SignupComponent;
 }());
@@ -1648,18 +1758,24 @@ var AuthService = /** @class */ (function () {
         this.http = http;
         this.roles = roles;
         this.router = router;
-        this.authUrl = 'http://localhost:2500/';
     }
     AuthService.prototype.login = function (user) {
         var _this = this;
-        return this.http.post(this.authUrl + 'login', user, {}).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
+        return this.http.post('/api/login', user, {}).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
+            _this.roles.setRole(res.role);
+            return res;
+        }));
+    };
+    AuthService.prototype.signup = function (user) {
+        var _this = this;
+        return this.http.post('/api/signup', user, {}).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
             _this.roles.setRole(res.role);
             return res;
         }));
     };
     AuthService.prototype.logout = function () {
         var _this = this;
-        this.http.post(this.authUrl + 'log-out', {}, {}).subscribe(function (res) {
+        this.http.post('/api/logout', {}, { responseType: 'text' }).subscribe(function (res) {
             console.log(res);
             _this.roles.removeRole();
             _this.router.navigate(['/home']);
@@ -1899,7 +2015,7 @@ var IsAdminDirective = /** @class */ (function () {
     }
     IsAdminDirective.prototype.ngOnInit = function () {
         // this.roles.getRoleAsync().subscribe(role => {
-        var role = this.roles.getRole();
+        var role = this.roles.role;
         if (role === 'admin') {
             this.viewContainer.createEmbeddedView(this.templateRef);
         }
@@ -1956,7 +2072,7 @@ var IsGuestDirective = /** @class */ (function () {
     IsGuestDirective.prototype.ngOnInit = function () {
         console.log('hello from is-gest directive!!!');
         // this.roles.getRoleAsync().subscribe(role => {
-        var role = this.roles.getRole();
+        var role = this.roles.role;
         if (this.isGuest && role === 'guest' || !this.isGuest && role !== 'guest') {
             this.viewContainer.createEmbeddedView(this.templateRef);
         }
@@ -2014,7 +2130,7 @@ var AuthGuard = /** @class */ (function () {
     AuthGuard.prototype.canActivate = function (next, state) {
         console.log('guard');
         var role = next.data.role;
-        return this.roles.getRole() === role;
+        return this.roles.role === role;
     };
     AuthGuard = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -2100,16 +2216,16 @@ var ApiService = /** @class */ (function () {
         this.http = http;
     }
     ApiService.prototype.getRole = function () {
-        return this.http.get('http://localhost:2500/api/role');
+        return this.http.get('/api/role');
     };
     ApiService.prototype.getVideos = function () {
-        return this.http.get('http://localhost:2500/api/videos');
+        return this.http.get('/api/videos');
     };
     ApiService.prototype.getSubtitles = function (videoId) {
-        return this.http.get('http://localhost:2500/api/video/' + videoId);
+        return this.http.get('/api/video/' + videoId);
     };
     ApiService.prototype.addVideo = function (video) {
-        return this.http.post('http://localhost:2500/api/add-video', video);
+        return this.http.post('/api/add-video', video);
     };
     ApiService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -2165,12 +2281,9 @@ var RolesService = /** @class */ (function () {
         }
         console.log('setted role: ' + localStorage.getItem('role'));
     };
-    RolesService.prototype.getRole = function () {
-        return localStorage.getItem('role') || this.roles.guest;
-    };
     Object.defineProperty(RolesService.prototype, "role", {
         get: function () {
-            return localStorage.getItem('role');
+            return localStorage.getItem('role') || this.roles.guest;
         },
         enumerable: true,
         configurable: true

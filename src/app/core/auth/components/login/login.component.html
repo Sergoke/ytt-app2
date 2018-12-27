@@ -1,35 +1,37 @@
-<div>{{diagnostic}}</div>
+<mat-toolbar color="primary">Вход</mat-toolbar>
 
-<div class="login-form">
-    <mat-toolbar color="primary" class="w400">Login</mat-toolbar>
-
-    <form #userForm="ngForm" (ngSubmit)="logIn()" class="w400">
-      <mat-form-field class="full-width">
-        <input [(ngModel)]="user.login" name="login" type="text" matInput placeholder="Login" autocomplete="off"
-          #login="ngModel" 
-          required
-          minlength="4"
-          maxlength="8"
-          pattern="[a-zA-Z0-9]*"
-        >
-        <mat-hint *ngIf="login.invalid && (login.dirty || login.touched) && login.errors.required">Это поле является обязательным</mat-hint>
-        <mat-hint *ngIf="login.invalid && (login.dirty || login.touched) && login.errors.pattern">Только латинские буквы и цифры</mat-hint>
-        <mat-hint *ngIf="login.invalid && (login.dirty || login.touched) && !login.errors.pattern && login.errors.minlength">Минимальная длина логина 4 символа</mat-hint>
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <input [(ngModel)]="user.password" name="password" matInput placeholder="Password" autocomplete="off"
-          #password="ngModel"
-          required
-          minlength="6"
-          maxlength="20"
-          pattern="[\w]*"
-        >
-        <mat-hint *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required">Это поле является обязательным</mat-hint>
-        <mat-hint *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.pattern">Только латинские буквы цифры, и символ нижнего подчеркивания</mat-hint>
-        <mat-hint *ngIf="password.invalid && (password.dirty || password.touched) && !password.errors.pattern && password.errors.minlength">Минимальная длина пароля 6 символов</mat-hint>
-      </mat-form-field>
-
-      <button type="submit" [disabled]="userForm.form.invalid" mat-raised-button class="full-width" color="primary">Login</button>
-    </form>
+<div *ngIf="error" class="error">
+  <header class="full-width">Ошибка</header>
+  <div class="full-width"><span>Неверный логин или пароль</span></div>
+  <button (click)="error = false" mat-raised-button color="warn">X</button>
 </div>
+
+<form #userForm="ngForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="full-width">
+    <input [(ngModel)]="user.login" name="login" type="text" matInput placeholder="Логин" autocomplete="off"
+      #login="ngModel" 
+      required
+      minlength="4"
+      maxlength="8"
+      pattern="[a-zA-Z0-9]*"
+    >
+    <mat-hint *ngIf="login.invalid && (login.dirty || login.touched) && login.errors.required">Это поле является обязательным</mat-hint>
+    <mat-hint *ngIf="login.invalid && (login.dirty || login.touched) && login.errors.pattern">Только латинские буквы и цифры</mat-hint>
+    <mat-hint *ngIf="login.invalid && (login.dirty || login.touched) && !login.errors.pattern && login.errors.minlength">Минимальная длина логина 4 символа</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <input [(ngModel)]="user.password" name="password" matInput placeholder="Пароль" autocomplete="off"
+      #password="ngModel"
+      required
+      minlength="6"
+      maxlength="20"
+      pattern="[\w]*"
+    >
+    <mat-hint *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required">Это поле является обязательным</mat-hint>
+    <mat-hint *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.pattern">Только латинские буквы цифры, и символ нижнего подчеркивания</mat-hint>
+    <mat-hint *ngIf="password.invalid && (password.dirty || password.touched) && !password.errors.pattern && password.errors.minlength">Минимальная длина пароля 6 символов</mat-hint>
+  </mat-form-field>
+
+  <button type="submit" [disabled]="userForm.form.invalid" mat-raised-button class="full-width" color="primary">Войти</button>
+</form>

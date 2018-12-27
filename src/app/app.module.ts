@@ -15,13 +15,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './core/auth/components/login/login.component';
 import { SignupComponent } from './core/auth/components/signup/signup.component';
 import { LogOutComponent } from './core/auth/components/log-out/log-out.component';
+import { ErrorMsgComponent } from './core/auth/components/error-msg/error-msg.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    LogOutComponent
+    LogOutComponent,
+    ErrorMsgComponent
   ],
   imports: [
     BrowserModule,
@@ -33,11 +35,14 @@ import { LogOutComponent } from './core/auth/components/log-out/log-out.componen
     MaterialModule,
     ContentModule
   ],
-  providers: [],
+  providers: [
+
+  ],
   entryComponents: [
     LoginComponent,
     SignupComponent,
-    LogOutComponent
+    LogOutComponent,
+    ErrorMsgComponent
   ],
   bootstrap: [AppComponent]
 })

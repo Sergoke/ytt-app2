@@ -16,6 +16,6 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       console.log('guard');
       var role = next.data.role;
-      return this.roles.getRole() === role;
+      return this.roles.role === role;
   }
 }

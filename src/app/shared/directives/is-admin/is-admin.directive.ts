@@ -17,7 +17,7 @@ export class IsAdminDirective implements OnInit{
 
   ngOnInit(){
     // this.roles.getRoleAsync().subscribe(role => {
-      var role = this.roles.getRole();
+      var role = this.roles.role;
       
       if(role === 'admin'){
         this.viewContainer.createEmbeddedView(this.templateRef);

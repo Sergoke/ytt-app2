@@ -1,12 +1,10 @@
 <mat-toolbar color='primary'>
-  <button *ngIf="roles.role === 'admin'" mat-button>Only for admin</button>
-  <button *ngIf="roles.role === 'guest'" mat-button routerLink="login">Login page</button>
-  <button mat-button routerLink="home">Home</button>
-  <button mat-button routerLink="videos">Videos</button>
-  <button *ngIf="roles.role === 'guest'" mat-button (click)="loginDialog()">Log in</button>
-  <button *ngIf="roles.role === 'guest'" mat-button (click)="signupDialog()">Sign up</button>
-  <button *ngIf="roles.role !== 'guest'" class="admin-btn" mat-button routerLink="admin">Administrate</button>
-  <button *ngIf="roles.role !== 'guest'" mat-button (click)="logoutDialog()">Log out</button>
+  <button mat-button routerLink="home">Главная</button>
+  <button mat-button routerLink="videos">Видео</button>
+  <button *ngIf="roles.role === 'guest'" mat-button (click)="loginDialog()">Вход</button>
+  <button *ngIf="roles.role === 'guest'" mat-button (click)="signupDialog()">Регистрация</button>
+  <button *ngIf="roles.role === 'admin'" class="admin-btn" mat-button routerLink="admin">Administrate</button>
+  <button *ngIf="roles.role !== 'guest'" mat-button (click)="logoutDialog()">Выйти</button>
 </mat-toolbar>
 
 <main>

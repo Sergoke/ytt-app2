@@ -12,6 +12,7 @@ import { MatDialogRef } from '@angular/material';
 export class LoginComponent {
 
   user: {};
+  error: boolean;
 
   constructor(
     private auth: AuthService,
@@ -28,14 +29,14 @@ export class LoginComponent {
     return JSON.stringify(this.user);
   }
 
-  logIn(){
+  onSubmit(){
     this.auth.login(this.user).subscribe(res => {
-      console.log(res);
+      this.error = false;
       this.dialogRef.close();
-      this.router.navigate(['/videos']);
+      this.router.navigate(['/profile']);
     },
     error => {
-      console.log('error, my friend')
+      this.error = true;
     });
   }
   

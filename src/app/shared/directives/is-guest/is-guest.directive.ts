@@ -20,7 +20,7 @@ export class IsGuestDirective implements OnInit {
   ngOnInit(){
     console.log('hello from is-gest directive!!!')
     // this.roles.getRoleAsync().subscribe(role => {
-      var role = this.roles.getRole();
+      var role = this.roles.role;
 
       if(this.isGuest && role === 'guest' || !this.isGuest && role !== 'guest'){
         this.viewContainer.createEmbeddedView(this.templateRef);

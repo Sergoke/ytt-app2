@@ -9,9 +9,11 @@ router.get('/', (req, res) => {
 		});
 	}
 
-	VideoModel.find({}, {_id: 0, videoId: 1}, (err, videoIdObjects) => {
-		resHandler(err, videoIdObjects);
-	});
+	else {
+		VideoModel.find({}, {_id: 0, videoId: 1}, (err, videoIdObjects) => {
+			resHandler(err, videoIdObjects);
+		});
+	}
 
 	var resHandler = (err, videoIdObjects) => {
 
@@ -20,8 +22,8 @@ router.get('/', (req, res) => {
 		var ids = videoIdObjects.map( obj => obj.videoId );
 
 		YtApiModel.getVideos(ids).then( videos => {
-			return res.send(videos);
-		});
+			return res.json(videos);
+		})
 	}
 });
 

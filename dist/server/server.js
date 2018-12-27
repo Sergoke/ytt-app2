@@ -22,11 +22,6 @@ app.use(session({
 	store: sessionStore
 }));
 
-app.use((req, res, next) => {//tmp
-	req.session.numVisited = req.session.numVisited + 1;
-	next();
-});
-
 app.use(express.static(__dirname + '/../' + config.staticFolder));
 
 app.use(express.json());
@@ -36,7 +31,6 @@ mongoose.set('debug', true);
 mongoose.connect(config.dbHost, {useNewUrlParser: true });
 
 app.use('/api', require('./routes/api/index'));
-app.use(require('./routes/auth/index'));
 app.use(require('./routes/angular/index'));
 
 mongoose.connection.on('open', function(){

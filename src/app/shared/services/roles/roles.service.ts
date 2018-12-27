@@ -26,12 +26,8 @@ export class RolesService {
     console.log('setted role: ' + localStorage.getItem('role'));
   }
 
-  getRole(): string{
-    return localStorage.getItem('role') || this.roles.guest;
-  }
-
   get role(){
-    return localStorage.getItem('role');
+    return localStorage.getItem('role') || this.roles.guest;
   }
 
   removeRole(): void{

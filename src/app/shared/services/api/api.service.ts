@@ -13,18 +13,18 @@ export class ApiService {
   ) { }
 
   getRole(): Observable<any>{
-    return this.http.get('http://localhost:2500/api/role');
+    return this.http.get('/api/role');
   }
 
   getVideos(): Observable<any>{
-    return this.http.get('http://localhost:2500/api/videos');
+    return this.http.get('/api/videos');
   }
 
   getSubtitles(videoId: string): Observable<any>{
-    return this.http.get('http://localhost:2500/api/video/' + videoId);
+    return this.http.get('/api/video/' + videoId);
   }
   
   addVideo(video: {}){
-    return this.http.post('http://localhost:2500/api/add-video', video);
+    return this.http.post('/api/add-video', video);
   }
 }
