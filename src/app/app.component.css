@@ -1,10 +1,17 @@
 main {
 	padding: 0 50px;
+	flex: 1;
+}
+
+@media screen and (max-width: 768px){
+	main {
+		padding: 0;
+	}
 }
 
 mat-toolbar {
 	height: auto;
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 	justify-content: flex-end;
 }
 
@@ -16,6 +23,14 @@ button {
 
 button:hover {
 	border: 1px solid white;
+}
+
+button.title {
+	margin-right: auto;
+    background-color: #fff;
+    color: #673ab7;
+    font-weight: bold;
+    font-style: italic;
 }
 
 .admin-btn {

@@ -5,9 +5,9 @@
 }
 
 .mat-card-wrap {
+    flex-basis: 300px;
+    flex-grow: 1;
     max-width: 400px;
-    min-width: 200px;
-    flex: 1;
     margin: 0 20px 50px 20px;
     cursor: pointer;
 }
@@ -19,6 +19,10 @@
 mat-card {
     height: 100%;
     box-sizing: border-box;
+}
+
+mat-card-title {
+    font-size: 14pt;
 }
 
 mat-spinner {

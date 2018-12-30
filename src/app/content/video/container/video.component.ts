@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from './../../../shared/services/api/api.service';
@@ -10,7 +10,10 @@ import { ApiService } from './../../../shared/services/api/api.service';
 })
 export class VideoComponent implements OnInit {
 
-  embedUrl: string;
+  @ViewChild('wrapper') videoWrapper;
+  @ViewChild('block', {read: ElementRef}) video: ElementRef;
+
+  private embedUrl: string;
   private player;
   private interval;
   private subtitles: {(key: string): Array<Array<string>>};
@@ -26,6 +29,7 @@ export class VideoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.setRatio();
     this.route.params.subscribe( params => {
       this.embedUrl = 'https://www.youtube.com/embed/' + params.id + '?enablejsapi=1';
       this.db.getSubtitles(params.id).subscribe( subts => {
@@ -72,6 +76,8 @@ export class VideoComponent implements OnInit {
           }
       }
     });
+
+    window['player'] = this.player;
   }
 
   onStateChangeHandler(e) {
@@ -90,17 +96,16 @@ export class VideoComponent implements OnInit {
   createTimeKeys(keys: [number]){
     console.log(keys);
     this.timeKeys = {};
-    keys.forEach(function(key, index, arr){
-      for(var i = key; i !== keys.length - 1 && i < keys[index + 1]; i += .1){
-        i = Math.round(10 * i) / 10;
+    keys.forEach(function(key, index){
+      for(var i = key; i < keys[index + 1]; i = Math.round((i + .1) * 10) / 10){
         this.timeKeys[i] = index;
       }
     }, this);
-  }
 
-  stopOrStartPlayer(stop: boolean = true){
-    if(stop) return this.player.pauseVideo();
-    this.player.playVideo();
+    var lastKey = keys[keys.length - 1];
+    for(var i = lastKey; i < lastKey + 2; i = Math.round((i + .1) * 10) / 10){
+      this.timeKeys[i] = keys.length - 1;
+    }
   }
 
   scrollSubts(down: boolean){
@@ -114,6 +119,47 @@ export class VideoComponent implements OnInit {
       this.player.seekTo(seekVal);
       this.changeDetector.detectChanges();
     }
+  }
+
+  onResize(){
+    this.setRatio();
+  }
+
+  blockStyles: {} = {};
+  isResizeIntervalWorking = false;
+
+  private setRatio(){
+
+    this.blockStyles = {
+      width: 'auto'
+    }
+      
+    if(!this.isResizeIntervalWorking){
+      this.isResizeIntervalWorking = true;
+      
+      var interval = setInterval(() => {
+        var blockRect = this.video.nativeElement.getBoundingClientRect();
+        var wrapperRect = this.videoWrapper.nativeElement.getBoundingClientRect();
+
+        if(blockRect.height >= wrapperRect.height){
+          this.blockStyles = {
+            width: wrapperRect.height * (blockRect.width / blockRect.height) + 'px'
+          }
+        }
+        else {
+          this.blockStyles = {
+            width: 'auto'
+          }
+        }
+      }, 0);
+
+      setTimeout(() => {
+        clearInterval(interval);
+        this.isResizeIntervalWorking = false;
+      }, 2000);
+
+    }
+
   }
 
 }

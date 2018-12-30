@@ -1,6 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+/* @import "../node_modules/bootstrap/dist/css/bootstrap.min.css"; */
 
 body {
 	margin: 0;
+	background-color: #fae2e2;
+}
+
+app-root {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
 }

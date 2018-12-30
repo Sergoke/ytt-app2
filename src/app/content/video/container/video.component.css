@@ -1,0 +1,10 @@
+.video-wrap {
+    max-height: calc(100vh - 68px);
+}
+
+.video {
+    margin: auto;
+    padding-bottom: 10px;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}

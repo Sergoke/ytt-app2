@@ -1,4 +1,8 @@
-<yt-player [embedUrl]="embedUrl"></yt-player>
-<subtitles [subtitles]="subtitles?.en" [subtOffset]="subtOffset" (wordClicked)="stopOrStartPlayer($event)" (scrollSubts)="scrollSubts($event)"></subtitles>
-<hr>
-<subtitles [subtitles]="subtitles?.ru" [subtOffset]="subtOffset" [disableWordClick]="true"></subtitles>
+<div #wrapper class="video-wrap">
+    <div class="video" [ngStyle]="blockStyles" #block (window:resize)="onResize($event)">
+        <yt-player [embedUrl]="embedUrl"></yt-player>
+        <subtitles *ngIf="subtitles?.en?.length" [subtitles]="subtitles?.en" [subtOffset]="subtOffset" [player]="player" (scrollSubts)="scrollSubts($event)"></subtitles>
+        <hr *ngIf="subtitles?.en?.length">
+        <subtitles *ngIf="subtitles?.ru?.length" [subtitles]="subtitles?.ru" [subtOffset]="subtOffset" [disableWordClick]="true" (scrollSubts)="scrollSubts($event)"></subtitles>
+    </div>
+</div>

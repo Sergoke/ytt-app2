@@ -6,7 +6,7 @@
 }
 
 ul {
-    margin: 0 20px;
+    margin: 0 20px 0 30px;
     padding: 0;
     list-style: none;
     font-family: 'Concert One',cursive;
@@ -34,12 +34,42 @@ li {
 
 .controls {
     position: absolute;
-    top: 15px;
-    left: 9px;
-    color: white;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-weight: bold;
+    opacity: 0;
 }
 
-.controls div {
+.subts-wrap:hover .controls {
+    opacity: 1;
+}
+
+.controls i {
+    width: 10px;
+    height: 10px;
+    margin: 1px;
+    display: inline-block;
+    border-style: solid;
+    border-color: #ccc;
+    border-width: 0 2px 2px 0;
     cursor: pointer;
+    transition: .2s;
+}
+
+.controls i:hover {
+    border-color: #fff;
+}
+
+.controls .arrow-top {
+    transform: rotate(-135deg);
+}
+
+.controls .arrow-down {
+    transform: rotate(45deg);
 }

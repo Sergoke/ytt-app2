@@ -13,8 +13,11 @@ import { TranslationComponent } from './../translation/translation.component';
 })
 export class SubtitlesComponent {
 
-  @Output() wordClicked = new EventEmitter();
   @Output() scrollSubts = new EventEmitter();
+
+  @Input() player;
+  @Input() subtOffset;
+  @Input() disableWordClick: boolean = false;
 
   private _subtitles;
 
@@ -29,9 +32,6 @@ export class SubtitlesComponent {
     return this._subtitles;
   }
 
-  @Input() subtOffset;
-  @Input() disableWordClick: boolean = false;
-
   private lastClickedWord;
 
   constructor(
@@ -41,7 +41,11 @@ export class SubtitlesComponent {
 
   wordClick(e){
     if ("SPAN" === e.target.tagName && !this.disableWordClick) {
-      this.wordClicked.emit(true);
+      var wasVideoPlaying = false;
+      if(this.player && this.player.getPlayerState() === 1){
+        wasVideoPlaying = true;
+        this.player.pauseVideo();
+      }
       this.lastClickedWord && this.lastClickedWord.classList.remove("clickedWord");
       this.lastClickedWord = e.target;
       this.lastClickedWord.classList.add("clickedWord");
@@ -55,7 +59,7 @@ export class SubtitlesComponent {
         });   
         
         dialogRef.afterClosed().subscribe(() => {
-          this.wordClicked.emit(false);
+          if(wasVideoPlaying) this.player.playVideo();
           this.lastClickedWord.classList.remove("clickedWord");
         });
       });

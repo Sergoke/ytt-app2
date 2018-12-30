@@ -1,5 +1,5 @@
 <mat-toolbar color='primary'>
-  <button mat-button routerLink="home">Главная</button>
+  <button mat-button routerLink="home" class="title">Yteng</button>
   <button mat-button routerLink="videos">Видео</button>
   <button *ngIf="roles.role === 'guest'" mat-button (click)="loginDialog()">Вход</button>
   <button *ngIf="roles.role === 'guest'" mat-button (click)="signupDialog()">Регистрация</button>
@@ -10,3 +10,6 @@
 <main>
   <router-outlet></router-outlet>
 </main>
+
+
+<app-footer></app-footer>

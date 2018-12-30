@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import { SingletonsModule } from './singletons/singletons.module';
 import { ContentModule } from './content/content.module';
 import { AdminModule } from './admin/admin.module';
 
@@ -30,6 +31,7 @@ import { ErrorMsgComponent } from './core/auth/components/error-msg/error-msg.co
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    SingletonsModule,
     AdminModule,
     SharedModule,
     MaterialModule,
