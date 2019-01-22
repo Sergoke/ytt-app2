@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class TranslService {
 
-  url = 'http://localhost:2500/api/translate/';
+  url = '/api/translate/';
 
   constructor(
     private http: HttpClient

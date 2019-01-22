@@ -11,7 +11,10 @@ import {
   MatProgressSpinnerModule,
   MatCheckboxModule,
   MatTableModule,
-  MatRadioModule
+  MatRadioModule,
+  MatExpansionModule,
+  MatIconModule,
+  MatMenuModule
 } from '@angular/material';
 
 @NgModule({
@@ -26,7 +29,10 @@ import {
     MatProgressSpinnerModule,
     MatCheckboxModule,
     MatTableModule,
-    MatRadioModule
+    MatRadioModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatMenuModule
   ],
   exports: [
     MatToolbarModule,
@@ -37,7 +43,10 @@ import {
     MatProgressSpinnerModule,
     MatCheckboxModule,
     MatTableModule,
-    MatRadioModule
+    MatRadioModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatMenuModule
   ],
   declarations: []
 })

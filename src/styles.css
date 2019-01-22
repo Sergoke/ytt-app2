@@ -4,11 +4,17 @@
 
 body {
 	margin: 0;
-	background-color: #fae2e2;
+	min-width: 400px;
+	background-color: #e8e8e8;
 }
 
 app-root {
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
+}
+
+main .full-width-of-main {
+	margin-left: -20px;
+	margin-right: -20px;
 }

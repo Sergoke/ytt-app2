@@ -5,12 +5,14 @@ import { VideosListComponent } from './container/videos-list.component';
 
 import { MaterialModule } from './../../material/material.module';
 import { RouterModule } from '@angular/router';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    InfiniteScrollModule
   ],
   declarations: [
     VideosListComponent

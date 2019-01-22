@@ -4,8 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SafePipe } from './pipes/safe.pipe';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
-import { IsGuestDirective } from './directives/is-guest/is-guest.directive';
-import { IsAdminDirective } from './directives/is-admin/is-admin.directive';
+import { IfRoleDirective } from './directives/if-role/if-role.directive';
 
 @NgModule({
   imports: [
@@ -16,13 +15,11 @@ import { IsAdminDirective } from './directives/is-admin/is-admin.directive';
   ],
   declarations: [
     NotFoundComponent, 
-    UnauthorizedComponent, 
-    IsGuestDirective, 
-    IsAdminDirective
+    UnauthorizedComponent,
+    IfRoleDirective
   ],
     exports: [
-      IsGuestDirective,
-      IsAdminDirective
+      IfRoleDirective
     ]
 })
 export class SharedModule { }

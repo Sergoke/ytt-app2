@@ -12,7 +12,7 @@ export class YtPlayerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.embedUrl);
+    
   }
 
 }

@@ -13,10 +13,10 @@ export class VideoComponent implements OnInit {
   @ViewChild('wrapper') videoWrapper;
   @ViewChild('block', {read: ElementRef}) video: ElementRef;
 
-  private embedUrl: string;
+  public embedUrl: string;
   private player;
   private interval;
-  private subtitles: {(key: string): Array<Array<string>>};
+  public subtitles: any;//{(key: string): Array<Array<string>>};
   private timeKeys: {};
   private timeKeysArray;
   public subtOffset;
@@ -33,11 +33,9 @@ export class VideoComponent implements OnInit {
     this.route.params.subscribe( params => {
       this.embedUrl = 'https://www.youtube.com/embed/' + params.id + '?enablejsapi=1';
       this.db.getSubtitles(params.id).subscribe( subts => {
-        console.log(subts);
         this.subtitles = subts['subts'];
         this.timeKeysArray = subts['timeKeys'];
         this.createTimeKeys(subts['timeKeys']);
-        console.log(this.timeKeys)
         this.subtOffset = 0;
       },
       error => {
@@ -94,7 +92,6 @@ export class VideoComponent implements OnInit {
   }
 
   createTimeKeys(keys: [number]){
-    console.log(keys);
     this.timeKeys = {};
     keys.forEach(function(key, index){
       for(var i = key; i < keys[index + 1]; i = Math.round((i + .1) * 10) / 10){
@@ -109,16 +106,18 @@ export class VideoComponent implements OnInit {
   }
 
   scrollSubts(down: boolean){
-    console.log('yes, scroll', down);
-
     var step = down? 1 : -1;
 
     var time = Math.round(10 * this.player.getCurrentTime()) / 10;
-    if(this.timeKeys.hasOwnProperty(time)){
-      let seekVal = this.timeKeysArray[this.timeKeys[time] + step];
+    var seekVal;
+    if(this.timeKeysArray[this.timeKeys[time] + step]){
+      seekVal = this.timeKeysArray[this.timeKeys[time] + step];
+    }
+    else {
+      seekVal = this.timeKeysArray[0];
+    }
       this.player.seekTo(seekVal);
       this.changeDetector.detectChanges();
-    }
   }
 
   onResize(){

@@ -3,17 +3,17 @@ const VideoModel = require('../../../models/VideoModel');
 const YtApiModel = require('../../../models/YtApiModel');
 
 router.get('/', (req, res) => {
+	console.log(req.query);
+
+	video = {};
+
 	if(!req.session.userId){
-		VideoModel.find({isDemo: true}, {_id: 0, videoId: 1}, (err, videoIdObjects) => {
-			resHandler(err, videoIdObjects);
-		});
+		video = {isDemo: true}
 	}
 
-	else {
-		VideoModel.find({}, {_id: 0, videoId: 1}, (err, videoIdObjects) => {
-			resHandler(err, videoIdObjects);
-		});
-	}
+	VideoModel.find(video, {_id: 0, videoId: 1}, (err, videoIdObjects) => {
+		resHandler(err, videoIdObjects);
+	}).skip(+req.query.skip).limit(+req.query.num);
 
 	var resHandler = (err, videoIdObjects) => {
 

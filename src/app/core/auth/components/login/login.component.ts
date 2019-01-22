@@ -11,7 +11,7 @@ import { MatDialogRef } from '@angular/material';
 })
 export class LoginComponent {
 
-  user: {};
+  user;
   error: boolean;
 
   constructor(

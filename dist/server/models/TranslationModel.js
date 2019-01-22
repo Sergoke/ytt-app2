@@ -5,8 +5,9 @@ const apiKey = 'AIzaSyCQb5uN3MO6uzT-_AsEmemduDdNyULtB9Y';
 
 module.exports.translate = (text, cb, cbErr) => {
 	var request = apiUrl + 'q=' + text + '&source=' + 'en' + '&target=' + 'ru' + '&key=' + apiKey;
-
+	console.log('tr')
 	https.get(request, res => {
+		console.log('tr resp')
 		var result = '';
 		res.on('data', chunk => result += chunk);
 		res.on('end', () => {
@@ -26,6 +27,9 @@ module.exports.translate = (text, cb, cbErr) => {
 				console.log(result);
 				cbErr();
 			}
+		});
+		res.on('error', err => {
+			console.log(err);
 		});
 	});
 	

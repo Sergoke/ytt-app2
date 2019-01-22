@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { ApiService } from './../../../shared/services/api/api.service';
-import { Observable } from 'rxjs';
+import { RolesService } from './../../../shared/services/roles/roles.service';
 
 @Component({
   selector: 'app-videos-list',
@@ -11,13 +12,36 @@ import { Observable } from 'rxjs';
 export class VideosListComponent implements OnInit {
 
   videos$: Observable<[]>;
+  videos = [];
+  fetchingNew = false;
+  noMoreVideos = false;
   
   constructor(
-    private api: ApiService
+    private api: ApiService,
+    public roles: RolesService
   ) { }
 
   ngOnInit() {
-    this.videos$ = this.api.getVideos();
+    this.getVideos(20);
+  }
+
+  getVideos(num){
+    this.api.getVideos(num, this.videos.length).subscribe(videos => {
+      videos.forEach(video => {
+        this.videos.push(video);
+      });
+
+      if(videos.length < num){
+        this.noMoreVideos = true;
+      }
+      this.fetchingNew = false;
+    });
+  }
+
+  onScroll(){
+    if(this.fetchingNew || this.noMoreVideos) return;
+    this.fetchingNew = true;
+    setTimeout(() => this.getVideos(10), 600);
   }
 
 }

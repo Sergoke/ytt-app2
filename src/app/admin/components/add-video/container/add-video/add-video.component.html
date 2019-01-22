@@ -1,7 +1,7 @@
 <form [formGroup]="videoForm" (ngSubmit)="onSubmit()">
   <mat-form-field class="full-width">
     <input formControlName="id" maxLength="11" matInput placeholder="video id" autocomplete="off">
-    <mat-hint *ngIf="!videoForm.controls['id'].valid && videoForm.controls['id'].touched">video id length must be 11 characters</mat-hint>
+    <mat-hint *ngIf="!videoForm['controls']['id'].valid && videoForm['controls']['id'].touched">video id length must be 11 characters</mat-hint>
   </mat-form-field>
 
   <mat-checkbox formControlName="isDemo">Demo</mat-checkbox>
@@ -9,7 +9,7 @@
   <div class="subts-wrap">
     <table formArrayName="timeKeys" style="width: 100px;">
       <tr><th>Keys</th></tr>
-      <tr *ngFor="let key of videoForm.get('timeKeys').controls; let i = index">
+      <tr *ngFor="let key of videoForm.get('timeKeys')['controls']; let i = index">
         <td>
           <input [formControlName]="i" type="number" step="0.1" matInput placeholder="key" autocomplete="off">
         </td>
@@ -20,7 +20,7 @@
       <div class="subts-langs-wrap">
         <table formArrayName="en" class="full-width">
             <tr><th>English</th></tr>
-            <tr *ngFor="let key of videoForm.get('subts').get('en').controls; let i = index">
+            <tr *ngFor="let key of videoForm.get('subts').get('en')['controls']; let i = index">
               <td class="full-width">
                 <input [formControlName]="i" type="text" matInput placeholder="subtitle" autocomplete="off">
               </td>
@@ -29,7 +29,7 @@
   
           <table formArrayName="ru" class="full-width">
             <tr><th>Russian</th></tr>
-            <tr *ngFor="let key of videoForm.get('subts').get('ru').controls; let i = index">
+            <tr *ngFor="let key of videoForm.get('subts').get('ru')['controls']; let i = index">
               <td class="full-width">
                 <input [formControlName]="i" type="text" matInput placeholder="subtitle" autocomplete="off">
               </td>
@@ -39,7 +39,7 @@
 
       <table style="width: auto;">
         <tr><th>Del</th></tr>
-        <tr *ngFor="let key of videoForm.get('subts').get('en').controls; let i = index">
+        <tr *ngFor="let key of videoForm.get('subts').get('en')['controls']; let i = index">
           <td><button type="button" (click)="removeSubt(i)" mat-raised-button color="warn" class="remove-btn">X</button></td>
         </tr>
       </table>

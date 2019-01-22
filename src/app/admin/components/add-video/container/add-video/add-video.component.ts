@@ -50,14 +50,14 @@ export class AddVideoComponent {
 
   }
 
-  private onSubmit(){
+  onSubmit(){
     console.log(this.videoForm.value);
     this.api.addVideo(this.videoForm.value).subscribe(res => {
       console.log(res);
     });
   }
 
-  private addSubt(num){
+  public addSubt(num){
     for(let i = 0; i < num; i++){
       this.timeKeyControls.push(this.fb.control(null, [Validators.required]));
       (this.subtGroup.get('en') as FormArray).push(this.fb.control(null, [Validators.required]));
@@ -77,7 +77,7 @@ export class AddVideoComponent {
     }
   }
 
-  private parseSubts(subts: string){
+  public parseSubts(subts: string){
 
     console.log(this.parseForm.value);
 

@@ -11,7 +11,7 @@ import { LoginComponent } from './../login/login.component';
 })
 export class SignupComponent {
 
-  user: {};
+  user;
   errorMsg: string;
   success: boolean;
 

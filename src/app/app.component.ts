@@ -16,7 +16,7 @@ export class AppComponent {
   title = 'ytt-app2';
 
   constructor(
-    private roles: RolesService,
+    public roles: RolesService,
     private matDialog: MatDialog
   ){
     this.roles.checkRoleAsync();
