@@ -19,9 +19,9 @@ export class AuthGuard implements CanActivate {
       var roles = next.data.roles;
 
       return this.roles.role.pipe(
-        map(currentRole => {
-          for(const allowedRole of roles){
-            if(allowedRole === currentRole) return true;
+        map(currentRoleCode => {
+          for(const allowedRoleCode of roles){
+            if(allowedRoleCode === currentRoleCode) return true;
           }
 
           return false;

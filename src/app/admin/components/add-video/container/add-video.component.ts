@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, Validators, FormControl, FormGroup, FormArray, AbstractControl } from '@angular/forms';
 
-import { ApiService } from './../../../../../shared/services/api/api.service';
+import { ApiService } from './../../../../shared/services/api/api.service';
 import { Subscription } from 'rxjs';
 
 @Component({

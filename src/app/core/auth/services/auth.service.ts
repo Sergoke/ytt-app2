@@ -22,7 +22,7 @@ export class AuthService {
   login(user: {}){
     return this.http.post('/api/login', user, {}).pipe(
       map((res: any) => {
-        this.roles.setRole(res.role);
+        this.roles.setRole(res.roleCode);
         return res;
       })
     );

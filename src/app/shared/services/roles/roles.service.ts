@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
+import { environment } from './../../../../environments/environment';
+
 import { ApiService } from './../api/api.service';
 
 @Injectable({
@@ -9,16 +11,17 @@ import { ApiService } from './../api/api.service';
 })
 export class RolesService {
 
-  private roles = {
-    guest: 'guest',
-    user: 'user',
-    admin: 'admin'
-  }
+  private roleCodes: {
+    guest: number,
+    user: number,
+    admin: number
+  };
 
-  private roleSubj: BehaviorSubject<string>;
+  private roleSubj: BehaviorSubject<number>;
 
   constructor(private api: ApiService) {
-    let currentRole = localStorage.getItem('role') || this.roles.guest
+    this.roleCodes = environment.roleCodes;
+    let currentRole = +localStorage.getItem('roleCode') || this.roleCodes.guest;
     this.roleSubj = new BehaviorSubject(currentRole);
   }
 
@@ -26,26 +29,26 @@ export class RolesService {
     return this.roleSubj;
   }
 
-  setRole(role){
-    if(role === this.roles.user || role === this.roles.admin){
-      localStorage.setItem('role', role);
-      this.roleSubj.next(role);
+  setRole(roleCode: number){
+    if(roleCode === this.roleCodes.user || roleCode === this.roleCodes.admin){
+      localStorage.setItem('roleCode', roleCode.toString());
+      this.roleSubj.next(roleCode);
     }
     else {
-      localStorage.setItem('role', this.roles.guest);
-      this.roleSubj.next(this.roles.guest);
+      localStorage.setItem('roleCode', this.roleCodes.guest.toString());
+      this.roleSubj.next(this.roleCodes.guest);
     }
   }
 
   removeRole(): void{
-    localStorage.removeItem('role');
-    this.roleSubj.next(this.roles.guest);
+    localStorage.removeItem('roleCode');
+    this.roleSubj.next(this.roleCodes.guest);
   }
 
   checkRoleAsync(){
     this.api.getRole().subscribe( roleObj => {
-      if(roleObj.role !== this.roleSubj.getValue()){
-        this.setRole(roleObj.role);
+      if(roleObj.roleCode !== this.roleSubj.getValue()){
+        this.setRole(roleObj.roleCode);
       }
     });
   }

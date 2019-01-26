@@ -16,10 +16,10 @@ import { IfRoleDirective } from './directives/if-role/if-role.directive';
   declarations: [
     NotFoundComponent, 
     UnauthorizedComponent,
-    IfRoleDirective
+    // IfRoleDirective
   ],
     exports: [
-      IfRoleDirective
+      // IfRoleDirective
     ]
 })
 export class SharedModule { }

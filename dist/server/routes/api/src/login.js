@@ -13,7 +13,7 @@ router.post('/', function(req, res){
 		if(user && user.checkPassword(req.body.password)){
 			console.log(req.session);
 			req.session.userId = user._id;
-			res.json({role: user.role});
+			res.json({roleCode: user.roleCode});
 		}
 
 		else{

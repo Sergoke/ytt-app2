@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { RouterModule, Routes } from '@angular/router';
 
+import { environment } from '../environments/environment';
+
 import { AuthGuard } from './shared/guards/auth/auth.guard';
 
 import { VideosListComponent } from './content/videos-list/container/videos-list.component';
 import { VideoComponent } from './content/video/container/video.component';
 import { HomeComponent } from './content/home/container/home/home.component';
-import { AdminPageComponent } from './admin/components/admin-page/container/admin-page.component';
-import { AddVideoComponent } from './admin/components/add-video/container/add-video/add-video.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
 import { ProfileComponent } from './singletons/components/profile/profile.component';
@@ -20,9 +20,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'videos', component: VideosListComponent},
   {path: 'video/:id', component: VideoComponent},
-  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: {roles: ['user', 'admin']}},
-  {path: 'admin', component: AdminPageComponent, canActivate: [AuthGuard], data: {roles: ['admin']}},
-  {path: 'admin/add-video', component: AddVideoComponent, canActivate: [AuthGuard], data: {roles: ['admin']}}, 
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: {roles: [environment.roleCodes.user, environment.roleCodes.admin]}},
+  {path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AuthGuard], data: {roles: [environment.roleCodes.admin]}},
   {path: 'unauthorized', component: UnauthorizedComponent},
   {path: '404', component: NotFoundComponent},
   {path: '**', component: NotFoundComponent}

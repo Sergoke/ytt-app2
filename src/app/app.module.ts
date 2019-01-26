@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { FormsModule } from '@angular/forms';
 
@@ -10,7 +11,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { SingletonsModule } from './singletons/singletons.module';
 import { ContentModule } from './content/content.module';
-import { AdminModule } from './admin/admin.module';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './core/auth/components/login/login.component';
@@ -28,11 +28,11 @@ import { ErrorMsgComponent } from './core/auth/components/error-msg/error-msg.co
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
     SingletonsModule,
-    AdminModule,
     SharedModule,
     MaterialModule,
     ContentModule

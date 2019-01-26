@@ -7,9 +7,9 @@ import { RolesService } from './../../services/roles/roles.service';
 })
 export class IfRoleDirective implements OnInit {
 
-  @Input() private ifRole: string;
+  @Input() private ifRole: [number];
 
-  private allowedRoles: Array<string>;
+  private allowedRoles: Array<number>;
 
   constructor(
     private viewContainer: ViewContainerRef,
@@ -18,7 +18,7 @@ export class IfRoleDirective implements OnInit {
   ) { }
 
   ngOnInit(){
-    this.allowedRoles = this.ifRole.split(' || ');
+    this.allowedRoles = this.ifRole;
 
     this.roles.role.subscribe(currentRole => {
       if(this.allowedRoles.some(allowedRole => allowedRole === currentRole)){

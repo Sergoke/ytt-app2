@@ -19,8 +19,7 @@ import {
 
 @NgModule({
   imports: [
-    // CommonModule,
-    BrowserAnimationsModule,
+    // BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
     MatDialogModule,
