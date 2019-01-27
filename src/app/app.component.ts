@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { RolesService } from './shared/services/roles/roles.service';
+import { RolesService } from './core/services/roles/roles.service';
 
 @Component({
   selector: 'app-root',

@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { RouterModule } from '@angular/router';
 
-import { IfRoleDirective } from './../shared/directives/if-role/if-role.directive';
 import { MaterialModule } from './../material/material.module';
+import { SharedModule } from './../shared/shared.module';
+
 import { FooterComponent } from './components/footer/footer.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -13,13 +14,13 @@ import { HeaderComponent } from './components/header/header.component';
   declarations: [
     FooterComponent,
     ProfileComponent,
-    HeaderComponent,
-    IfRoleDirective
+    HeaderComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ],
   exports: [
     FooterComponent,

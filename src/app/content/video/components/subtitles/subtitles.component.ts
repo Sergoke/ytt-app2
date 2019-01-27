@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { MatDialog } from '@angular/material';
 
-import { TranslService } from '../../../../shared/services/translation/transl.service';
+import { TranslService } from '../../../../core/services/translation/transl.service';
 
 import { TranslationComponent } from './../translation/translation.component';
 

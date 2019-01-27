@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from './../../../shared/services/api/api.service';
+import { ApiService } from './../../../core/services/api/api.service';
 
 @Component({
   selector: 'app-video',

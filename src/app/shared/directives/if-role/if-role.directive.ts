@@ -1,6 +1,6 @@
 import { Directive, Input, OnInit, ViewContainerRef, TemplateRef } from '@angular/core';
 
-import { RolesService } from './../../services/roles/roles.service';
+import { RolesService } from './../../../core/services/roles/roles.service';
 
 @Directive({
   selector: '[ifRole]'

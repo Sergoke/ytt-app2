@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { map } from 'rxjs/operators';
 
-import { RolesService } from './../../../shared/services/roles/roles.service';
+import { RolesService } from './../../../core/services/roles/roles.service';
 import { Observable } from 'rxjs';
 
 
