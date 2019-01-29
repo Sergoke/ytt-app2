@@ -7,12 +7,12 @@ import { environment } from '../environments/environment';
 
 import { AuthGuard } from './core/guards/auth/auth.guard';
 
-import { VideosListComponent } from './content/videos-list/container/videos-list.component';
-import { VideoComponent } from './content/video/container/video.component';
-import { HomeComponent } from './content/home/container/home/home.component';
-import { NotFoundComponent } from './content/not-found/not-found.component';
-import { UnauthorizedComponent } from './content/unauthorized/unauthorized.component';
-import { ProfileComponent } from './singletons/components/profile/profile.component';
+import { VideosListComponent } from './pages/videos-list/container/videos-list.component';
+import { VideoComponent } from './pages/video/container/video.component';
+import { HomeComponent } from './pages/home/home.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 
 const routes: Routes = [
@@ -22,9 +22,9 @@ const routes: Routes = [
   {path: 'video/:id', component: VideoComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: {roles: [environment.roleCodes.user, environment.roleCodes.admin]}},
   {path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AuthGuard], data: {roles: [environment.roleCodes.admin]}},
-  // {path: 'unauthorized', component: UnauthorizedComponent},
-  // {path: '404', component: NotFoundComponent},
-  // {path: '**', component: NotFoundComponent}
+  {path: 'unauthorized', component: UnauthorizedComponent},
+  {path: '404', component: NotFoundComponent},
+  {path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({

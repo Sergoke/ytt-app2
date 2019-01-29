@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from './../../../core/services/auth/auth.service';
 import { MatDialogRef } from '@angular/material';
 
 @Component({

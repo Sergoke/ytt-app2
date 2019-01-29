@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { MatDialog } from '@angular/material';
 
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
-import { LoginComponent } from '../../../core/auth/components/login/login.component';
-import { SignupComponent } from '../../../core/auth/components/signup/signup.component';
-import { LogOutComponent } from '../../../core/auth/components/log-out/log-out.component';
+import { LoginComponent } from '../../core/auth-modals/login/login.component';
+import { SignupComponent } from '../../core/auth-modals/signup/signup.component';
+import { LogOutComponent } from '../../core/auth-modals/log-out/log-out.component';
 
 @Component({
   selector: 'app-header',

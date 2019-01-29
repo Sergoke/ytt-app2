@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from './../../../core/services/auth/auth.service';
 import { MatDialogRef, MatDialog } from '@angular/material';
 
 import { LoginComponent } from './../login/login.component';
@@ -12,6 +12,7 @@ import { LoginComponent } from './../login/login.component';
 export class SignupComponent {
 
   user;
+  error: boolean;
   errorMsg: string;
   success: boolean;
 
@@ -31,7 +32,7 @@ export class SignupComponent {
 
   onSubmit(){
     this.auth.signup(this.user).subscribe(res => {
-      if(this.errorMsg !== null) this.errorMsg = null;
+      this.onErrorMsgClose();
       this.success = true;
       setTimeout(() => {
         this.dialogRef.close();
@@ -41,13 +42,20 @@ export class SignupComponent {
       }, 3000);
     },
     error => {
-      this.errorMsg = error.error;
-      console.log(this.errorMsg);
+      this.error = true;
+      if(error.status === 422){
+        this.errorMsg = error.error;
+      }
     });
   }
 
-  get diagnostic(){
-    return JSON.stringify(this.user);
+  onErrorMsgClose(){
+    this.error = false;
+    this.errorMsg = '';
+  }
+
+  onSuccessMsgClose(){
+    this.success = false;
   }
 
 }

@@ -1,18 +1,7 @@
 <mat-toolbar color="primary">Регистрация</mat-toolbar>
 
-<div *ngIf="errorMsg" class="error">
-  <header class="full-width">Ошибка</header>
-  <div class="full-width"><span>{{errorMsg}}</span></div>
-  <button (click)="errorMsg = null" mat-raised-button color="warn">X</button>
-</div>
-
-<div *ngIf="success" class="error success">
-  <header class="full-width">Успешно!</header>
-  <div class="full-width"><span>Вы успешно зарегистрировались, теперь нужно войти</span></div>
-  <button (click)="success = false" mat-raised-button color="warn">X</button>
-</div>
-
-
+<notice *ngIf="error" [msg]="errorMsg || 'Перезагрузите страницу, пожалуйста'" (onClose)="onErrorMsgClose()"></notice>
+<notice *ngIf="success" type="success" msg="Вы успешно зарегистрировались, теперь нужно войти" (onClose)="onSuccessMsgClose()"></notice>
 
 <form #userForm="ngForm" (ngSubmit)="onSubmit()">
   <mat-form-field class="full-width">

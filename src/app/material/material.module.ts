@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
   MatToolbarModule,
@@ -19,7 +17,6 @@ import {
 
 @NgModule({
   imports: [
-    // BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
     MatDialogModule,

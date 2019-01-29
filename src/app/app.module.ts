@@ -9,22 +9,14 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { SingletonsModule } from './singletons/singletons.module';
-import { ContentModule } from './content/content.module';
+import { SingletonsModule } from './templates/templates.module';
+import { PagesModule } from './pages/pages.module';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './core/auth/components/login/login.component';
-import { SignupComponent } from './core/auth/components/signup/signup.component';
-import { LogOutComponent } from './core/auth/components/log-out/log-out.component';
-import { ErrorMsgComponent } from './core/auth/components/error-msg/error-msg.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    SignupComponent,
-    LogOutComponent,
-    ErrorMsgComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -35,16 +27,10 @@ import { ErrorMsgComponent } from './core/auth/components/error-msg/error-msg.co
     SingletonsModule,
     SharedModule,
     MaterialModule,
-    ContentModule
+    PagesModule
   ],
   providers: [
 
-  ],
-  entryComponents: [
-    LoginComponent,
-    SignupComponent,
-    LogOutComponent,
-    ErrorMsgComponent
   ],
   bootstrap: [AppComponent]
 })

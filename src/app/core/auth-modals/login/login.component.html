@@ -1,10 +1,6 @@
 <mat-toolbar color="primary">Вход</mat-toolbar>
 
-<div *ngIf="error" class="error">
-  <header class="full-width">Ошибка</header>
-  <div class="full-width"><span>Неверный логин или пароль</span></div>
-  <button (click)="error = false" mat-raised-button color="warn">X</button>
-</div>
+<notice *ngIf="error" [msg]="errorMsg || 'Перезагрузите страницу, пожалуйста'" (onClose)="onErrorMsgClose()"></notice>
 
 <form #userForm="ngForm" (ngSubmit)="onSubmit()">
   <mat-form-field class="full-width">

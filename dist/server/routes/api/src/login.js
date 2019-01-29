@@ -17,7 +17,7 @@ router.post('/', function(req, res){
 		}
 
 		else{
-			res.status(401).send('this user doesn\'t exist');
+			res.status(422).send('this user doesn\'t exist');
 		}
 	});
 

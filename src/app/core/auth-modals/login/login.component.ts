@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from './../../../core/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material';
 
@@ -13,6 +13,7 @@ export class LoginComponent {
 
   user;
   error: boolean;
+  errorMsg: string;
 
   constructor(
     private auth: AuthService,
@@ -25,19 +26,24 @@ export class LoginComponent {
     };
   }
 
-  get diagnostic(){
-    return JSON.stringify(this.user);
-  }
-
   onSubmit(){
-    this.auth.login(this.user).subscribe(res => {
+    this.auth.login(this.user).subscribe(
+    res => {
       this.error = false;
       this.dialogRef.close();
       this.router.navigate(['/profile']);
     },
     error => {
       this.error = true;
+      if(error.status === 422){
+        this.errorMsg = 'Неверный пароль, попробуйте еще раз';
+      }
     });
+  }
+
+  onErrorMsgClose(){
+    this.error = false;
+    this.errorMsg = '';
   }
   
 }

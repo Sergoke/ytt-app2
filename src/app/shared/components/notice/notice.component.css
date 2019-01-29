@@ -1,21 +1,4 @@
-.mat-toolbar {
-	height: 50px;
-    margin-bottom: 20px;
-}
-
-.full-width {
-	width: 100%;
-}
-
-mat-hint {
-	color: #f00!important;
-}
-
-button {
-	margin-top: 10px;
-}
-
-.error {
+.wrap {
 	padding: 10px;
 	margin-bottom: 10px;
 	background-color: #faacac;
@@ -24,18 +7,26 @@ button {
 	position: relative;
 }
 
-.error header{
+.wrap.success {
+	background-color: #7cf373;
+}
+
+header {
 	font-size: 20pt;
 	color: #d01b1b;;
 }
 
-.error div{
+.success header {
+	color: #1e1818;
+}
+
+.wrap div{
 	margin: 10px;
 	font-size: 13pt;
 	color: #1e1818;
 }
 
-.error button {
+button {
     min-width: 40px;
 	margin: 5px 5px 0 0;
     position: absolute;

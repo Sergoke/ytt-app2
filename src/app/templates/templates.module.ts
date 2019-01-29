@@ -3,24 +3,24 @@ import { CommonModule } from '@angular/common';
 
 import { RouterModule } from '@angular/router';
 
-import { MaterialModule } from './../material/material.module';
-import { SharedModule } from './../shared/shared.module';
+import { MaterialModule } from '../material/material.module';
+import { SharedModule } from '../shared/shared.module';
+import { AuthModalsModule } from '../core/auth-modals/auth-modals.module';
 
-import { FooterComponent } from './components/footer/footer.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     FooterComponent,
-    ProfileComponent,
     HeaderComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    AuthModalsModule
   ],
   exports: [
     FooterComponent,
