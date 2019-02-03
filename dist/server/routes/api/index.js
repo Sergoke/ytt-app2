@@ -17,6 +17,7 @@ router.use('/user', isAuth, require('./src/user'));
 
 //admin
 router.use('/add-video', isAdmin, require('./src/add-video'));
+router.use('/users', isAdmin, require('./src/users'));
 
 router.use('*', function(req, res){
     res.sendStatus(404);

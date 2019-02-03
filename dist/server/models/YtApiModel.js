@@ -4,7 +4,7 @@ const ApiUrl = "https://www.googleapis.com/youtube/v3/videos";
 const ApiKey = "AIzaSyBLVlx_YeT_1BFQOyBmFzg9HZsf7a8UuL4";
 
 module.exports.getVideos = function(ids){
-	let url = ApiUrl + '?key=' + ApiKey + '&part=snippet' + '&id=';
+	let url = ApiUrl + '?key=' + ApiKey + '&part=snippet, statistics' + '&id=';
 
 	ids.forEach( (id, i) => {
 		url += id;
@@ -29,7 +29,8 @@ module.exports.getVideos = function(ids){
 						id: video.id,
 						title: video.snippet.title,
 						channel: video.snippet.channelTitle,
-						thumbnail: video.snippet.thumbnails.medium.url
+						thumbnail: video.snippet.thumbnails.medium.url,
+						popularity: video.statistics.viewCount / 1000000000 * 100
 					});
 				});
 

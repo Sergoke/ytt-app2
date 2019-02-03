@@ -8,7 +8,7 @@ module.exports = function(req, res, next){
     User.findOne({_id: req.session.userId}, (err, user) => {
         if(err) return res.sendStatus(500);
 
-        if(user.role === 'admin'){
+        if(user.roleCode === 5){
             return next();
         }
 

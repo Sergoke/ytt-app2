@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { RouterModule, Routes } from '@angular/router';
 
-import { AddVideoComponent } from './pages/add-video/container/add-video.component';
 import { AdminPageComponent } from './pages/admin-page/container/admin-page.component';
+import { AddVideoComponent } from './pages/add-video/container/add-video.component';
+import { UsersComponent } from './pages/users/users.component';
 
 const routes: Routes = [
   {path: '', component: AdminPageComponent},
-  {path: 'add-video', component: AddVideoComponent}
+  {path: 'add-video', component: AddVideoComponent},
+  {path: 'users', component: UsersComponent}
 ];
 
 @NgModule({

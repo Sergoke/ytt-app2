@@ -7,9 +7,7 @@ import { RolesService } from './../../../core/services/roles/roles.service';
 })
 export class IfRoleDirective implements OnInit {
 
-  @Input() private ifRole: [number];
-
-  private allowedRoles: Array<number>;
+  @Input('ifRole') allowedRoles: [number];
 
   constructor(
     private viewContainer: ViewContainerRef,
@@ -18,8 +16,6 @@ export class IfRoleDirective implements OnInit {
   ) { }
 
   ngOnInit(){
-    this.allowedRoles = this.ifRole;
-
     this.roles.role.subscribe(currentRole => {
       if(this.allowedRoles.some(allowedRole => allowedRole === currentRole)){
         this.viewContainer.createEmbeddedView(this.template);

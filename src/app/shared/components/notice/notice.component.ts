@@ -1,20 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'notice',
   templateUrl: './notice.component.html',
   styleUrls: ['./notice.component.css']
 })
-export class NoticeComponent implements OnInit {
+export class NoticeComponent {
 
-  @Input() private msg: string;
-  @Input() private type: string = 'error';
+  @Input() msg: string;
+  @Input() type: string = 'error';
 
-  @Output() private onClose = new EventEmitter();
-
-  ngOnInit(){
-    
-  }
+  @Output() onClose = new EventEmitter<null>();
 
   close(){
     this.onClose.emit();

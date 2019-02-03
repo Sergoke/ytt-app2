@@ -30,6 +30,10 @@
     padding-top: calc(56.25% + 18px);
 }
 
+.mat-card-image {
+    margin-bottom: 0;
+}
+
 mat-card {
     height: 100%;
     box-sizing: border-box;
@@ -37,6 +41,23 @@ mat-card {
 
 mat-card-title {
     font-size: 14pt;
+}
+
+.popularity-wrap {
+    height: 10px;
+    margin: 10px -8px 10px -8px;
+    overflow: hidden;
+    background-color: rgb(177, 183, 177);
+    box-shadow: 0 0 7px #766b6b;
+    border: 1px solid #555;
+    border-radius: 20px;
+}
+
+.popularity {
+    height: 100%;
+    width: 0;
+    background-color: #3ed43e;
+    border-right: 1px solid #fff;
 }
 
 .init-videos-spinner {
@@ -53,10 +74,6 @@ mat-card-title {
     align-self: flex-end;
     display: flex;
     justify-content: center;
-}
-
-.fetching-new-videos-spinner-wrap > mat-spinner {
-    
 }
 
 .fetching-new-videos-spinner-wrap > p {

@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { SingletonsModule } from './templates/templates.module';
+import { TemplatesModule } from './templates/templates.module';
 import { PagesModule } from './pages/pages.module';
 
 import { AppComponent } from './app.component';
@@ -24,7 +24,7 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    SingletonsModule,
+    TemplatesModule,
     SharedModule,
     MaterialModule,
     PagesModule

@@ -17,6 +17,7 @@
       <div class="mat-card-wrap" *ngFor="let video of videos; let i = index" routerLink="/video/{{video.id}}">
         <mat-card>
           <div mat-card-image class="video-thumbnail-wrap" [ngStyle]="{'background-color': '#989898', 'background-image': 'url(' + video.thumbnail + ')', 'background-size': 'cover'}"></div>
+          <div class="popularity-wrap" title="likes/dislikes"><div class="popularity" [style.width.%]="video.popularity > 100 ? 100 : video.popularity"></div></div>
           <mat-card-title>{{video.title}}</mat-card-title>
         </mat-card>
       </div>

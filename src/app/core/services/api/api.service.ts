@@ -17,7 +17,9 @@ export class ApiService {
   }
 
   getVideos(num, skip = 0): Observable<any>{
-    return this.http.get('/api/videos?num=' + num + '&skip=' + skip);
+    let res = this.http.get('/api/videos?num=' + num + '&skip=' + skip);
+    res.subscribe(vids => console.log(vids))
+    return res;
   }
 
   getSubtitles(videoId: string): Observable<any>{
@@ -26,9 +28,5 @@ export class ApiService {
 
   getUserData(){
     return this.http.get('/api/user');
-  }
-  
-  addVideo(video: {}){
-    return this.http.post('/api/add-video', video);
   }
 }

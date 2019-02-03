@@ -6,44 +6,40 @@
 
   <mat-checkbox formControlName="isDemo">Demo</mat-checkbox>
 
-  <div class="subts-wrap">
-    <table formArrayName="timeKeys" style="width: 100px;">
-      <tr><th>Keys</th></tr>
-      <tr *ngFor="let key of videoForm.get('timeKeys')['controls']; let i = index">
-        <td>
-          <input [formControlName]="i" type="number" step="0.1" matInput placeholder="key" autocomplete="off">
-        </td>
-      </tr>
+  <div class="table-wrap">
+    <table mat-table [dataSource]="videoForm.get('timeKeys').controls">
+      <ng-container matColumnDef="number">
+        <th mat-heder-cell *matHeaderCellDef>№</th>
+        <td mat-cell *matCellDef="let i = index">{{i + 1}}</td>
+      </ng-container>
+    
+      <ng-container formArrayName="timeKeys" matColumnDef="timeKeys" sticky>
+        <th mat-header-cell *matHeaderCellDef>TimeKeys</th>
+        <td mat-cell *matCellDef="let i = index" [style.width.px]="50"><input [formControlName]="i" type="number" step="0.1" matInput placeholder="key" autocomplete="off"></td>
+      </ng-container>
+    
+      <ng-container formGroupName="subts" matColumnDef="subts-en">
+        <ng-container formArrayName="en">
+          <th mat-header-cell *matHeaderCellDef>English</th>
+          <td mat-cell *matCellDef="let i = index" class="subts-column"><input [formControlName]="i" type="text" matInput placeholder="subtitle" autocomplete="off"></td>
+        </ng-container>
+      </ng-container>
+    
+      <ng-container formGroupName="subts" matColumnDef="subts-ru">
+        <ng-container formArrayName="ru">
+          <th mat-header-cell *matHeaderCellDef>Russian</th>
+          <td mat-cell *matCellDef="let i = index" class="subts-column"><input [formControlName]="i" type="text" matInput placeholder="subtitle" autocomplete="off"></td>
+        </ng-container>
+      </ng-container>
+    
+      <ng-container matColumnDef="delete" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef>Delete</th>
+        <td mat-cell *matCellDef="let i = index"><button type="button" (click)="removeSubt(i)" mat-raised-button color="warn" class="remove-btn">X</button></td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="['number', 'timeKeys', 'subts-en', 'subts-ru', 'delete']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['number', 'timeKeys', 'subts-en', 'subts-ru', 'delete']"></tr>
     </table>
-  
-    <div formGroupName="subts" class="subts-overflow">
-      <div class="subts-langs-wrap">
-        <table formArrayName="en" class="full-width">
-            <tr><th>English</th></tr>
-            <tr *ngFor="let key of videoForm.get('subts').get('en')['controls']; let i = index">
-              <td class="full-width">
-                <input [formControlName]="i" type="text" matInput placeholder="subtitle" autocomplete="off">
-              </td>
-            </tr>
-          </table>
-  
-          <table formArrayName="ru" class="full-width">
-            <tr><th>Russian</th></tr>
-            <tr *ngFor="let key of videoForm.get('subts').get('ru')['controls']; let i = index">
-              <td class="full-width">
-                <input [formControlName]="i" type="text" matInput placeholder="subtitle" autocomplete="off">
-              </td>
-            </tr>
-          </table>
-      </div>
-
-      <table style="width: auto;">
-        <tr><th>Del</th></tr>
-        <tr *ngFor="let key of videoForm.get('subts').get('en')['controls']; let i = index">
-          <td><button type="button" (click)="removeSubt(i)" mat-raised-button color="warn" class="remove-btn">X</button></td>
-        </tr>
-      </table>
-    </div>
   </div>
 
   <div class="subts-controls">
@@ -55,10 +51,6 @@
     <mat-form-field class="full-width">
         <textarea #subts matInput placeholder="Subtitles"></textarea>
     </mat-form-field>
-    <mat-radio-group formControlName="updateOrAdd" class="full-width">
-        <mat-radio-button value="1">Update</mat-radio-button>
-        <mat-radio-button value="2">Add</mat-radio-button>
-    </mat-radio-group>
     <mat-radio-group formControlName="timeKeys_or_EN_or_RU" class="full-width">
         <mat-radio-button value="1">TimeKeys</mat-radio-button>
         <mat-radio-button value="2">En</mat-radio-button>
