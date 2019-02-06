@@ -9,25 +9,25 @@
   <div class="table-wrap">
     <table mat-table [dataSource]="videoForm.get('timeKeys').controls">
       <ng-container matColumnDef="number">
-        <th mat-heder-cell *matHeaderCellDef>№</th>
-        <td mat-cell *matCellDef="let i = index">{{i + 1}}</td>
+        <th mat-header-cell *matHeaderCellDef>№</th>
+        <td mat-cell *matCellDef="let i = index" [ngStyle]="{width: '20px', 'text-align': 'center'}">{{i + 1}}</td>
       </ng-container>
     
       <ng-container formArrayName="timeKeys" matColumnDef="timeKeys" sticky>
-        <th mat-header-cell *matHeaderCellDef>TimeKeys</th>
+        <th mat-header-cell *matHeaderCellDef><span (click)="openParser('keys')" class="open-parser">TimeKeys</span></th>
         <td mat-cell *matCellDef="let i = index" [style.width.px]="50"><input [formControlName]="i" type="number" step="0.1" matInput placeholder="key" autocomplete="off"></td>
       </ng-container>
     
       <ng-container formGroupName="subts" matColumnDef="subts-en">
         <ng-container formArrayName="en">
-          <th mat-header-cell *matHeaderCellDef>English</th>
+          <th mat-header-cell *matHeaderCellDef><span (click)="openParser('en')" class="open-parser">English</span></th>
           <td mat-cell *matCellDef="let i = index" class="subts-column"><input [formControlName]="i" type="text" matInput placeholder="subtitle" autocomplete="off"></td>
         </ng-container>
       </ng-container>
     
       <ng-container formGroupName="subts" matColumnDef="subts-ru">
         <ng-container formArrayName="ru">
-          <th mat-header-cell *matHeaderCellDef>Russian</th>
+          <th mat-header-cell *matHeaderCellDef><span (click)="openParser('ru')" class="open-parser">Russian</span></th>
           <td mat-cell *matCellDef="let i = index" class="subts-column"><input [formControlName]="i" type="text" matInput placeholder="subtitle" autocomplete="off"></td>
         </ng-container>
       </ng-container>
@@ -46,19 +46,6 @@
     <button type="button" (click)="addSubt(newSubtsNum.value)" mat-raised-button color="primary">Add new subts</button>
     <input #newSubtsNum type="number" matInput value="1" autocomplete="off">
   </div>
-
-  <div class="parser" [formGroup]="parseForm">
-    <mat-form-field class="full-width">
-        <textarea #subts matInput placeholder="Subtitles"></textarea>
-    </mat-form-field>
-    <mat-radio-group formControlName="timeKeys_or_EN_or_RU" class="full-width">
-        <mat-radio-button value="1">TimeKeys</mat-radio-button>
-        <mat-radio-button value="2">En</mat-radio-button>
-        <mat-radio-button value="3">Ru</mat-radio-button>
-    </mat-radio-group>
-    <button type="button" (click)="parseSubts(subts.value)" mat-raised-button color="primary">Parse subts</button>
-  </div>
-
 
   <button type="submit" mat-raised-button [disabled]="!videoForm.valid" class="full-width" color="primary">Add</button>
 </form>

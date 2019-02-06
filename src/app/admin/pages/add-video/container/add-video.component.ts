@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { MatTable } from '@angular/material';
+import { MatTable, MatDialog } from '@angular/material';
 
 import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 
 import { ApiAdminService } from './../../../services/api-admin/api-admin.service';
-import { Subscription } from 'rxjs';
+
+import { SubtsParserComponent } from './../components/subts-parser/subts-parser.component';
 
 @Component({
   selector: 'app-add-video',
@@ -20,11 +21,10 @@ export class AddVideoComponent {
   timeKeyControls: FormArray;
   subtGroup: FormGroup;
 
-  parseForm: FormGroup;
-
   constructor(
     private fb: FormBuilder,
-    private apiAdmin: ApiAdminService
+    private apiAdmin: ApiAdminService,
+    private matDialog: MatDialog
   ) {
     this.videoForm = this.fb.group({
       'id': [null, Validators.compose([Validators.required, Validators.pattern('[0-9A-Za-z_-]{10}[048AEIMQUYcgkosw]')])],
@@ -40,10 +40,6 @@ export class AddVideoComponent {
     this.subtGroup = this.videoForm.get('subts') as FormGroup;
 
     this.addSubt(1);
-
-    this.parseForm = this.fb.group({
-      'timeKeys_or_EN_or_RU': ['2']
-    });
 
   }
 
@@ -72,33 +68,34 @@ export class AddVideoComponent {
     this.table && this.table.renderRows();
   }
 
-  parseSubts(subts: string){
-    console.log(this.parseForm.value);
-
-    let result = subts.split('\n');
-    result = result.filter(item => item.length);
-    let resultInitialLength = result.length;
-    if(resultInitialLength < this.timeKeyControls.length){
-      result.length = this.timeKeyControls.length;
-      result.fill('', resultInitialLength);
-    }
-    else if(resultInitialLength > this.timeKeyControls.length){
-      this.addSubt(resultInitialLength - this.timeKeyControls.length);
-    }
-
-    if(this.parseForm.get('timeKeys_or_EN_or_RU').value === '1'){
-      this.timeKeyControls.setValue(result);
-    }
-
-    else if(this.parseForm.get('timeKeys_or_EN_or_RU').value === '2'){
-      (this.subtGroup.get('en') as FormArray).setValue(result);
-    }
-
-    else if(this.parseForm.get('timeKeys_or_EN_or_RU').value === '3'){
-      (this.subtGroup.get('ru') as FormArray).setValue(result);
-    }
-
-    this.table.renderRows();
+  openParser(target: string){
+    let dialogRef = this.matDialog.open(SubtsParserComponent, {width: '500px'});
+    dialogRef.afterClosed().subscribe(result => {
+      if(!result) return;
+      
+      let resultInitialLength = result.length;
+      if(resultInitialLength < this.timeKeyControls.length){
+        result.length = this.timeKeyControls.length;
+        result.fill('', resultInitialLength);
+      }
+      else if(resultInitialLength > this.timeKeyControls.length){
+        this.addSubt(resultInitialLength - this.timeKeyControls.length);
+      }
+  
+      if(target === 'keys'){
+        this.timeKeyControls.setValue(result);
+      }
+  
+      else if(target === 'en'){
+        (this.subtGroup.get('en') as FormArray).setValue(result);
+      }
+  
+      else if(target === 'ru'){
+        (this.subtGroup.get('ru') as FormArray).setValue(result);
+      }
+  
+      this.table.renderRows();
+    });
   }
 
 }

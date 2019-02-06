@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MaterialModule } from './../material/material.module';
+import { SharedModule } from './../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminPageModule } from './pages/admin-page/admin-page.module';
 import { AddVideoModule } from './pages/add-video/add-video.module';
@@ -9,16 +10,19 @@ import { AddVideoModule } from './pages/add-video/add-video.module';
 import { ApiAdminService } from './services/api-admin/api-admin.service';
 
 import { UsersComponent } from './pages/users/users.component';
+import { ViewVideoComponent } from './pages/view-video/view-video.component';
 
 @NgModule({
   declarations: [
-    UsersComponent
+    UsersComponent,
+    ViewVideoComponent
   ],
 
   imports: [
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
+    SharedModule,
     AdminPageModule,
     AddVideoModule
   ],

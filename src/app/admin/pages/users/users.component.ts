@@ -16,10 +16,6 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.apiAdmin.getUsers().subscribe(users => {
-      console.log(users);
-    });
-
     this.users$ = this.apiAdmin.getUsers();
   }
 

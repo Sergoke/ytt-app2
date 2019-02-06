@@ -1,6 +1,6 @@
 <div #wrapper class="video-wrap full-width-of-main">
     <div class="video" [ngStyle]="blockStyles" #block (window:resize)="onResize()">
-        <yt-player [embedUrl]="embedUrl"></yt-player>
+        <yt-player [videoId]="videoId"></yt-player>
         <subtitles *ngIf="subtitles?.en?.length" [subtitles]="subtitles?.en" [subtOffset]="subtOffset" [player]="player" (scrollSubts)="scrollSubts($event)"></subtitles>
         <hr *ngIf="subtitles?.en?.length">
         <subtitles *ngIf="subtitles?.ru?.length" [subtitles]="subtitles?.ru" [subtOffset]="subtOffset" [disableWordClick]="true" (scrollSubts)="scrollSubts($event)"></subtitles>

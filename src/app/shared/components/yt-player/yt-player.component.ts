@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class YtPlayerComponent implements OnInit {
 
-  @Input() embedUrl: string;
+  @Input() videoId: string;
 
   constructor() { }
 

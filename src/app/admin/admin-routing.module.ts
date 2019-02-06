@@ -5,11 +5,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AdminPageComponent } from './pages/admin-page/container/admin-page.component';
 import { AddVideoComponent } from './pages/add-video/container/add-video.component';
+import { ViewVideoComponent } from './pages/view-video/view-video.component';
 import { UsersComponent } from './pages/users/users.component';
 
 const routes: Routes = [
   {path: '', component: AdminPageComponent},
   {path: 'add-video', component: AddVideoComponent},
+  {path: 'view-video/:id', component: ViewVideoComponent},
   {path: 'users', component: UsersComponent}
 ];
 

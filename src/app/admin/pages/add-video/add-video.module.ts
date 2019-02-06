@@ -7,15 +7,19 @@ import { MaterialModule } from './../../../material/material.module';
 import { RouterModule } from '@angular/router';
 
 import { AddVideoComponent } from './container/add-video.component';
+import { SubtsParserComponent } from './components/subts-parser/subts-parser.component';
 
 @NgModule({
-  declarations: [AddVideoComponent],
+  declarations: [AddVideoComponent, SubtsParserComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
     RouterModule
+  ],
+  entryComponents: [
+    SubtsParserComponent
   ]
 })
 export class AddVideoModule { }

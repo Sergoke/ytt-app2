@@ -2,13 +2,12 @@ const router = require('express').Router();
 const Video = require('./../../../models/VideoModel');
 
 router.get('/:id', function(req, res){
-    Video.findOne({videoId: req.params.id}, (err, video) => {
+    Video.findOne({videoId: req.params.id}, {_id: 0, __v: 0}, (err, video) => {
 
         if(err) {
             console.error(err)
-            return res.sendStatus(500);}
-
-        console.log(video);
+            return res.sendStatus(500);
+        }
 
         if(!video){
             if(!req.session.userId) return res.sendStatus(401);

@@ -1,8 +1,3 @@
-<!-- <table>
-  <tr><th>login</th><th>name</th><th>surname</th><th>roleCode</th></tr>
-  <tr *ngFor="let user of users$ | async;"><td>{{user.login}}</td><td>{{user.name}}</td><td>{{user.surname}}</td><td>{{user.roleCode}}</td></tr>
-</table> -->
-
 <table mat-table [dataSource]="users$ | async">
   <ng-container *ngFor="let column of cols" [matColumnDef]="column">
     <th mat-header-cell *matHeaderCellDef>{{column | titlecase}}</th>

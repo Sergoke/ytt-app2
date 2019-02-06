@@ -41,7 +41,7 @@ export class VideosListComponent implements OnInit {
   onScroll(){
     if(this.fetchingNew || this.noMoreVideos) return;
     this.fetchingNew = true;
-    setTimeout(() => this.getVideos(10), 600);
+    this.getVideos(10);
   }
 
 }

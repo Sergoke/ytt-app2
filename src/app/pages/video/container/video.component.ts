@@ -13,7 +13,7 @@ export class VideoComponent implements OnInit {
   @ViewChild('wrapper') videoWrapper;
   @ViewChild('block', {read: ElementRef}) video: ElementRef;
 
-  public embedUrl: string;
+  public videoId: string;
   private player;
   private interval;
   public subtitles: any;//{(key: string): Array<Array<string>>};
@@ -31,7 +31,7 @@ export class VideoComponent implements OnInit {
   ngOnInit() {
     this.setRatio();
     this.route.params.subscribe( params => {
-      this.embedUrl = 'https://www.youtube.com/embed/' + params.id + '?enablejsapi=1';
+      this.videoId = params.id;
       this.db.getSubtitles(params.id).subscribe( subts => {
         this.subtitles = subts['subts'];
         this.timeKeysArray = subts['timeKeys'];
