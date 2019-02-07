@@ -20,7 +20,13 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(login: string){
-    alert('Are you sure you want delete ' + login + '?');
+    let confirmed = confirm('Are you sure you want to delete ' + login + '?');
+    if(confirmed){
+      this.apiAdmin.deleteUser(login).subscribe(res => {
+        alert(login + ' successfully deleted!');
+        this.users$ = this.apiAdmin.getUsers();
+      });
+    }
   }
 
 }

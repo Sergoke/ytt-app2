@@ -15,4 +15,12 @@ export class ApiAdminService {
   getUsers(){
     return this.http.get('/api/users');
   }
+
+  deleteUser(login: string){
+    return this.http.post('/api/user/delete', {login});
+  }
+
+  updateVideoSubts(initialVideoId: string, video: Object){
+    return this.http.post('/api/video/update/' + initialVideoId, video);
+  }
 }

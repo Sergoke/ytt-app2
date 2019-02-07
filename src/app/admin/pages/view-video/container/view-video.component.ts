@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatTable } from '@angular/material';
-import { ApiService } from './../../../core/services/api/api.service';
+import { ApiService } from '../../../../core/services/api/api.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-view-video',
@@ -11,8 +11,7 @@ import { ApiService } from './../../../core/services/api/api.service';
 })
 export class ViewVideoComponent implements OnInit {
 
-  @ViewChild(MatTable) table: MatTable<any>;
-
+  video$: Observable<any>;
   videoId: string;
   video: Object;
 
@@ -23,10 +22,10 @@ export class ViewVideoComponent implements OnInit {
   ) { 
     this.route.params.subscribe(params => {
       this.videoId = params.id;
-      this.api.getSubtitles(params.id).subscribe(
+      this.video$ = this.api.getSubtitles(params.id);
+      this.video$.subscribe(
       res => {
         this.video = res;
-        this.table.renderRows();
         console.log(res);
       },
       err => {

@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 
+import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from './../../../core/services/api/api.service';
 
@@ -13,6 +14,7 @@ export class VideoComponent implements OnInit {
   @ViewChild('wrapper') videoWrapper;
   @ViewChild('block', {read: ElementRef}) video: ElementRef;
 
+  private roles = environment.roleCodes;
   public videoId: string;
   private player;
   private interval;

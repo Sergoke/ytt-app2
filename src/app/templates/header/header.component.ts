@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { MatDialog } from '@angular/material';
 
@@ -13,24 +13,16 @@ import { LogOutComponent } from '../../core/auth-modals/log-out/log-out.componen
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  private roles: any;
-  private guest: number;
-  private user: number;
-  private admin: number;
+  private roles = environment.roleCodes;
+  private guest = this.roles.guest;
+  private user = this.roles.user;
+  private admin = this.roles.admin;
 
   constructor(
     private matDialog: MatDialog
-  ) { 
-    this.roles = environment.roleCodes;
-    this.guest = this.roles.guest;
-    this.user = this.roles.user;
-    this.admin = this.roles.admin;
-  }
-
-  ngOnInit() {
-  }
+  ) { }
 
   loginDialog(){
     this.matDialog.open(LoginComponent, {

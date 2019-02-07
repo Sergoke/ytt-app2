@@ -6,3 +6,4 @@
         <subtitles *ngIf="subtitles?.ru?.length" [subtitles]="subtitles?.ru" [subtOffset]="subtOffset" [disableWordClick]="true" (scrollSubts)="scrollSubts($event)"></subtitles>
     </div>
 </div>
+<button routerLink="/admin/view-video/{{videoId}}" *ifRole="[roles.admin]" mat-raised-button color="primary">Administrate</button>

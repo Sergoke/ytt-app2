@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { RouterModule } from '@angular/router';
+import { MaterialModule } from './../../material/material.module';
 import { SharedModule } from './../../shared/shared.module';
 
 import { VideoComponent } from './container/video.component';
@@ -16,6 +18,8 @@ import { TranslationComponent } from './components/translation/translation.compo
   ],
   imports: [
     CommonModule,
+    RouterModule,
+    MaterialModule,
     SharedModule
   ],
   entryComponents: [

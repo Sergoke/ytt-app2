@@ -21,4 +21,17 @@ router.get('/:id', function(req, res){
     });
 });
 
+router.post('/update/:id', function(req, res){
+    Video.findOneAndUpdate({videoId: req.params.id}, {
+        videoId: req.body.id,
+        isDemo: req.body.isDemo,
+        timeKeys: req.body.timeKeys,
+        subts: req.body.subts
+    }, function(err, result){
+        if(err) return res.sendStatus(500);
+
+        res.json(result);
+    });
+});
+
 module.exports = router;

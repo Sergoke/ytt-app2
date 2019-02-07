@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+const isAdmin = require('../../../middleware/isAdmin');
 const User = require('../../../models/UserModel');
 
 router.get('/', function(req, res){
@@ -10,6 +11,14 @@ router.get('/', function(req, res){
         res.json(user);
     })
     
+});
+
+router.post('/delete', isAdmin, function(req, res){
+    User.deleteOne({login: req.body.login}, function(err, result){
+        if(err) return res.sendStatus(500);
+
+        res.json(result);
+    });
 });
 
 module.exports = router;
