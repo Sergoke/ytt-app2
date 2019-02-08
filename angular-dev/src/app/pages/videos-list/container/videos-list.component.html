@@ -23,8 +23,10 @@
       </div>
       <div class="fetching-new-videos-spinner-wrap">
         <mat-spinner *ngIf="fetchingNew" strokeWidth="3" diameter="30"></mat-spinner>
-        <p *ngIf="noMoreVideos && roles.role === 'guest'">Это не все видео. Войдите, чтобы увидеть больше</p>
-        <p *ngIf="noMoreVideos && roles.role !== 'guest'">На данный момент это все видео</p>
+        <ng-container *ngIf="noMoreVideos">
+          <p *ifRole="[0]">Это не все видео. Войдите, чтобы увидеть больше</p>
+          <p *ifRole="[1, 5]">На данный момент это все видео</p>
+        </ng-container>
       </div>
     </div>
 </div>

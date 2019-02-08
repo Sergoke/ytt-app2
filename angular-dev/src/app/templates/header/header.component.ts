@@ -15,10 +15,7 @@ import { LogOutComponent } from '../../core/auth-modals/log-out/log-out.componen
 })
 export class HeaderComponent {
 
-  private roles = environment.roleCodes;
-  private guest = this.roles.guest;
-  private user = this.roles.user;
-  private admin = this.roles.admin;
+  roles = environment.roleCodes;
 
   constructor(
     private matDialog: MatDialog
