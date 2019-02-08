@@ -5,9 +5,8 @@
 /out-tsc
 
 # dependencies
-/node_modules
-/dist/server/node_modules
-/dist/yt-app
+node_modules
+/public/angular
 
 # IDEs and editors
 /.idea
