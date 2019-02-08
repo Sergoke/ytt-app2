@@ -1,0 +1,35 @@
+.table-wrap {
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}
+
+table th {
+    font-size: 12pt;
+    text-align: center;
+}
+
+tr.mat-row {
+    height: 35px;
+}
+
+.time-keys {
+    width: 50px;
+    padding: 10px;
+    text-align: center;
+}
+
+.number {
+    width: 20px;
+    padding: 0!important;
+    font-size: 7pt;
+    text-align: center;
+    color: gray;
+}
+
+.subts-column {
+    min-width: 300px;
+    padding: 10px;
+}

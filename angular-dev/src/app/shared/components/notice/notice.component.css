@@ -1,0 +1,36 @@
+.wrap {
+	padding: 10px;
+	margin-bottom: 10px;
+	background-color: #faacac;
+	border-radius: 2px;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.wrap.success {
+	background-color: #7cf373;
+}
+
+header {
+	font-size: 20pt;
+	color: #d01b1b;
+}
+
+.success header {
+	color: #1e1818;
+}
+
+.wrap div{
+	margin: 10px;
+	font-size: 13pt;
+	color: #1e1818;
+}
+
+button {
+    min-width: 40px;
+	margin: 5px 5px 0 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 20px;
+}

@@ -1,0 +1,81 @@
+.mat-expansion-panel {
+    margin: 0 20px 20px 20px;
+}
+
+.mat-content, .mat-expansion-panel-header-title {
+    height: 100%;
+    align-items: center;
+}
+
+.mat-expansion-panel .mat-icon {
+    margin-right: 5px;
+    font-size: 26px;
+}
+
+.videos-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.mat-card-wrap {
+    flex-basis: 300px;
+    flex-grow: 1;
+    max-width: 400px;
+    margin: 0 20px 50px 20px;
+    cursor: pointer;
+}
+
+.video-thumbnail-wrap {
+    padding-top: calc(56.25% + 18px);
+}
+
+.mat-card-image {
+    margin-bottom: 0;
+}
+
+mat-card {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+mat-card-title {
+    font-size: 14pt;
+}
+
+.popularity-wrap {
+    height: 10px;
+    margin: 10px -8px 10px -8px;
+    overflow: hidden;
+    background-color: rgb(177, 183, 177);
+    box-shadow: 0 0 7px #766b6b;
+    border: 1px solid #555;
+    border-radius: 20px;
+}
+
+.popularity {
+    height: 100%;
+    width: 0;
+    background-color: #3ed43e;
+    border-right: 1px solid #fff;
+}
+
+.init-videos-spinner {
+    position: absolute;
+    top: 200px;
+    left: calc(50% - 50px);
+    z-index: 1;
+}
+
+.fetching-new-videos-spinner-wrap {
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: -30px;
+    align-self: flex-end;
+    display: flex;
+    justify-content: center;
+}
+
+.fetching-new-videos-spinner-wrap > p {
+    font-size: 15pt;
+}

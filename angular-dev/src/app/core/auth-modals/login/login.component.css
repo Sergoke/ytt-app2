@@ -1,0 +1,16 @@
+.mat-toolbar {
+	height: 50px;
+    margin-bottom: 20px;
+}
+
+.full-width {
+	width: 100%;
+}
+
+mat-hint {
+	color: #f00!important;
+}
+
+button {
+	margin-top: 10px;
+}

@@ -1,0 +1,13 @@
+<mat-toolbar color='primary'>
+  <button mat-button routerLink="home" class="title">Youteng</button>
+  <button mat-button routerLink="videos">Видео</button>
+  <button *ifRole="[guest]" mat-button (click)="loginDialog()">Вход</button>
+  <button *ifRole="[guest]" mat-button (click)="signupDialog()">Регистрация</button>
+  <button *ifRole="[admin]" class="admin-btn" mat-button routerLink="admin">Administrate</button>
+
+  <mat-icon *ifRole="[user, admin]" mat-button [matMenuTriggerFor]="profileMenu" style="cursor: pointer; margin-left: 10px;">account_circle</mat-icon>
+  <mat-menu #profileMenu="matMenu">
+    <button mat-menu-item routerLink="profile">Профиль</button>
+    <button mat-menu-item (click)="logoutDialog()">Выйти</button>
+  </mat-menu>
+</mat-toolbar>

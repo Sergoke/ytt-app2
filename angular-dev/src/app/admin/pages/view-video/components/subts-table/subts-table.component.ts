@@ -1,0 +1,23 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+
+@Component({
+  selector: 'subts-table',
+  templateUrl: './subts-table.component.html',
+  styleUrls: ['./subts-table.component.css']
+})
+export class SubtsTableComponent implements OnInit {
+
+  @Input() video$: Observable<any>;
+
+  video: Object;
+
+  constructor() { }
+
+  ngOnInit() {
+    this.video$.subscribe(video => {
+      this.video = video;
+    });
+  }
+
+}
