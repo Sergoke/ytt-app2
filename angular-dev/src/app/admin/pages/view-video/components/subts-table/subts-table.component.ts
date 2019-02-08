@@ -10,7 +10,7 @@ export class SubtsTableComponent implements OnInit {
 
   @Input() video$: Observable<any>;
 
-  video: Object;
+  video: any;
 
   constructor() { }
 

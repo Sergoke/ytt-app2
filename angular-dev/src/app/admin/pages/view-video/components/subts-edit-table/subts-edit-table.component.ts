@@ -67,4 +67,8 @@ export class SubtsEditTableComponent implements OnInit {
     });
   }
 
+  addSubt(param){
+
+  }
+
 }

@@ -14,8 +14,8 @@ export class VideoComponent implements OnInit {
   @ViewChild('wrapper') videoWrapper;
   @ViewChild('block', {read: ElementRef}) video: ElementRef;
 
-  private roles = environment.roleCodes;
-  public videoId: string;
+  roles = environment.roleCodes;
+  videoId: string;
   private player;
   private interval;
   public subtitles: any;//{(key: string): Array<Array<string>>};
