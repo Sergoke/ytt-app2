@@ -16,7 +16,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'videos', component: VideosListComponent},
   {path: 'video/:id', component: VideoComponent},
@@ -24,6 +23,7 @@ const routes: Routes = [
   {path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AuthGuard], data: {roles: [environment.roleCodes.admin]}},
   {path: 'unauthorized', component: UnauthorizedComponent},
   {path: '404', component: NotFoundComponent},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', component: NotFoundComponent}
 ];
 

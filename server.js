@@ -35,8 +35,8 @@ app.use(require('./routes/angular/index'));
 
 mongoose.connection.on('open', function(){
 
-	app.listen(config.port, config.host, function(){
-		console.log('server is listening on: http://' + config.host + ':' + config.port);
+	app.listen(config.port, function(){
+		console.log('server is listening on port: ' + config.port);
 	});
 
 });

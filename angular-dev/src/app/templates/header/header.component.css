@@ -4,13 +4,30 @@ mat-toolbar {
 }
 
 mat-toolbar > button {
-	margin: 5px 2px;
+	margin: 5px 3px;
 	font-size: 14pt;
 	border: 1px solid #673ab7;
+	transition: .2s;
 }
 
-mat-toolbar > button:hover {
+mat-toolbar > button.active-link {
+	border-bottom: 1px solid white;
+	border-radius: 0;
+}
+
+mat-toolbar > button:hover, button.active-link:hover {
 	border: 1px solid white;
+    border-radius: 5px;
+}
+
+.auth {
+	margin: 0 10px;
+}
+
+.auth a {
+	margin: 5px 10px;
+	font-style: italic;
+	cursor: pointer;
 }
 
 mat-toolbar > button.title {
