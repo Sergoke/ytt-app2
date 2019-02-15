@@ -1,0 +1,37 @@
+.sidenav-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenav .mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-toolbar {
+  height: 50px;
+}
+
+mat-sidenav-content .mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+mat-sidenav-content button {
+  font-size: 15pt;
+}
+
+mat-sidenav-content button:first-child {
+  margin-right: auto;
+}

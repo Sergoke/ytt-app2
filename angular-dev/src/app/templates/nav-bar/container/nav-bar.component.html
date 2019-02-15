@@ -1,0 +1,32 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="'navigation'" position="end">
+    <mat-toolbar color="primary">
+      <span>Меню</span>
+      <button (click)="drawer.close()" type="button" aria-label="Close sidenav" mat-icon-button>
+        <mat-icon aria-label="Close menu">close</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-nav-list (click)="drawer.close()">
+      <a mat-list-item routerLink="videos">Видео</a>
+      <ng-container *ifRole="[roles.guest]">
+        <hr>
+        <a mat-list-item (click)="matDialogs.loginDialog()">Вход</a>
+        <a mat-list-item (click)="matDialogs.signupDialog()">Регистрация</a>
+      </ng-container>
+      <a mat-list-item *ifRole="[roles.admin]" routerLink="admin">Administrate</a>
+      <ng-container *ifRole="[roles.user, roles.admin]">
+        <a mat-list-item routerLink="profile">Профиль</a>
+        <hr>
+        <a mat-list-item (click)="matDialogs.logoutDialog()">Выйти</a>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <top-nav [mobile]="!mobileQuery.matches">
+      <button (click)="drawer.open()" type="button" [style.display]="mobileQuery.matches ? 'inline-block' : 'none'" mat-icon-button aria-label="Open sidenav">
+        <mat-icon aria-label="Open menu">menu</mat-icon>
+      </button>
+    </top-nav>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

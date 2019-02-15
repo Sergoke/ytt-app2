@@ -1,0 +1,18 @@
+<mat-toolbar color='primary'>
+    <button mat-button routerLink="home" routerLinkActive="active-link" class="title">Youteng</button>
+
+    <button mat-button routerLink="videos" [style.display]="mobile ? 'initial' : 'none'" routerLinkActive="active-link">Видео</button>
+    <div class="auth" *ifRole="[roles.guest]" [style.display]="mobile ? 'initial' : 'none'">
+      <a (click)="matDialogs.loginDialog()">Вход</a>/<a (click)="matDialogs.signupDialog()">Регистрация</a>
+    </div>
+    <button *ifRole="[roles.admin]" class="admin-btn" mat-button routerLink="admin" [style.display]="mobile ? 'initial' : 'none'" routerLinkActive="active-link">Administrate</button>
+    
+    <mat-icon *ifRole="[roles.user, roles.admin]" [style.display]="mobile ? 'initial' : 'none'" mat-button [matMenuTriggerFor]="profileMenu" style="cursor: pointer; margin-left: 10px;">account_circle</mat-icon>
+    <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item routerLink="profile">Профиль</button>
+      <button mat-menu-item (click)="matDialogs.logoutDialog()">Выйти</button>
+    </mat-menu>
+
+    <ng-content></ng-content>
+  </mat-toolbar>
+  

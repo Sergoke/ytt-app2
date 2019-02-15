@@ -2,9 +2,13 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 /* @import "../node_modules/bootstrap/dist/css/bootstrap.min.css"; */
 
+html, body {
+	height: 100%;
+}
+
 body {
 	margin: 0;
-	min-width: 400px;
+	min-width: 200px;
 	background-color: #e8e8e8;
 }
 

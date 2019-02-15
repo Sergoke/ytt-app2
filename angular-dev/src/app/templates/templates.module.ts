@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { AuthModalsModule } from '../core/auth-modals/auth-modals.module';
+import { NavBarModule } from './nav-bar/nav-bar.module';
 
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
@@ -20,10 +21,12 @@ import { HeaderComponent } from './header/header.component';
     MaterialModule,
     RouterModule,
     SharedModule,
-    AuthModalsModule
+    AuthModalsModule,
+    NavBarModule
   ],
   exports: [
     FooterComponent,
+    NavBarModule,
     HeaderComponent
   ]
 })
