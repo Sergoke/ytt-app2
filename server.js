@@ -7,6 +7,13 @@ const express = require('express'),
 
 var app = express();
 
+app.use('*', function(req, res, next){
+	if(req.headers.host === '3.17.160.130'){
+		return res.redirect('http://langvy.ga' + req.url);
+	}
+	next();
+});
+
 app.use(require('cors')({
 	origin: 'http://localhost:4200'
 }));//tmp
@@ -20,7 +27,7 @@ app.use(session({
 	resave: false,
 	cookie: config.session.cookie,
 	store: sessionStore
-}));
+}))
 
 app.use(express.static(config.staticFolder));
 
