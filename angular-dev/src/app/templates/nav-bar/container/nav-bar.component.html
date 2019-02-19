@@ -21,7 +21,7 @@
       </ng-container>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content id="main-sidenav-content">
     <top-nav [mobile]="!mobileQuery.matches">
       <button (click)="drawer.open()" type="button" [style.display]="mobileQuery.matches ? 'inline-block' : 'none'" mat-icon-button aria-label="Open sidenav">
         <mat-icon aria-label="Open menu">menu</mat-icon>
