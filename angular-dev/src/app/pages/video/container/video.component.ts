@@ -21,7 +21,7 @@ export class VideoComponent implements OnInit {
   public subtitles: any;//{(key: string): Array<Array<string>>};
   private timeKeys: {};
   private timeKeysArray;
-  public subtOffset;
+  public currentRowIndex;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -38,7 +38,7 @@ export class VideoComponent implements OnInit {
         this.subtitles = subts['subts'];
         this.timeKeysArray = subts['timeKeys'];
         this.createTimeKeys(subts['timeKeys']);
-        this.subtOffset = 0;
+        this.currentRowIndex = 0;
       },
       error => {
         this.router.navigate(['/unauthorized']);
@@ -86,7 +86,7 @@ export class VideoComponent implements OnInit {
       this.interval = setInterval( () => {
         var time = Math.round(10 * this.player.getCurrentTime()) / 10;
         if(this.timeKeys.hasOwnProperty(time)){
-          this.subtOffset = this.timeKeys[time] * 50;
+          this.currentRowIndex = this.timeKeys[time];
           this.changeDetector.detectChanges();
         }
       }, 100);

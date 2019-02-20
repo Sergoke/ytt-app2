@@ -1,9 +1,9 @@
 <div #wrapper class="video-wrap full-width-of-main">
     <div class="video" [ngStyle]="blockStyles" #block (window:resize)="onResize()">
         <yt-player [videoId]="videoId"></yt-player>
-        <subtitles *ngIf="subtitles?.en?.length" [subtitles]="subtitles?.en" [subtOffset]="subtOffset" [player]="player" (scrollSubts)="scrollSubts($event)"></subtitles>
-        <hr *ngIf="subtitles?.en?.length">
-        <subtitles *ngIf="subtitles?.ru?.length" [subtitles]="subtitles?.ru" [subtOffset]="subtOffset" [disableWordClick]="true" (scrollSubts)="scrollSubts($event)"></subtitles>
+        <subtitles *ngIf="subtitles?.en?.length" [subtitles]="subtitles?.en" [currentRowIndex]="currentRowIndex" [player]="player" (scrollSubts)="scrollSubts($event)"></subtitles>
+        <hr style="margin: 0" *ngIf="subtitles?.ru?.length">
+        <subtitles *ngIf="subtitles?.ru?.length" [subtitles]="subtitles?.ru" [currentRowIndex]="currentRowIndex" [disableWordClick]="true" (scrollSubts)="scrollSubts($event)"></subtitles>
     </div>
 </div>
 <button routerLink="/admin/view-video/{{videoId}}" *ifRole="[roles.admin]" mat-raised-button color="primary">Administrate</button>

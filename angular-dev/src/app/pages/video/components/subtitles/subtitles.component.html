@@ -1,12 +1,10 @@
-<div class="subts-wrap">
-  <ul [ngStyle]="{'transform': 'translateY(-' + subtOffset + 'px)'}" (click)="wordClick($event)">
-    <li class="string" *ngFor="let string of subtitles">
-      <span *ngFor="let word of string">{{word}}</span>
-    </li>
-  </ul>
-  <div class="controls">
-    <i class="arrow-top" (click)="scrollSubtsUp()"></i>
-    <i class="arrow-down" (click)="scrollSubtsDown()"></i>
+<div class="subts-block">
+  <div [ngClass]="{
+    'subts-row-prev': i < currentRowIndex,
+    'subts-row-current': i === currentRowIndex,
+    'subts-row-follow': i > currentRowIndex
+  }" class="subts-row" *ngFor="let row of subtitles; let i = index" (click)="wordClick($event)">
+    <span class="subts-word" *ngFor="let word of row">{{word}}</span>
   </div>
 </div>
 

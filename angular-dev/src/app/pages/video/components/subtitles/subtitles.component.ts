@@ -16,7 +16,7 @@ export class SubtitlesComponent {
   @Output() scrollSubts = new EventEmitter();
 
   @Input() player;
-  @Input() subtOffset;
+  @Input() currentRowIndex;
   @Input() disableWordClick: boolean = false;
 
   private _subtitles;

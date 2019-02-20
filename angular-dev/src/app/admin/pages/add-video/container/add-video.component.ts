@@ -31,8 +31,8 @@ export class AddVideoComponent {
       'isDemo': [false],
       'timeKeys': this.fb.array([]),
       'subts': this.fb.group({
-        'en': this.fb.array([]),
-        'ru': this.fb.array([])
+        'en': this.fb.array([[], Validators.max(45)]),
+        'ru': this.fb.array([[], Validators.max(45)])
       })
     });
 

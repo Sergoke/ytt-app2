@@ -21,14 +21,14 @@
       <ng-container formGroupName="subts" matColumnDef="subts-en">
         <ng-container formArrayName="en">
           <th mat-header-cell *matHeaderCellDef><span (click)="openParser('en')" class="open-parser">English</span></th>
-          <td mat-cell *matCellDef="let i = index" class="subts-column"><input [formControlName]="i" type="text" matInput placeholder="subtitle" autocomplete="off"></td>
+          <td mat-cell *matCellDef="let i = index" class="subts-column"><input [formControlName]="i" type="text" matInput maxLength="45" placeholder="subtitle" autocomplete="off"></td>
         </ng-container>
       </ng-container>
     
       <ng-container formGroupName="subts" matColumnDef="subts-ru">
         <ng-container formArrayName="ru">
           <th mat-header-cell *matHeaderCellDef><span (click)="openParser('ru')" class="open-parser">Russian</span></th>
-          <td mat-cell *matCellDef="let i = index" class="subts-column"><input [formControlName]="i" type="text" matInput placeholder="subtitle" autocomplete="off"></td>
+          <td mat-cell *matCellDef="let i = index" class="subts-column"><input [formControlName]="i" type="text" matInput maxLength="45" placeholder="subtitle" autocomplete="off"></td>
         </ng-container>
       </ng-container>
     
