@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from './../../../core/services/api/api.service';
+import { ApiService } from '../../../core/services/api/api.service';
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-video',
@@ -10,15 +11,11 @@ import { ApiService } from './../../../core/services/api/api.service';
   styleUrls: ['./video.component.css']
 })
 export class VideoComponent implements OnInit {
-
-  @ViewChild('wrapper') videoWrapper;
-  @ViewChild('block', {read: ElementRef}) video: ElementRef;
-
   roles = environment.roleCodes;
   videoId: string;
   private player;
   private interval;
-  public subtitles: any;//{(key: string): Array<Array<string>>};
+  public subtitles: {[key: string]: Array<Array<string>>};
   private timeKeys: {};
   private timeKeysArray;
   public currentRowIndex;
@@ -27,11 +24,11 @@ export class VideoComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private route: ActivatedRoute,
     private router: Router,
-    private db: ApiService
+    private db: ApiService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
-    this.setRatio();
     this.route.params.subscribe( params => {
       this.videoId = params.id;
       this.db.getSubtitles(params.id).subscribe( subts => {
@@ -122,45 +119,14 @@ export class VideoComponent implements OnInit {
       this.changeDetector.detectChanges();
   }
 
-  onResize(){
-    this.setRatio();
-  }
-
-  blockStyles: {} = {};
-  isResizeIntervalWorking = false;
-
-  private setRatio(){
-
-    this.blockStyles = {
-      width: 'auto'
+  get videoMaxWidth() {
+    if(!this.subtitles) {
+      return;
     }
-      
-    if(!this.isResizeIntervalWorking){
-      this.isResizeIntervalWorking = true;
-      
-      var interval = setInterval(() => {
-        var blockRect = this.video.nativeElement.getBoundingClientRect();
-        var wrapperRect = this.videoWrapper.nativeElement.getBoundingClientRect();
-
-        if(blockRect.height >= wrapperRect.height){
-          this.blockStyles = {
-            width: wrapperRect.height * (blockRect.width / blockRect.height) + 'px'
-          }
-        }
-        else {
-          this.blockStyles = {
-            width: 'auto'
-          }
-        }
-      }, 0);
-
-      setTimeout(() => {
-        clearInterval(interval);
-        this.isResizeIntervalWorking = false;
-      }, 2000);
-
-    }
-
-  }
+    const subtsCount = Object.keys(this.subtitles).length;
+    const subtsBlockHeight = 52 * subtsCount;
+    const unsafeStyle = 'calc((100vh - 50px - 20px - ' + subtsBlockHeight + 'px) / 9 * 16)';
+    return this.sanitizer.bypassSecurityTrustStyle(unsafeStyle);
+}
 
 }
