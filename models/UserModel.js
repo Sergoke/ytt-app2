@@ -25,6 +25,6 @@ UserSchema.methods = {
 	checkPassword(password){
 		return this.encryptPassword(password) === this.password_hash;
 	}
-}
+};
 
 module.exports = mongoose.model('user', UserSchema);

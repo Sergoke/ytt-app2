@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { RouterModule, Routes } from '@angular/router';
-
 import { environment } from '../environments/environment';
-
 import { AuthGuard } from './core/guards/auth/auth.guard';
 
 import { VideosListComponent } from './pages/videos-list/container/videos-list.component';
-import { VideoComponent } from './pages/video/container/video.component';
+import { VideoComponent } from './pages/video/video.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';

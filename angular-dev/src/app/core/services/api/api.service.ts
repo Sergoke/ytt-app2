@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
 import { HttpClient } from '@angular/common/http';
+import { Video } from '../../../shared/models';
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +12,18 @@ export class ApiService {
     private http: HttpClient
   ) { }
 
-  getRole(): Observable<any>{
+  getRole(): Observable<any> {
     return this.http.get('/api/role');
   }
 
-  getVideos(num, skip = 0): Observable<any>{
+  getVideos(num, skip = 0): Observable<any> {
     let res = this.http.get('/api/videos?num=' + num + '&skip=' + skip);
-    res.subscribe(vids => console.log(vids))
+    res.subscribe(console.log);
     return res;
   }
 
-  getSubtitles(videoId: string): Observable<any>{
-    return this.http.get('/api/video/' + videoId);
+  getVideo(videoId: string): Observable<Video> {
+    return this.http.get<Video>(`/api/video/${videoId}`);
   }
 
   getUserData(){

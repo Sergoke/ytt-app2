@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { ApiAdminService } from './../../../../services/api-admin/api-admin.service';
+import { ApiAdminService } from '../../../../services/api-admin/api-admin.service';
 
 @Component({
   selector: 'subts-edit-table',
@@ -40,7 +40,7 @@ export class SubtsEditTableComponent implements OnInit {
       });
 
       this.videoForm = this.fb.group({
-        'id': [video.videoId, Validators.compose([Validators.required, Validators.pattern('[0-9A-Za-z_-]{10}[048AEIMQUYcgkosw]')])],
+        'id': [video.video.id, Validators.compose([Validators.required, Validators.pattern('[0-9A-Za-z_-]{10}[048AEIMQUYcgkosw]')])],
         'isDemo': [video.isDemo],
         'timeKeys': this.fb.array(timeKeys),
         'subts': this.fb.group({
@@ -62,13 +62,9 @@ export class SubtsEditTableComponent implements OnInit {
   }
 
   onSubmit(){
-    this.api.updateVideoSubts(this.video['videoId'], this.videoForm.value).subscribe(res => {
+    this.api.updateVideoSubts(this.video['id'], this.videoForm.value).subscribe(res => {
       console.log(res);
     });
-  }
-
-  addSubt(param){
-
   }
 
 }
