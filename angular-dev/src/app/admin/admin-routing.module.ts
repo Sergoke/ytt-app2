@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { RouterModule, Routes } from '@angular/router';
 
-import { AdminPageComponent } from './pages/admin-page/container/admin-page.component';
-import { AddVideoComponent } from './pages/add-video/container/add-video.component';
-import { ViewVideoComponent } from './pages/view-video/container/view-video.component';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { AddVideoComponent } from './pages/add-video/add-video.component';
+import { ViewVideoComponent } from './pages/view-video/view-video.component';
 import { UsersComponent } from './pages/users/users.component';
 
 const routes: Routes = [

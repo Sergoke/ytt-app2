@@ -1,12 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-
 import { MatTable, MatDialog } from '@angular/material';
-
 import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
-
-import { ApiAdminService } from './../../../services/api-admin/api-admin.service';
-
-import { SubtsParserComponent } from './../components/subts-parser/subts-parser.component';
+import { ApiAdminService } from '../../services/api-admin/api-admin.service';
+import { SubtsParserComponent } from './components/subts-parser/subts-parser.component';
 
 @Component({
   selector: 'app-add-video',

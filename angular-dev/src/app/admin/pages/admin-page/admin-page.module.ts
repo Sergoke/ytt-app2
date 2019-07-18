@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from './../../../material/material.module';
 import { RouterModule } from '@angular/router';
 
-import { AdminPageComponent } from './container/admin-page.component';
+import { AdminPageComponent } from './admin-page.component';
 
 @NgModule({
   declarations: [AdminPageComponent],

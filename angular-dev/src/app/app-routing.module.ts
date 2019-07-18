@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { environment } from '../environments/environment';
 import { AuthGuard } from './core/guards/auth/auth.guard';
 
-import { VideosListComponent } from './pages/videos-list/container/videos-list.component';
+import { VideosListComponent } from './pages/videos-list/videos-list.component';
 import { VideoComponent } from './pages/video/video.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';

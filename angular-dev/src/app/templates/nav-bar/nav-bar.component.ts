@@ -1,9 +1,9 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
-import { MatDialogsService } from '../../../core/services/mat-dialogs/mat-dialogs.service';
+import { MatDialogsService } from '../../core/services/mat-dialogs/mat-dialogs.service';
 
 @Component({
   selector: 'nav-bar',

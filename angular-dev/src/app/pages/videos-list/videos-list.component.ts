@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { ApiService } from '../../../core/services/api/api.service';
-import { RolesService } from '../../../core/services/roles/roles.service';
+import { ApiService } from '../../core/services/api/api.service';
+import { RolesService } from '../../core/services/roles/roles.service';
 
 @Component({
   selector: 'app-videos-list',

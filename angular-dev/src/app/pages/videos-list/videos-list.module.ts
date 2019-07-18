@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { VideosListComponent } from './container/videos-list.component';
+import { VideosListComponent } from './videos-list.component';
 
-import { MaterialModule } from './../../material/material.module';
+import { MaterialModule } from '../../material/material.module';
 import { RouterModule } from '@angular/router';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { SharedModule } from './../../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [

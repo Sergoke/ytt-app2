@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ApiService } from '../../../../core/services/api/api.service';
+import { ApiService } from '../../../core/services/api/api.service';
 import { Observable } from 'rxjs';
 
 @Component({
