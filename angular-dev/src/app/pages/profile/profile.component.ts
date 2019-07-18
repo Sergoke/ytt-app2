@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ApiService } from './../../core/services/api/api.service';
+import { ApiService } from '../../core/services/api/api.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
 

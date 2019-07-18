@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-view-video',
   templateUrl: './view-video.component.html',
-  styleUrls: ['./view-video.component.css']
+  styleUrls: ['./view-video.component.scss']
 })
 export class ViewVideoComponent implements OnInit {
 

@@ -5,7 +5,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 @Component({
   selector: 'app-translation',
   templateUrl: './translation.component.html',
-  styleUrls: ['./translation.component.css']
+  styleUrls: ['./translation.component.scss']
 })
 export class TranslationComponent implements OnInit {
 

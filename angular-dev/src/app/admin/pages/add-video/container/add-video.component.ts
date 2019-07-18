@@ -11,7 +11,7 @@ import { SubtsParserComponent } from './../components/subts-parser/subts-parser.
 @Component({
   selector: 'app-add-video',
   templateUrl: './add-video.component.html',
-  styleUrls: ['./add-video.component.css']
+  styleUrls: ['./add-video.component.scss']
 })
 export class AddVideoComponent {
 

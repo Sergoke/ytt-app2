@@ -5,7 +5,7 @@ import { MatDialogRef } from '@angular/material';
 @Component({
   selector: 'app-subts-parser',
   templateUrl: './subts-parser.component.html',
-  styleUrls: ['./subts-parser.component.css']
+  styleUrls: ['./subts-parser.component.scss']
 })
 export class SubtsParserComponent {
 

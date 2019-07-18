@@ -8,7 +8,7 @@ import { ApiAdminService } from '../../../../services/api-admin/api-admin.servic
 @Component({
   selector: 'subts-edit-table',
   templateUrl: './subts-edit-table.component.html',
-  styleUrls: ['./subts-edit-table.component.css']
+  styleUrls: ['./subts-edit-table.component.scss']
 })
 export class SubtsEditTableComponent implements OnInit {
 

@@ -3,7 +3,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'notice',
   templateUrl: './notice.component.html',
-  styleUrls: ['./notice.component.css']
+  styleUrls: ['./notice.component.scss']
 })
 export class NoticeComponent {
 

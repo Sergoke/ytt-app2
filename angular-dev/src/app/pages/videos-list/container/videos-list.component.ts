@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { ApiService } from './../../../core/services/api/api.service';
-import { RolesService } from './../../../core/services/roles/roles.service';
+import { ApiService } from '../../../core/services/api/api.service';
+import { RolesService } from '../../../core/services/roles/roles.service';
 
 @Component({
   selector: 'app-videos-list',
   templateUrl: './videos-list.component.html',
-  styleUrls: ['./videos-list.component.css']
+  styleUrls: ['./videos-list.component.scss']
 })
 export class VideosListComponent implements OnInit {
 

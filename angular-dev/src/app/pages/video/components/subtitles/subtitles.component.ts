@@ -9,7 +9,7 @@ import { TranslationComponent } from './../translation/translation.component';
 @Component({
   selector: 'subtitles',
   templateUrl: './subtitles.component.html',
-  styleUrls: ['./subtitles.component.css']
+  styleUrls: ['./subtitles.component.scss']
 })
 export class SubtitlesComponent {
 

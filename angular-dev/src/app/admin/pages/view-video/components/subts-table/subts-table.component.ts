@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'subts-table',
   templateUrl: './subts-table.component.html',
-  styleUrls: ['./subts-table.component.css']
+  styleUrls: ['./subts-table.component.scss']
 })
 export class SubtsTableComponent implements OnInit {
 

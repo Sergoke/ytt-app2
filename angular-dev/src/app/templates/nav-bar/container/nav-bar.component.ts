@@ -8,7 +8,7 @@ import { MatDialogsService } from '../../../core/services/mat-dialogs/mat-dialog
 @Component({
   selector: 'nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css']
+  styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent {
 
