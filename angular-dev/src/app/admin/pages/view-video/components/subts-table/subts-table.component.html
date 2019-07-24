@@ -1,30 +1,65 @@
-<p>
-  Demo: {{video?.isDemo ? 'true' : 'false'}}
-</p>
+<form *ngIf="videoForm" [formGroup]="videoForm">
+  <div class="form-wrap">
+    <table mat-table [dataSource]="videoForm.get('timeKeys').controls" class="table-primary no-border">
+      <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef class="index">№</th>
+        <td mat-cell *matCellDef="let i = index" class="index">{{i + 1}}.</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
 
-<div class="table-wrap">
-  <table mat-table [dataSource]="video?.timeKeys">
-    <ng-container matColumnDef="number">
-      <th mat-header-cell *matHeaderCellDef class="number">№</th>
-      <td mat-cell *matCellDef="let i = index" class="number">{{i + 1}}</td>
-    </ng-container>
-  
-    <ng-container matColumnDef="timeKeys" sticky>
-      <th mat-header-cell *matHeaderCellDef class="time-keys">TimeKeys</th>
-      <td mat-cell *matCellDef="let element" class="time-keys">{{element}}</td>
-    </ng-container>
-  
-    <ng-container matColumnDef="subts-en" class="subts-column">
-      <th mat-header-cell *matHeaderCellDef>English</th>
-      <td mat-cell *matCellDef="let i = index" class="subts-column">{{video.subts.en[i]}}</td>
-    </ng-container>
-  
-    <ng-container matColumnDef="subts-ru" class="subts-column">
-      <th mat-header-cell *matHeaderCellDef>Russian</th>
-      <td mat-cell *matCellDef="let i = index" class="subts-column">{{video.subts.ru[i]}}</td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="['number', 'timeKeys', 'subts-en', 'subts-ru']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['number', 'timeKeys', 'subts-en', 'subts-ru']"></tr>
-  </table>
-</div>
+      <ng-container formArrayName="timeKeys" matColumnDef="timeKeys" sticky>
+        <th mat-header-cell *matHeaderCellDef class="time-keys">Time</th>
+        <td mat-cell *matCellDef="let i = index" class="time-keys">
+          <mat-form-field>
+            <input #timeKey [formControlName]="i" type="number" step=".1" matInput>
+          </mat-form-field>
+          <p class="hidden">{{timeKey.value}}</p>
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container *ngFor="let lang of languages" formGroupName="subts" [matColumnDef]="lang">
+        <ng-container [formArrayName]="lang">
+          <th mat-header-cell *matHeaderCellDef class="subt">{{lang}}</th>
+          <td mat-cell *matCellDef="let i = index">
+            <mat-form-field>
+              <input #en [formControlName]="i" matInput>
+            </mat-form-field>
+            <p class="hidden">{{en.value}}</p>
+          </td>
+          <td mat-footer-cell *matFooterCellDef>
+            <button type="button" (click)="removeLanguage(lang)" mat-raised-button color="warn" class="remove-btn">Delete</button>
+          </td>
+        </ng-container>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let i = index">
+          <div class="actions-wrap">
+            <button type="button" (click)="removeSubt(i)" mat-raised-button color="warn">X</button>
+            <button type="button" (click)="addSubt(i + 1)" mat-raised-button color="primary">+</button>
+          </div>
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['index', 'timeKeys'].concat(languages, 'actions')"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['index', 'timeKeys'].concat(languages, 'actions')"></tr>
+      <tr mat-footer-row *matFooterRowDef="['index', 'timeKeys'].concat(languages, 'actions')"></tr>
+    </table>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Add language</mat-label>
+    <mat-select (selectionChange)="addLanguage($event.value)">
+      <mat-option *ngFor="let lang of langs" [value]="lang">
+        {{lang}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button (click)="updateVideo()" [disabled]="videoForm.invalid || videoForm.pristine" color="primary" mat-raised-button>
+    Update
+  </button>
+</form>

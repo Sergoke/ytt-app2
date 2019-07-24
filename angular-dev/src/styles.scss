@@ -23,6 +23,82 @@ main .full-width-of-main {
 	margin-right: -20px;
 }
 
-.w100 {
-	width: 100%;
+.form-wrap {
+  overflow: auto hidden;
+}
+
+// tables
+table.mat-table {
+  &.table-primary {
+    width: 100%;
+
+    &.no-border {
+      td.mat-cell {
+        border: none;
+      }
+    }
+
+    tr.mat-row {
+      height: auto;
+    }
+
+    td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+      padding: 0 15px;
+
+      &.index {
+        text-align: end;
+        font-size: .9rem;
+        font-weight: bold;
+        color: #838383;
+      }
+
+      &.subt {
+        min-width: 100px;
+      }
+
+      &.mat-column-actions .actions-wrap {
+        display: flex;
+
+        > button {
+          min-width: 20px;
+          line-height: 20px;
+
+          &:not(:last-child) {
+            margin-right: 20px;
+          }
+        }
+      }
+    }
+
+    td.mat-cell.time-keys {
+      width: 95px;
+      box-sizing: border-box;
+      border-right: 1px solid #e5d3d3;
+    }
+
+    mat-form-field {
+      width: 100%;
+
+      .mat-form-field-wrapper {
+        padding: 0;
+      }
+
+      .mat-form-field-underline {
+        background: #e9e9e9;
+        bottom: 0;
+      }
+
+      .mat-form-field-infix {
+        border: none;
+        width: auto;
+      }
+    }
+
+    mat-form-field + .hidden {
+      height: 0;
+      margin: 0;
+      visibility: hidden;
+      white-space: nowrap;
+    }
+  }
 }

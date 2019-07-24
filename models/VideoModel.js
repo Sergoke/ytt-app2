@@ -6,8 +6,9 @@ const VideoSchema = new Schema({
 	isDemo: {type: Boolean, default: false},
 	timeKeys: [{type: Number, required: true}],
 	subts: {
-		en: [{type: String, required: true}],
-		ru: [{type: String}]
+		en: {type: [String], required: true},
+		ru: {type: [String], default: undefined},
+		ua: {type: [String], default: undefined}
 	}
 });
 

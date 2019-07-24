@@ -12,7 +12,7 @@ import { Video } from "../../shared/models";
 })
 export class VideoComponent implements OnInit {
   private videoId: string;
-  private video: Video;
+  public video: Video;
   private player;
   private interval;
   private curRowIdx = 0;

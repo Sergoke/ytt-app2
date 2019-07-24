@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Video } from '../../../shared/models';
 
 @Injectable()
-export class ApiAdminService {
+export class AdminApiService {
 
   constructor(
     public http: HttpClient) {
@@ -21,7 +21,7 @@ export class ApiAdminService {
     return this.http.post('/api/user/delete', {login});
   }
 
-  updateVideoSubts(initialVideoId: string, video: Object) {
-    return this.http.post('/api/video/update/' + initialVideoId, video);
+  updateVideo(video: Video) {
+    return this.http.post(`/api/video/update/${video.id}`, video);
   }
 }

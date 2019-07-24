@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiAdminService } from '../../services/api-admin/api-admin.service';
+import { AdminApiService } from '../../services/api-admin/admin-api.service';
 
 @Component({
   selector: 'app-users',
@@ -12,7 +12,7 @@ export class UsersComponent implements OnInit {
   cols = ['login', 'name', 'surname', 'email', 'roleCode'];
 
   constructor(
-    public apiAdmin: ApiAdminService
+    public apiAdmin: AdminApiService
   ) { }
 
   ngOnInit() {
@@ -22,7 +22,7 @@ export class UsersComponent implements OnInit {
   deleteUser(login: string){
     let confirmed = confirm('Are you sure you want to delete ' + login + '?');
     if(confirmed){
-      this.apiAdmin.deleteUser(login).subscribe(res => {
+      this.apiAdmin.deleteUser(login).subscribe(() => {
         alert(login + ' successfully deleted!');
         this.users$ = this.apiAdmin.getUsers();
       });

@@ -6,7 +6,13 @@ export interface Video {
 }
 
 export interface Subtitles {
-    en: string[];
+    en?: string[];
     ua?: string[];
     ru?: string[];
+}
+
+export enum SubtitleLanguages {
+  'en' = 'English',
+  'ua' = 'Ukrainian',
+  'ru' = 'Russian',
 }

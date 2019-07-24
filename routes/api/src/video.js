@@ -23,14 +23,14 @@ router.get('/:id', function (req, res) {
 });
 
 router.post('/update/:id', isAdmin, function (req, res) {
-    Video.findOneAndUpdate({id: req.params.id}, {
+    const video = {
         id: req.body.id,
         isDemo: req.body.isDemo,
         timeKeys: req.body.timeKeys,
         subts: req.body.subts
-    }, function (err, result) {
+    };
+    Video.findOneAndUpdate({id: req.params.id}, video, function (err, result) {
         if (err) return res.sendStatus(500);
-
         res.json(result);
     });
 });
