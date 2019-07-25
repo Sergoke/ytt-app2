@@ -11,8 +11,10 @@ import { Video } from "../../shared/models";
   styleUrls: ['./video.component.scss']
 })
 export class VideoComponent implements OnInit {
-  private videoId: string;
+  public videoId: string;
   public video: Video;
+  public langsToShow = [];
+
   private player;
   private interval;
   private curRowIdx = 0;
@@ -100,10 +102,12 @@ export class VideoComponent implements OnInit {
     if (!this.video || !this.video.subts) {
       return;
     }
-    const subtsCount = Object.keys(this.video.subts).length;
-    const subtsBlockHeight = 52 * subtsCount;
+    const subtsBlockHeight = 52 * this.langsToShow.length;
     const unsafeStyle = 'calc((100vh - 50px - 20px - ' + subtsBlockHeight + 'px) / 9 * 16)';
     return this.sanitizer.bypassSecurityTrustStyle(unsafeStyle);
   }
 
+  addLanguage(lang: string) {
+    this.langsToShow.push(lang);
+  }
 }

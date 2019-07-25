@@ -1,9 +1,19 @@
 <div class="video-wrap full-width-of-main">
     <div class="video" [style.max-width]="videoMaxWidth">
         <yt-player [videoId]="videoId"></yt-player>
-        <subtitles *ngIf="video?.subts.en.length" [subtitles]="video?.subts.en" [currentRowIndex]="curRowIdx" [player]="player" (scrollSubts)="scrollSubts($event)"></subtitles>
-        <hr style="margin: 0" *ngIf="video?.subts.ru.length">
-        <subtitles *ngIf="video?.subts.ru.length" [subtitles]="video?.subts.ru" [currentRowIndex]="curRowIdx" [disableWordClick]="true" (scrollSubts)="scrollSubts($event)"></subtitles>
+        <ng-container *ngIf="video?.subts">
+          <subtitles *ngFor="let lang of langsToShow" [subtitles]="video.subts[lang]" [currentRowIndex]="curRowIdx" [player]="player" (scrollSubts)="scrollSubts($event)"></subtitles>
+        </ng-container>
     </div>
 </div>
+
+<mat-form-field>
+  <mat-label>Check language</mat-label>
+  <mat-select (selectionChange)="addLanguage($event.value)">
+    <mat-option *ngFor="let lang of video?.subts | keyvalue" [value]="lang.key">
+      {{lang.key}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
 <button routerLink="/admin/view-video/{{video?.id}}" *ifRole="[roles.admin]" mat-raised-button color="primary">Administrate</button>

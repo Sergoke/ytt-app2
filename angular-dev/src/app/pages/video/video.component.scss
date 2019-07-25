@@ -1,11 +1,16 @@
 .video-wrap {
     max-height: calc(100vh - 68px);
-}
 
-.video {
+  .video {
     max-width: calc((100vh - 50px - 20px - 52px) / 9 * 16);
     margin: auto;
     padding-bottom: 10px;
     border-radius: 10px 10px 0 0;
     overflow: hidden;
+
+      subtitles:not(:last-child) {
+        border-bottom: 2px solid #5d81ff;
+        display: block;
+      }
+  }
 }

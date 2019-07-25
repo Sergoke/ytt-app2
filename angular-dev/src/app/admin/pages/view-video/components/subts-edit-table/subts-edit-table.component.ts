@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { ApiAdminService } from '../../../../services/api-admin/api-admin.service';
+import { AdminApiService } from '../../../../services/api-admin/admin-api.service';
 
 @Component({
   selector: 'subts-edit-table',
@@ -20,7 +20,7 @@ export class SubtsEditTableComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private api: ApiAdminService
+    private api: AdminApiService
   ) { }
 
   ngOnInit() {
@@ -62,7 +62,7 @@ export class SubtsEditTableComponent implements OnInit {
   }
 
   onSubmit(){
-    this.api.updateVideoSubts(this.video['id'], this.videoForm.value).subscribe(res => {
+    this.api.updateVideo(this.videoForm.value).subscribe(res => {
       console.log(res);
     });
   }
