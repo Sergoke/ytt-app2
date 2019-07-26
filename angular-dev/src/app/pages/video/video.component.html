@@ -9,9 +9,9 @@
 
 <mat-form-field>
   <mat-label>Check language</mat-label>
-  <mat-select (selectionChange)="addLanguage($event.value)">
+  <mat-select [(ngModel)]="langsToShow" multiple>
     <mat-option *ngFor="let lang of video?.subts | keyvalue" [value]="lang.key">
-      {{lang.key}}
+      {{fullLangs[lang.key]}}
     </mat-option>
   </mat-select>
 </mat-form-field>

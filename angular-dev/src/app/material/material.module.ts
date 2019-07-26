@@ -16,46 +16,34 @@ import {
   MatMenuModule,
   MatSidenavModule,
   MatListModule,
-  MatSelectModule
+  MatSelectModule,
+  MatRippleModule
 } from '@angular/material';
 
+const modules = [
+  LayoutModule,
+
+  MatToolbarModule,
+  MatButtonModule,
+  MatDialogModule,
+  MatInputModule,
+  MatCardModule,
+  MatProgressSpinnerModule,
+  MatCheckboxModule,
+  MatTableModule,
+  MatRadioModule,
+  MatExpansionModule,
+  MatIconModule,
+  MatMenuModule,
+  MatSidenavModule,
+  MatListModule,
+  MatSelectModule,
+  MatRippleModule
+];
+
 @NgModule({
-  imports: [
-    MatToolbarModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatInputModule,
-    MatCardModule,
-    MatProgressSpinnerModule,
-    MatCheckboxModule,
-    MatTableModule,
-    MatRadioModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatMenuModule,
-    LayoutModule,
-    MatSidenavModule,
-    MatListModule,
-    MatSelectModule
-  ],
-  exports: [
-    MatToolbarModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatInputModule,
-    MatCardModule,
-    MatProgressSpinnerModule,
-    MatCheckboxModule,
-    MatTableModule,
-    MatRadioModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatMenuModule,
-    LayoutModule,
-    MatSidenavModule,
-    MatListModule,
-    MatSelectModule
-  ],
+  imports: modules,
+  exports: modules,
   declarations: []
 })
 export class MaterialModule { }

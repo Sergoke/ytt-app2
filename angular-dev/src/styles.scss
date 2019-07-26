@@ -71,9 +71,12 @@ table.mat-table {
     }
 
     td.mat-cell.time-keys {
-      width: 95px;
       box-sizing: border-box;
       border-right: 1px solid #e5d3d3;
+
+      mat-form-field {
+        min-width: 50px;
+      }
     }
 
     mat-form-field {

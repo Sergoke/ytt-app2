@@ -1,16 +1,16 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/services/api/api.service';
 import { DomSanitizer } from "@angular/platform-browser";
-import { Video } from "../../shared/models";
+import { SubtitleLanguages, Video } from '../../shared/models';
 
 @Component({
   selector: 'app-video',
   templateUrl: './video.component.html',
   styleUrls: ['./video.component.scss']
 })
-export class VideoComponent implements OnInit {
+export class VideoComponent implements OnInit, OnDestroy {
   public videoId: string;
   public video: Video;
   public langsToShow = [];
@@ -107,7 +107,7 @@ export class VideoComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustStyle(unsafeStyle);
   }
 
-  addLanguage(lang: string) {
-    this.langsToShow.push(lang);
+  get fullLangs() {
+    return SubtitleLanguages;
   }
 }
