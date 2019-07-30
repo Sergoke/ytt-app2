@@ -5,21 +5,19 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../../../material/material.module';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../../../shared/shared.module';
 
 import { AddVideoComponent } from './add-video.component';
-import { SubtsParserComponent } from './components/subts-parser/subts-parser.component';
 
 @NgModule({
-  declarations: [AddVideoComponent, SubtsParserComponent],
+  declarations: [AddVideoComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    RouterModule
-  ],
-  entryComponents: [
-    SubtsParserComponent
+    RouterModule,
+    SharedModule
   ]
 })
 export class AddVideoModule { }

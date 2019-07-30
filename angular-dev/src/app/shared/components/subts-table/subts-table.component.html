@@ -1,4 +1,11 @@
-<form *ngIf="videoForm" [formGroup]="videoForm">
+<form *ngIf="videoForm" [formGroup]="videoForm" (submit)="onSubmit()">
+  <mat-form-field class="full-width">
+    <input formControlName="id" maxLength="11" matInput placeholder="video id" autocomplete="off">
+    <mat-hint *ngIf="!videoForm['controls']['id'].valid && videoForm['controls']['id'].touched">video id length must be 11 characters</mat-hint>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="isDemo">Demo</mat-checkbox>
+
   <div class="form-wrap">
     <table mat-table [dataSource]="videoForm.get('timeKeys').controls" class="table-primary no-border">
       <ng-container matColumnDef="index">
@@ -15,7 +22,9 @@
           </mat-form-field>
           <p class="hidden">{{timeKey.value}}</p>
         </td>
-        <td mat-footer-cell *matFooterCellDef></td>
+        <td mat-footer-cell *matFooterCellDef>
+          <button type="button" (click)="openParser('keys')" mat-raised-button color="primary">Parse</button>
+        </td>
       </ng-container>
 
       <ng-container *ngFor="let lang of languages" formGroupName="subts" [matColumnDef]="lang">
@@ -28,6 +37,7 @@
             <p class="hidden">{{en.value}}</p>
           </td>
           <td mat-footer-cell *matFooterCellDef>
+            <button type="button" (click)="openParser(lang)" mat-raised-button color="primary">Parse</button>
             <button type="button" (click)="removeLanguage(lang)" mat-raised-button color="warn" class="remove-btn">Delete</button>
           </td>
         </ng-container>
@@ -59,7 +69,7 @@
     </mat-select>
   </mat-form-field>
 
-  <button (click)="updateVideo()" [disabled]="videoForm.invalid || videoForm.pristine" color="primary" mat-raised-button>
-    Update
+  <button [disabled]="videoForm.invalid || videoForm.pristine" color="primary" mat-raised-button>
+    {{btnText || 'Update'}}
   </button>
 </form>

@@ -23,7 +23,7 @@ export class ApiService {
   }
 
   getVideo(videoId: string): Observable<Video> {
-    return this.http.get<Video>(`/api/video/${videoId}`);
+    return this.http.get<Video>(`/api/videos/${videoId}`);
   }
 
   getUserData(){

@@ -10,7 +10,15 @@ export class AdminApiService {
   }
 
   addVideo(video: Video) {
-    return this.http.post('/api/add-video', video);
+    return this.http.post('/api/videos', video);
+  }
+
+  updateVideo(video: Video) {
+    return this.http.put(`/api/videos/${video.id}`, video);
+  }
+
+  deleteVideo(id: string) {
+    return this.http.delete(`/api/videos/${id}`);
   }
 
   getUsers() {
@@ -19,9 +27,5 @@ export class AdminApiService {
 
   deleteUser(login: string) {
     return this.http.post('/api/user/delete', {login});
-  }
-
-  updateVideo(video: Video) {
-    return this.http.post(`/api/video/update/${video.id}`, video);
   }
 }

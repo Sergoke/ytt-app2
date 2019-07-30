@@ -6,14 +6,10 @@ import { SharedModule } from '../../../shared/shared.module';
 import { MaterialModule } from '../../../material/material.module';
 
 import { ViewVideoComponent } from './view-video.component';
-import { SubtsTableComponent } from './components/subts-table/subts-table.component';
-import { SubtsEditTableComponent } from './components/subts-edit-table/subts-edit-table.component';
 
 @NgModule({
   declarations: [
-    ViewVideoComponent,
-    SubtsTableComponent,
-    SubtsEditTableComponent
+    ViewVideoComponent
   ],
   imports: [
     CommonModule,

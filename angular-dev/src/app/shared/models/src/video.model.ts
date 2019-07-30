@@ -1,8 +1,8 @@
 export interface Video {
   readonly id: string;
   readonly isDemo: boolean;
-  readonly timeKeys?: number[];
-  readonly subts?: Subtitles;
+  readonly timeKeys: number[];
+  readonly subts: Subtitles;
 }
 
 export interface Subtitles {

@@ -2,10 +2,6 @@
   <yt-player [videoId]="videoId"></yt-player>
 </div>
 
-<mat-radio-group #controls="matRadioGroup">
-  <mat-radio-button value="view" checked>View</mat-radio-button>
-  <mat-radio-button value="edit">Edit</mat-radio-button>
-</mat-radio-group>
+<button (click)="deleteVideo()" mat-raised-button color="warn">Delete video</button>
 
-<subts-table *ngIf="controls.value === 'view'" [video$]="video$"></subts-table>
-<subts-edit-table *ngIf="controls.value === 'edit'" [video$]="video$"></subts-edit-table>
+<app-subts-table [video]="video" (submitVideo)="onSubmit($event)"></app-subts-table>
