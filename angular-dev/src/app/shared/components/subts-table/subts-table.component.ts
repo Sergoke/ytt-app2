@@ -77,7 +77,13 @@ export class SubtsTableComponent implements OnChanges {
   }
 
   openParser(target: string) {
-    const dialogRef = this.matDialog.open(SubtsParserComponent, {width: '500px'});
+    const dialogRef = this.matDialog.open(SubtsParserComponent, {
+      data: {
+        target: target,
+        value: (target === 'keys' ? this.videoForm.get('timeKeys') : this.videoForm.get('subts').get(target)).value.join('\n').trim()
+      },
+      width: '500px'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if(!result) return;
 
@@ -87,8 +93,8 @@ export class SubtsTableComponent implements OnChanges {
         result.fill('', resultLength);
       }
       else if(result.length > this.subtsCount){
-        for(let i = 0; i < result.length - this.subtsCount; i++) {
-          this.addSubt(result.length - this.subtsCount);
+        for(let i = 0, subtsCount = this.subtsCount; i < result.length - subtsCount; i++) {
+          this.addSubt(this.subtsCount);
         }
       }
 
@@ -102,6 +108,67 @@ export class SubtsTableComponent implements OnChanges {
 
       this.table.renderRows();
     });
+  }
+
+  export() {
+    const content = JSON.stringify(this.videoForm.value);
+    const a = document.createElement("a");
+    const file = new Blob([content], {type: 'text/plain'});
+    a.href = URL.createObjectURL(file);
+    a.download = `${this.videoForm.get('id').value}.ytsrt`;
+    a.click();
+  }
+
+  import(file: File) {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const video: Video = JSON.parse(String(reader.result));
+      Object.keys(video.subts).forEach(lang => {
+        if(!(this.videoForm.value as Video).subts[lang]) {
+          this.addLanguage(lang);
+        }
+      });
+      for(let i = 0; this.subtsCount < video.timeKeys.length; i++) {
+        this.addSubt(this.subtsCount);
+      }
+      this.videoForm.setValue(video);
+    };
+
+    reader.onerror = function(e) {
+      console.error("An error ocurred reading the file", e);
+    };
+
+    reader.readAsText(file, "UTF-8");
+  }
+
+  importSrt(file: File) {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const subts = String(reader.result);
+
+      const timeKeys = subts.match(/\d\d:\d\d:\d\d,\d\d\d -->/g).map(subt => {
+        return subt.replace(/\d\d:(\d\d):(\d\d),(\d)\d\d -->/, (str, mins, secs, ms) => {
+          return `${+mins * 60 + +secs}.${ms}`;
+        });
+      });
+
+      const subtitles = subts.split('\n\n').map(p => {
+        return p.split('\n').pop();
+      });
+
+      for(let i = 0; this.subtsCount < timeKeys.length; i++) {
+        this.addSubt(this.subtsCount);
+      }
+      this.videoForm.patchValue({timeKeys, subts: {en: subtitles}});
+    };
+
+    reader.onerror = function(e) {
+      console.error("An error ocurred reading the file .srt", e);
+    };
+
+    reader.readAsText(file, "UTF-8");
   }
 
   get langs() {

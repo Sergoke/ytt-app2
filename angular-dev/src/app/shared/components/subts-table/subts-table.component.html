@@ -60,6 +60,12 @@
     </table>
   </div>
 
+  <button (click)="export()" type="button" color="primary" mat-raised-button>Export</button>
+  <button (click)="fileInput.click()" type="button" color="primary" mat-raised-button>Import</button>
+  <input #fileInput (change)="import(fileInput.files[0])" type="file" accept=".ytsrt" hidden>
+  <button (click)="srtFileInput.click()" type="button" color="primary" mat-raised-button>Import .srt</button>
+  <input #srtFileInput (change)="importSrt(srtFileInput.files[0])" type="file" accept=".srt" hidden>
+
   <mat-form-field>
     <mat-label>Add language</mat-label>
     <mat-select (selectionChange)="addLanguage($event.value)">

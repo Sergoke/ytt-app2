@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 
-import { MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-subts-parser',
@@ -10,12 +10,16 @@ import { MatDialogRef } from '@angular/material';
 export class SubtsParserComponent {
 
   constructor(
-    private dialogRef: MatDialogRef<SubtsParserComponent>
-  ) { }
+    private dialogRef: MatDialogRef<SubtsParserComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+  }
 
-  parseSubts(subts: string){
+  parseSubts(subts: string) {
     let result = subts.split('\n');
-    result = result.filter(item => item.length);
+    result = result
+      .map(item => item.trim())
+      .filter(item => item.length);
     this.dialogRef.close(result);
   }
 
