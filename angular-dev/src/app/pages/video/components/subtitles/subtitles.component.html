@@ -1,10 +1,19 @@
-<div class="subts-block" matRipple>
-  <div [ngClass]="{
-    'subts-row-prev': i < currentRowIndex,
-    'subts-row-current': i === currentRowIndex,
-    'subts-row-follow': i > currentRowIndex
-  }" class="subts-row" *ngFor="let row of subtitles; let i = index" (click)="wordClick($event)">
-    <span class="subts-word" *ngFor="let word of row">{{word}}</span>
+<div [@containerAppearance]="state.show" class="subts-container">
+  <div class="lifter"
+       [style.margin-top.px]="state.show === 'all' ? 0 : -currentRowIndex * 50"
+  ></div>
+  <div class="highlighter"
+       *ngIf="state.show === 'all'"
+       [style.top.px]="currentRowIndex * 50"
+  ></div>
+  <div class="subts-row"
+       *ngFor="let row of subtitles; let i = index"
+       [ngClass]="{'subts-row-current': i === currentRowIndex}"
+       (click)="wordClick($event)"
+  ><span class="subts-word" *ngFor="let word of row" matRipple [matRippleColor]="'#bf84d68a'">{{word}}</span>
   </div>
 </div>
 
+<button (click)="state.show = 'all'">Expand</button>
+<button (click)="state.show = 'oneLine'" matRipple [matRippleColor]="'red'">Collapse</button>
+<button (click)="state.show = 'twoLines'" matRipple [matRippleColor]="'grey'">Two lines</button>

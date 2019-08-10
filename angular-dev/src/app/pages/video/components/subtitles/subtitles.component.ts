@@ -5,11 +5,26 @@ import { MatDialog } from '@angular/material';
 import { TranslService } from '../../../../core/services/translation/transl.service';
 
 import { TranslationComponent } from './../translation/translation.component';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'subtitles',
   templateUrl: './subtitles.component.html',
-  styleUrls: ['./subtitles.component.scss']
+  styleUrls: ['./subtitles.component.scss'],
+  animations: [
+    trigger('containerAppearance', [
+      state('oneLine', style({
+        height: '50px'
+      })),
+      state('twoLines', style({
+        height: '100px'
+      })),
+      state('all', style({
+        // height: '500px'
+      })),
+      transition('* => *', animate('600ms ease-out')),
+    ])
+  ]
 })
 export class SubtitlesComponent {
 
@@ -22,7 +37,7 @@ export class SubtitlesComponent {
   private _subtitles;
 
   @Input('subtitles')
-  set subtitles(subtitles: Array<string>){
+  set subtitles(subtitles: Array<string>) {
     if(subtitles){
       this._subtitles = subtitles.map( (string: string) => string.split(' '));
     }
@@ -33,6 +48,11 @@ export class SubtitlesComponent {
   }
 
   private lastClickedWord;
+  state: {
+    show: 'oneLine' | 'twoLines' | 'all'
+  } = {
+    show: 'oneLine'
+  };
 
   constructor(
     private dialog: MatDialog,

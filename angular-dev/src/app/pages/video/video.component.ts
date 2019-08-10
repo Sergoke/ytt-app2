@@ -13,7 +13,7 @@ import { SubtitleLanguages, Video } from '../../shared/models';
 export class VideoComponent implements OnInit, OnDestroy {
   public videoId: string;
   public video: Video;
-  public langsToShow = [];
+  public langsToShow = ['en'];
 
   private player;
   private interval;

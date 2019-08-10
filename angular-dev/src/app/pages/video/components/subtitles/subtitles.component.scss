@@ -1,59 +1,48 @@
-.subts-block {
-    --subt-height-xl: 50px;
-    --subt-height-lg: 40px;
-    --subt-height-md: 30px;
-    --subt-height-sm: 25px;
-    --subt-height-xs: 20px;
-  
-    height: var(--subt-height-xl);
-    font-size: 24px;
-    font-family: Helvetica;
-    overflow: hidden;
-    background-color: aqua;
-    position: relative;
+.subts-container {
+  --subt-height-xl: 50px;
+  --subt-height-lg: 40px;
+  --subt-height-md: 30px;
+  --subt-height-sm: 25px;
+  --subt-height-xs: 20px;
+
+  font-size: 24px;
+  font-family: Helvetica;
+  overflow: hidden;
+  background-color: aqua;
+  position: relative;
+
+  .lifter {
+    transition: margin-top .5s;
   }
-  
-  .subts-row {
+
+  .highlighter {
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 50px;
+    transition: top .5s;
+    background-color: sienna;
+  }
+
+  .subts-row {
+    width: 100%;
+    height: 50px;
     padding-left: 10px;
     overflow: auto;
     display: flex;
     align-items: center;
-    transition: 1s;
   }
-  
-  .subts-row.subts-row-prev { 
-    /* left: -100%; */
-    opacity: 0;
-    letter-spacing: -10px;
-  }
-  
-  .subts-row.subts-row-current {
-    left: 0;
-    z-index: 1;
-  }
-  
-  .subts-row.subts-row-follow {
-    /* left: 10%; */
-    opacity: 0;
-    letter-spacing: -10px;
-  }
-  
+
   .subts-word {
     padding: 3px 5px;
-  }
-  
-  .subts-word:hover {
-    background: gray;
     cursor: pointer;
+    border-radius: 5px;
   }
+}
   
   button {
     margin: 30px 10px;
   }
-  
+
   @media (max-width: 600px){
     .subts-block {
       height: var(--subt-height-lg);
